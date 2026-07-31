@@ -56,7 +56,7 @@ export default function TrainingPage() {
             <p className="text-2xl text-teal-900/80 font-medium mb-8 leading-relaxed">
               Real-world obedience forged in the heart of a working farm.
             </p>
-            <Link to="/booking" className={btnPrimary}>
+            <Link to="/contact?service=training" className={btnPrimary}>
               Book a Consultation
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>

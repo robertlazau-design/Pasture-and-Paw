@@ -4,7 +4,7 @@ import { ArrowRight, Leaf, Dog, MapPin, Mail, Instagram, ChevronRight, PawPrint,
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import FarmPage from './pages/FarmPage';
 import TrainingPage from './pages/TrainingPage';
-import BookingPage from './pages/BookingPage';
+import ContactPage from './pages/ContactPage';
 
 // Reusable tactile button styles
 const btnPrimary = "inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl border-2 border-teal-900 bg-sage text-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] hover:shadow-[2px_2px_0px_0px_#0B3B3C] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200";
@@ -49,10 +49,8 @@ function Navbar() {
     }
   };
 
-  const handleContactClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleContactClick = () => {
     setMobileOpen(false);
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const navLinkClass = "relative text-teal-900 font-bold text-lg group overflow-hidden";
@@ -88,10 +86,10 @@ function Navbar() {
               Training
               {underline}
             </Link>
-            <a href="#contact" onClick={handleContactClick} className={navLinkClass}>
+            <Link to="/contact" onClick={handleContactClick} className={navLinkClass}>
               Contact
               {underline}
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Hamburger */}
@@ -125,9 +123,9 @@ function Navbar() {
               <Link to="/training" onClick={() => setMobileOpen(false)} className="text-teal-900 font-bold text-xl py-2 border-b-2 border-sage-light">
                 Training
               </Link>
-              <a href="#contact" onClick={handleContactClick} className="text-teal-900 font-bold text-xl py-2">
+              <Link to="/contact" onClick={handleContactClick} className="text-teal-900 font-bold text-xl py-2">
                 Contact
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}
@@ -567,7 +565,7 @@ export default function App() {
           <Route path="/farm/norwegian-goats" element={<PlaceholderPage title="Norwegian Goats" description="Learn about our Norwegian Goats." backLink="/farm" />} />
           <Route path="/farm/silver-fox-rabbits" element={<PlaceholderPage title="Silver Fox Rabbits" description="Learn about our Silver Fox Rabbits." backLink="/farm" />} />
           <Route path="/training" element={<TrainingPage />} />
-          <Route path="/booking" element={<BookingPage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </main>
       <Footer />
