@@ -1,7 +1,10 @@
-import React, { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
-import { ArrowRight, Leaf, Dog, MapPin, Mail, Instagram, ChevronRight, PawPrint, Sprout, Cloud, Sun, ArrowLeft } from 'lucide-react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import React, { useRef, useEffect, useState } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { ArrowRight, Leaf, Dog, MapPin, Mail, Instagram, ChevronRight, PawPrint, Sprout, Cloud, Sun, ArrowLeft, Menu, X } from 'lucide-react';
+import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
+import FarmPage from './pages/FarmPage';
+import TrainingPage from './pages/TrainingPage';
+import BookingPage from './pages/BookingPage';
 
 // Reusable tactile button styles
 const btnPrimary = "inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl border-2 border-teal-900 bg-sage text-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] hover:shadow-[2px_2px_0px_0px_#0B3B3C] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200";
@@ -29,11 +32,37 @@ function ScrollToTop() {
 }
 
 function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleStoryClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setMobileOpen(false);
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById('story')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      document.getElementById('story')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setMobileOpen(false);
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const navLinkClass = "relative text-teal-900 font-bold text-lg group overflow-hidden";
+  const underline = <span className="absolute bottom-0 left-0 w-full h-1 bg-sage transform translate-y-1 group-hover:translate-y-0 transition-transform duration-200" />;
+
   return (
     <nav className="fixed w-full z-50 bg-cream border-b-4 border-teal-900 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link to="/">
+          <Link to="/" onClick={() => setMobileOpen(false)}>
             <motion.div 
               whileHover={{ scale: 1.05, rotate: -2 }}
               className="flex items-center gap-2 cursor-pointer"
@@ -44,26 +73,65 @@ function Navbar() {
               <span className="font-display font-bold text-2xl text-teal-900 tracking-tight">Pasture & Paw</span>
             </motion.div>
           </Link>
+
+          {/* Desktop Nav */}
           <div className="hidden md:flex space-x-8">
-            <Link to="/#story" className="relative text-teal-900 font-bold text-lg group overflow-hidden">
+            <a href="#story" onClick={handleStoryClick} className={navLinkClass}>
               Story
-              <span className="absolute bottom-0 left-0 w-full h-1 bg-sage transform translate-y-1 group-hover:translate-y-0 transition-transform duration-200" />
-            </Link>
-            <Link to="/farm" className="relative text-teal-900 font-bold text-lg group overflow-hidden">
+              {underline}
+            </a>
+            <Link to="/farm" className={navLinkClass}>
               Farm
-              <span className="absolute bottom-0 left-0 w-full h-1 bg-sage transform translate-y-1 group-hover:translate-y-0 transition-transform duration-200" />
+              {underline}
             </Link>
-            <Link to="/training" className="relative text-teal-900 font-bold text-lg group overflow-hidden">
+            <Link to="/training" className={navLinkClass}>
               Training
-              <span className="absolute bottom-0 left-0 w-full h-1 bg-sage transform translate-y-1 group-hover:translate-y-0 transition-transform duration-200" />
+              {underline}
             </Link>
-            <a href="#contact" className="relative text-teal-900 font-bold text-lg group overflow-hidden">
+            <a href="#contact" onClick={handleContactClick} className={navLinkClass}>
               Contact
-              <span className="absolute bottom-0 left-0 w-full h-1 bg-sage transform translate-y-1 group-hover:translate-y-0 transition-transform duration-200" />
+              {underline}
             </a>
           </div>
+
+          {/* Mobile Hamburger */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden p-2 rounded-xl border-2 border-teal-900 bg-sage-light hover:bg-sage transition-colors"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileOpen ? <X className="h-6 w-6 text-teal-900" /> : <Menu className="h-6 w-6 text-teal-900" />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="md:hidden overflow-hidden bg-cream border-t-2 border-teal-900/20"
+          >
+            <div className="px-6 py-6 flex flex-col gap-4">
+              <a href="#story" onClick={handleStoryClick} className="text-teal-900 font-bold text-xl py-2 border-b-2 border-sage-light">
+                Story
+              </a>
+              <Link to="/farm" onClick={() => setMobileOpen(false)} className="text-teal-900 font-bold text-xl py-2 border-b-2 border-sage-light">
+                Farm
+              </Link>
+              <Link to="/training" onClick={() => setMobileOpen(false)} className="text-teal-900 font-bold text-xl py-2 border-b-2 border-sage-light">
+                Training
+              </Link>
+              <a href="#contact" onClick={handleContactClick} className="text-teal-900 font-bold text-xl py-2">
+                Contact
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
@@ -172,14 +240,14 @@ function Story() {
               <span className="text-clay">Driven by Discipline.</span>
             </h2>
             <div className="space-y-6 text-teal-900/80 text-xl leading-relaxed font-medium">
-              <p>
-                "Raised between pasture and production, my life has always been shaped by early mornings and the realities of agriculture. Stewardship isn't just a slogan here—it is a responsibility lived daily.
+              <p className="italic border-l-4 border-sage pl-6">
+                &ldquo;Raised between pasture and production, my life has always been shaped by early mornings and the realities of agriculture. Stewardship isn&rsquo;t just a slogan here&mdash;it is a responsibility lived daily.
               </p>
               <p>
                 While my foundation was built on the discipline of family-run agricultural operations, my focus expanded to professional dog training in 2017. Pasture & Paw is the culmination of these two lifelong pursuits.
               </p>
-              <p>
-                By bringing my training program to a working farm environment, I am able to offer an experience that goes beyond traditional livestock production and standard obedience classes."
+              <p className="italic border-l-4 border-sage pl-6">
+                By bringing my training program to a working farm environment, I am able to offer an experience that goes beyond traditional livestock production and standard obedience classes.&rdquo;
               </p>
             </div>
           </motion.div>
@@ -193,12 +261,10 @@ function Story() {
             {/* Organic Blob Image Mask */}
             <div className="aspect-square overflow-hidden border-4 border-teal-900 shadow-[16px_16px_0px_0px_#95C0A1] rounded-[40%_60%_70%_30%/40%_50%_60%_50%] bg-sage">
               <img
-                src="/story-image.jpg"
-                alt="Founder with her dogs"
+                src="https://picsum.photos/seed/wolfpack/800/800"
+                alt="Founder with her dogs on the farm"
                 className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
-                onError={(e) => {
-                  e.currentTarget.src = "https://picsum.photos/seed/wolfpack/800/800";
-                }}
+                referrerPolicy="no-referrer"
               />
             </div>
             
@@ -499,12 +565,13 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/farm" element={<PlaceholderPage title="The Farm" description="Detailed information about our farm operations, philosophy, and community involvement." />} />
+          <Route path="/farm" element={<FarmPage />} />
           <Route path="/farm/highlander-cattle" element={<PlaceholderPage title="Highlander Cattle" description="Learn about our Highlander Cattle breeding program." backLink="/farm" />} />
           <Route path="/farm/dexter-cattle" element={<PlaceholderPage title="Dexter Cattle" description="Learn about our Dexter Cattle." backLink="/farm" />} />
           <Route path="/farm/norwegian-goats" element={<PlaceholderPage title="Norwegian Goats" description="Learn about our Norwegian Goats." backLink="/farm" />} />
           <Route path="/farm/silver-fox-rabbits" element={<PlaceholderPage title="Silver Fox Rabbits" description="Learn about our Silver Fox Rabbits." backLink="/farm" />} />
-          <Route path="/training" element={<PlaceholderPage title="Canine Training" description="Detailed information about our training programs, philosophy, and booking." />} />
+          <Route path="/training" element={<TrainingPage />} />
+          <Route path="/booking" element={<BookingPage />} />
         </Routes>
       </main>
       <Footer />
