@@ -70,10 +70,9 @@ export default function TrainingPage() {
           >
             <div className="aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C] bg-clay">
                <img
-                src="https://picsum.photos/seed/dogtraining2/800/600"
-                alt="Dog training on the farm"
+                src="/images/training-hero.png"
+                alt="Dog trainer with German Shepherd on the farm"
                 className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
               />
             </div>
           </motion.div>

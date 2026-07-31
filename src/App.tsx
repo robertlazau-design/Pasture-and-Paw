@@ -148,10 +148,9 @@ function Hero() {
     <section ref={ref} className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-teal-950">
       <motion.div style={{ y }} className="absolute inset-0 z-0">
         <img
-          src="https://picsum.photos/seed/wolfdogfarm/1920/1080"
-          alt="Wolf-like dog sitting calmly on a farm"
+          src="/images/hero-main.png"
+          alt="Belgian Malinois standing alert on a misty farm at sunrise"
           className="w-full h-full object-cover opacity-60"
-          referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-teal-900/40 mix-blend-multiply" />
       </motion.div>
@@ -261,10 +260,9 @@ function Story() {
             {/* Organic Blob Image Mask */}
             <div className="aspect-square overflow-hidden border-4 border-teal-900 shadow-[16px_16px_0px_0px_#95C0A1] rounded-[40%_60%_70%_30%/40%_50%_60%_50%] bg-sage">
               <img
-                src="https://picsum.photos/seed/wolfpack/800/800"
+                src="/images/founder-story.png"
                 alt="Founder with her dogs on the farm"
                 className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
-                referrerPolicy="no-referrer"
               />
             </div>
             
@@ -362,10 +360,9 @@ function FarmPreview() {
                 <div className={`aspect-square rounded-[1.5rem] overflow-hidden mb-6 border-4 border-teal-900 ${animal.color} relative`}>
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-teal-900/20 transition-opacity z-10" />
                   <img
-                    src={`https://picsum.photos/seed/${animal.seed}/400/400`}
+                    src={`/images/${animal.seed}.png`}
                     alt={animal.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
                   />
                 </div>
                 <h3 className="font-display font-bold text-2xl text-teal-900 text-center pb-2">
@@ -398,10 +395,9 @@ function TrainingPreview() {
           >
             <div className="aspect-[4/5] overflow-hidden border-4 border-cream shadow-[-16px_16px_0px_0px_#C89F7E] rounded-[60%_40%_30%_70%/60%_30%_70%_40%] bg-clay">
               <img
-                src="https://picsum.photos/seed/wolfdogtraining/800/1000"
-                alt="Wolf-like dog in training on the farm"
+                src="/images/training-action.png"
+                alt="Dog training on the farm with cattle in the background"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                referrerPolicy="no-referrer"
               />
             </div>
             <motion.div 

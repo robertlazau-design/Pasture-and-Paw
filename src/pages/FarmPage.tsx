@@ -8,25 +8,25 @@ const btnPrimary = "inline-flex items-center justify-center px-8 py-4 text-base 
 const animals = [
   {
     name: 'Highlander Cattle',
-    seed: 'highlandcow',
+    image: '/images/highland-cattle.png',
     color: 'bg-clay',
     description: 'Known for their docile nature and hardiness, our Highlander herd is the heart of our pasture management, contributing to soil health and sustainable grazing.',
   },
   {
     name: 'Dexter Cattle',
-    seed: 'dextercow',
+    image: '/images/dexter-cattle.png',
     color: 'bg-sage',
     description: 'A smaller, dual-purpose breed that thrives on our diverse pastures. They are efficient foragers and perfect for our regenerative agriculture model.',
   },
   {
     name: 'Norwegian Goats',
-    seed: 'goat',
+    image: '/images/norwegian-goats.png',
     color: 'bg-teal-800',
     description: 'Our primary brush management team. These goats help clear invasive species and maintain the delicate balance of our wooded pasture areas.',
   },
   {
     name: 'Silver Fox Rabbits',
-    seed: 'rabbit',
+    image: '/images/silver-fox-rabbit.png',
     color: 'bg-clay',
     description: 'A heritage breed we raise with a focus on preserving genetic diversity and supporting local 4-H youth agricultural programs.',
   },
@@ -76,10 +76,9 @@ export default function FarmPage() {
           >
             <div className="aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C] bg-sage">
                <img
-                src="https://picsum.photos/seed/farmfield/800/600"
-                alt="Lush green pastures on the farm"
+                src="/images/farm-hero.png"
+                alt="Aerial view of Pasture & Paw working farm"
                 className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
               />
             </div>
             <motion.div 
@@ -126,10 +125,9 @@ export default function FarmPage() {
             >
               <div className={`aspect-[16/9] rounded-xl overflow-hidden mb-8 border-4 border-teal-900 ${animal.color}`}>
                  <img
-                    src={`https://picsum.photos/seed/${animal.seed}/800/450`}
+                    src={animal.image}
                     alt={animal.name}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
                   />
               </div>
               <h3 className="font-display font-bold text-3xl text-teal-900 mb-4">
