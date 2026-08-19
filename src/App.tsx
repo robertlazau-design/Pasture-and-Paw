@@ -267,9 +267,9 @@ function Story() {
             {/* Organic Blob Image Mask */}
             <div className="aspect-square overflow-hidden border-4 border-teal-900 shadow-[16px_16px_0px_0px_#95C0A1] rounded-[40%_60%_70%_30%/40%_50%_60%_50%] bg-sage">
               <img
-                src="/images/founder-story.png"
-                alt="Founder with her dogs on the farm"
-                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                src="/images/founder-story.jpg"
+                alt="Pasture & Paw founder with calf on the farm in golden sunlight"
+                className="w-full h-full object-cover object-[center_25%] hover:scale-105 transition-transform duration-700"
               />
             </div>
             
