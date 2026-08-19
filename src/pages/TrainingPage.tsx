@@ -78,7 +78,7 @@ export default function TrainingPage() {
             <div className="aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C] bg-clay">
                <img
                 src="/images/training-hero.png"
-                alt="Dog trainer with German Shepherd on the farm"
+                alt="Well-trained pack of dogs demonstrating focus and obedience"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -208,7 +208,7 @@ export default function TrainingPage() {
                 <div className="aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-cream shadow-[-12px_12px_0px_0px_#C89F7E] bg-clay">
                   <img
                     src="/images/boarding.jpg"
-                    alt="Dog relaxing in a spacious farm-style boarding kennel with pastures visible through the open barn door"
+                    alt="Dogs resting calmly in our clean, spacious farm boarding kennel facility"
                     className="w-full h-full object-cover"
                   />
                 </div>
