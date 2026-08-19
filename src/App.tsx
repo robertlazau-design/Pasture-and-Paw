@@ -402,9 +402,9 @@ function TrainingPreview() {
           >
             <div className="aspect-[4/5] overflow-hidden border-4 border-cream shadow-[-16px_16px_0px_0px_#C89F7E] rounded-[60%_40%_30%_70%/60%_30%_70%_40%] bg-clay">
               <img
-                src="/images/training-action.png"
-                alt="Dog training on the farm with cattle in the background"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                src="/images/training-action.jpg"
+                alt="Trainer with four well-trained dogs resting calmly on a forest trail"
+                className="w-full h-full object-cover object-[center_35%] hover:scale-105 transition-transform duration-700"
               />
             </div>
             <motion.div 
