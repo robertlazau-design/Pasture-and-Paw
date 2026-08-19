@@ -125,6 +125,16 @@ export default function ContactPage() {
             </div>
 
             <div className="bg-sage-light border-4 border-teal-900 p-8 rounded-[2rem] shadow-[8px_8px_0px_0px_#0B3B3C] space-y-8">
+              <div className="flex items-center gap-4 pb-6 border-b-2 border-teal-900/20">
+                <div className="w-16 h-16 bg-cream rounded-2xl border-2 border-teal-900 p-2 shadow-[3px_3px_0px_0px_#0B3B3C] flex items-center justify-center shrink-0">
+                  <img src="/images/logo-teal.png" alt="Pasture & Paw Emblem" className="w-full h-full object-contain" />
+                </div>
+                <div>
+                  <h3 className="font-display font-bold text-2xl text-teal-900 leading-tight">Pasture &amp; Paw</h3>
+                  <p className="text-teal-900/70 text-xs font-bold uppercase tracking-wider">Working Farm &amp; Academy</p>
+                </div>
+              </div>
+
               <div>
                 <h4 className="font-bold text-teal-900 text-lg mb-4 flex items-center gap-2">
                   <Mail className="text-sage w-6 h-6" /> Email Us
@@ -377,8 +387,8 @@ export default function ContactPage() {
                       animate={{ opacity: 1, scale: 1 }}
                       className="text-center py-12"
                     >
-                      <div className="w-24 h-24 bg-sage rounded-full flex items-center justify-center border-4 border-teal-900 mx-auto mb-8 shadow-[6px_6px_0px_0px_#0B3B3C]">
-                        <CheckCircle2 className="w-12 h-12 text-teal-900" />
+                      <div className="w-28 h-28 bg-sage rounded-3xl flex items-center justify-center border-4 border-teal-900 mx-auto mb-8 shadow-[6px_6px_0px_0px_#0B3B3C] p-3">
+                        <img src="/images/logo-teal.png" alt="Pasture & Paw" className="w-full h-full object-contain" />
                       </div>
                       <h2 className="font-display text-4xl font-bold text-teal-900 mb-4">
                         {serviceType === 'general' || serviceType === 'talent' ? 'Message Sent!' : 'Booking Confirmed!'}

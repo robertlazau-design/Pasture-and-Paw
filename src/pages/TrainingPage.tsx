@@ -159,7 +159,9 @@ export default function TrainingPage() {
         </div>
 
         <div className="bg-teal-950 text-cream py-24 relative">
-          <PawPrint className="absolute bottom-10 right-10 w-80 h-80 text-teal-900/20 -rotate-12 pointer-events-none" />
+          <div className="absolute bottom-6 right-6 w-96 h-96 opacity-10 pointer-events-none select-none">
+            <img src="/images/logo-light.png" alt="" className="w-full h-full object-contain -rotate-12" />
+          </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">

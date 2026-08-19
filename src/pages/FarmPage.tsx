@@ -97,10 +97,10 @@ export default function FarmPage() {
             <motion.div 
               animate={{ rotate: [-5, 5, -5] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-8 -left-8 bg-cream border-4 border-teal-900 p-6 rounded-full shadow-[8px_8px_0px_0px_#0B3B3C] w-32 h-32 flex flex-col items-center justify-center"
+              className="absolute -bottom-8 -left-8 bg-cream border-4 border-teal-900 p-3 rounded-full shadow-[8px_8px_0px_0px_#0B3B3C] w-36 h-36 flex flex-col items-center justify-center"
             >
-              <Leaf className="h-8 w-8 text-sage mb-1" />
-              <p className="font-display font-bold text-teal-900 text-sm text-center leading-tight">100%<br/>Pasture</p>
+              <img src="/images/logo-teal.png" alt="Pasture & Paw Emblem" className="w-16 h-16 object-contain mb-1" />
+              <p className="font-display font-bold text-teal-900 text-xs text-center leading-tight uppercase tracking-wider">Working<br/>Farm</p>
             </motion.div>
           </motion.div>
         </div>
@@ -108,7 +108,9 @@ export default function FarmPage() {
 
       {/* Philosophy Section */}
       <section className="bg-teal-950 text-cream py-24 mb-24 relative overflow-hidden">
-         <PawPrint className="absolute top-10 right-10 w-64 h-64 text-teal-900/30 rotate-12 pointer-events-none" />
+         <div className="absolute top-6 right-6 w-80 h-80 opacity-10 pointer-events-none select-none">
+           <img src="/images/logo-light.png" alt="" className="w-full h-full object-contain rotate-12" />
+         </div>
          
          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-8">Stewardship as a Lifestyle</h2>

@@ -64,13 +64,13 @@ function Navbar() {
         <div className="flex justify-between items-center h-20">
           <Link to="/" onClick={() => setMobileOpen(false)}>
             <motion.div 
-              whileHover={{ scale: 1.05, rotate: -2 }}
-              className="flex items-center gap-2 cursor-pointer"
+              whileHover={{ scale: 1.03, rotate: -1 }}
+              className="flex items-center gap-3 cursor-pointer"
             >
-              <div className="bg-teal-900 p-2 rounded-xl shadow-[2px_2px_0px_0px_#95C0A1]">
-                <Dog className="h-6 w-6 text-cream" />
+              <div className="bg-sage-light/70 p-1.5 rounded-2xl border-2 border-teal-900 shadow-[2px_2px_0px_0px_#0B3B3C] w-12 h-12 flex items-center justify-center overflow-hidden shrink-0">
+                <img src="/images/logo-teal.png" alt="Pasture & Paw Emblem" className="w-full h-full object-contain" />
               </div>
-              <span className="font-display font-bold text-2xl text-teal-900 tracking-tight">Pasture & Paw</span>
+              <span className="font-display font-bold text-2xl text-teal-900 tracking-tight">Pasture &amp; Paw</span>
             </motion.div>
           </Link>
 
@@ -277,10 +277,10 @@ function Story() {
             <motion.div 
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-4 -left-4 bg-cream border-4 border-teal-900 p-6 rounded-full shadow-[8px_8px_0px_0px_#0B3B3C] hidden md:flex flex-col items-center justify-center w-40 h-40"
+              className="absolute -bottom-6 -left-6 bg-cream border-4 border-teal-900 p-4 rounded-3xl shadow-[8px_8px_0px_0px_#0B3B3C] hidden md:flex flex-col items-center justify-center w-40 h-40"
             >
-              <Leaf className="h-10 w-10 text-sage mb-2" />
-              <p className="font-display font-bold text-teal-900 text-xl text-center leading-none">Est.<br/>2017</p>
+              <img src="/images/logo-teal.png" alt="Pasture & Paw Official Crest" className="w-20 h-20 object-contain mb-1" />
+              <p className="font-display font-bold text-teal-900 text-xs tracking-wider uppercase text-center">Est. 2017</p>
             </motion.div>
           </motion.div>
         </div>
@@ -460,17 +460,22 @@ function TrainingPreview() {
 function Footer() {
   return (
     <footer id="contact" className="bg-teal-950 text-cream pt-24 pb-12 relative overflow-hidden">
-      {/* Massive playful background watermark */}
-      <PawPrint className="absolute -bottom-24 -right-24 w-[500px] h-[500px] text-teal-900/30 -rotate-12 pointer-events-none" />
+      {/* Massive subtle logo watermark in background */}
+      <div className="absolute -bottom-20 -right-20 w-[520px] h-[520px] opacity-10 pointer-events-none select-none">
+        <img src="/images/logo-light.png" alt="" className="w-full h-full object-contain -rotate-12" />
+      </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="bg-sage p-3 rounded-2xl border-2 border-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C]">
-                <Dog className="h-8 w-8 text-teal-900" />
+            <div className="flex items-center gap-4 mb-8">
+              <div className="bg-cream/10 p-2.5 rounded-2xl border-2 border-sage/40 backdrop-blur w-16 h-16 flex items-center justify-center overflow-hidden shrink-0 shadow-[4px_4px_0px_0px_#0B3B3C]">
+                <img src="/images/logo-light.png" alt="Pasture & Paw Logo" className="w-full h-full object-contain" />
               </div>
-              <span className="font-display font-bold text-4xl text-cream tracking-tight">Pasture & Paw</span>
+              <div>
+                <span className="font-display font-bold text-3xl sm:text-4xl text-cream tracking-tight block">Pasture & Paw</span>
+                <span className="text-sage text-xs font-bold tracking-widest uppercase">Working Farm & Canine Academy</span>
+              </div>
             </div>
             <p className="text-2xl font-display text-sage mb-8 font-bold">
               Excellence in Agriculture.<br />Reliability in Training.
