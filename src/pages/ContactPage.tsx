@@ -5,7 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 
 const btnPrimary = "inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl border-2 border-teal-900 bg-sage text-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] hover:shadow-[2px_2px_0px_0px_#0B3B3C] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed";
 
-type ServiceType = 'farm' | 'training' | 'general' | null;
+type ServiceType = 'farm' | 'training' | 'talent' | 'boarding' | 'wellness' | 'general' | null;
 
 export default function ContactPage() {
   const [searchParams] = useSearchParams();
@@ -19,12 +19,12 @@ export default function ContactPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
     const serviceParam = searchParams.get('service');
-    if (serviceParam === 'farm') {
-      setServiceType('farm');
+    if (serviceParam === 'farm' || serviceParam === 'training' || serviceParam === 'boarding' || serviceParam === 'wellness') {
+      setServiceType(serviceParam as ServiceType);
       setBookingStep('calendar');
-    } else if (serviceParam === 'training') {
-      setServiceType('training');
-      setBookingStep('calendar');
+    } else if (serviceParam === 'talent') {
+      setServiceType('talent');
+      setBookingStep('form');
     }
   }, [searchParams]);
 
@@ -59,7 +59,7 @@ export default function ContactPage() {
 
   const handleServiceSelect = (type: ServiceType) => {
     setServiceType(type);
-    if (type === 'general') {
+    if (type === 'general' || type === 'talent') {
       setBookingStep('form');
     } else {
       setBookingStep('calendar');
@@ -185,14 +185,26 @@ export default function ContactPage() {
                       exit={{ opacity: 0, y: -20 }}
                     >
                       <h2 className="font-display font-bold text-4xl text-teal-900 mb-8">What are you reaching out for?</h2>
-                      <div className="space-y-6">
+                      <div className="space-y-4">
                         <button onClick={() => handleServiceSelect('training')} className="w-full text-left p-6 rounded-2xl border-4 border-teal-900/20 hover:border-teal-900 hover:bg-sage-light hover:shadow-[6px_6px_0px_0px_#0B3B3C] transition-all group">
                           <h3 className="font-bold text-2xl text-teal-900 mb-2 group-hover:text-teal-950">Dog Training Consultation</h3>
                           <p className="text-teal-900/70 font-medium">Book a free phone consultation to discuss your dog's behavioral goals.</p>
                         </button>
+                        <button onClick={() => handleServiceSelect('boarding')} className="w-full text-left p-6 rounded-2xl border-4 border-teal-900/20 hover:border-teal-900 hover:bg-sage-light hover:shadow-[6px_6px_0px_0px_#0B3B3C] transition-all group">
+                          <h3 className="font-bold text-2xl text-teal-900 mb-2 group-hover:text-teal-950">Farm Boarding</h3>
+                          <p className="text-teal-900/70 font-medium">Schedule a drop-off for overnight, extended, or recurring boarding stays.</p>
+                        </button>
                         <button onClick={() => handleServiceSelect('farm')} className="w-full text-left p-6 rounded-2xl border-4 border-teal-900/20 hover:border-teal-900 hover:bg-sage-light hover:shadow-[6px_6px_0px_0px_#0B3B3C] transition-all group">
                           <h3 className="font-bold text-2xl text-teal-900 mb-2 group-hover:text-teal-950">Farm Tour or Visit</h3>
                           <p className="text-teal-900/70 font-medium">Schedule a time to visit the farm, see the animals, and pick up local goods.</p>
+                        </button>
+                        <button onClick={() => handleServiceSelect('wellness')} className="w-full text-left p-6 rounded-2xl border-4 border-teal-900/20 hover:border-teal-900 hover:bg-sage-light hover:shadow-[6px_6px_0px_0px_#0B3B3C] transition-all group">
+                          <h3 className="font-bold text-2xl text-teal-900 mb-2 group-hover:text-teal-950">Farm Wellness Experience</h3>
+                          <p className="text-teal-900/70 font-medium">Book a full-day farm immersion for yourself, your group, or your team.</p>
+                        </button>
+                        <button onClick={() => handleServiceSelect('talent')} className="w-full text-left p-6 rounded-2xl border-4 border-teal-900/20 hover:border-teal-900 hover:bg-sage-light hover:shadow-[6px_6px_0px_0px_#0B3B3C] transition-all group">
+                          <h3 className="font-bold text-2xl text-teal-900 mb-2 group-hover:text-teal-950">Talent &amp; Production Inquiry</h3>
+                          <p className="text-teal-900/70 font-medium">Inquire about hiring our dogs and handler for film, TV, or commercial work.</p>
                         </button>
                         <button onClick={() => handleServiceSelect('general')} className="w-full text-left p-6 rounded-2xl border-4 border-teal-900/20 hover:border-teal-900 hover:bg-sage-light hover:shadow-[6px_6px_0px_0px_#0B3B3C] transition-all group">
                           <h3 className="font-bold text-2xl text-teal-900 mb-2 group-hover:text-teal-950">General Inquiry</h3>
@@ -212,7 +224,7 @@ export default function ContactPage() {
                     >
                       <div className="col-span-1 md:col-span-2 mb-4">
                         <h2 className="font-display font-bold text-3xl text-teal-900">
-                          {serviceType === 'training' ? 'Schedule a Consultation' : 'Book a Farm Visit'}
+                          {serviceType === 'training' ? 'Schedule a Consultation' : serviceType === 'boarding' ? 'Schedule a Drop-Off' : serviceType === 'wellness' ? 'Book Your Experience' : 'Book a Farm Visit'}
                         </h2>
                         <p className="text-teal-900/80 font-medium mt-2">Select a date and time that works for you.</p>
                       </div>
@@ -283,7 +295,7 @@ export default function ContactPage() {
                       )}
 
                       <h2 className="font-display font-bold text-3xl text-teal-900 mb-8">
-                        {serviceType === 'general' ? 'Send a Message' : 'Your Details'}
+                        {serviceType === 'general' || serviceType === 'talent' ? 'Send a Message' : 'Your Details'}
                       </h2>
 
                       <form onSubmit={handleFormSubmit} className="space-y-6">
@@ -304,6 +316,40 @@ export default function ContactPage() {
                               </div>
                             )}
 
+                            {serviceType === 'talent' && (
+                              <>
+                                <div>
+                                  <label className="block font-bold text-teal-900 mb-2">Production Company</label>
+                                  <input required type="text" className="w-full bg-cream border-2 border-teal-900 rounded-xl p-3 focus:outline-none focus:ring-4 focus:ring-sage" />
+                                </div>
+                                <div>
+                                  <label className="block font-bold text-teal-900 mb-2">Project Type</label>
+                                  <select required className="w-full bg-cream border-2 border-teal-900 rounded-xl p-3 focus:outline-none focus:ring-4 focus:ring-sage">
+                                    <option value="">Select project type</option>
+                                    <option value="film">Feature Film</option>
+                                    <option value="tv">Television</option>
+                                    <option value="commercial">Commercial</option>
+                                    <option value="print">Print / Editorial</option>
+                                    <option value="event">Live Event</option>
+                                    <option value="other">Other</option>
+                                  </select>
+                                </div>
+                              </>
+                            )}
+
+                            {serviceType === 'wellness' && (
+                              <div>
+                                <label className="block font-bold text-teal-900 mb-2">Group Size</label>
+                                <select required className="w-full bg-cream border-2 border-teal-900 rounded-xl p-3 focus:outline-none focus:ring-4 focus:ring-sage">
+                                  <option value="">Select group size</option>
+                                  <option value="1">Individual (1 person)</option>
+                                  <option value="2-4">Small Group (2–4)</option>
+                                  <option value="5-8">Group (5–8)</option>
+                                  <option value="corporate">Corporate / Private Event</option>
+                                </select>
+                              </div>
+                            )}
+
                             {serviceType === 'training' && (
                               <div>
                                 <label className="block font-bold text-teal-900 mb-2">Dog's Name & Breed</label>
@@ -313,12 +359,12 @@ export default function ContactPage() {
                          </div>
                          <div>
                             <label className="block font-bold text-teal-900 mb-2">
-                              {serviceType === 'training' ? 'What are your primary goals or concerns?' : 'Message'}
+                              {serviceType === 'training' ? 'What are your primary goals or concerns?' : serviceType === 'talent' ? 'Project details, timeline, and requirements' : serviceType === 'boarding' ? 'Tell us about your dog and any special needs' : serviceType === 'wellness' ? 'Any dietary restrictions or accessibility needs?' : 'Message'}
                             </label>
                             <textarea required rows={4} className="w-full bg-cream border-2 border-teal-900 rounded-xl p-3 focus:outline-none focus:ring-4 focus:ring-sage"></textarea>
                          </div>
                          <button type="submit" className={`${btnPrimary} w-full mt-4`}>
-                           {serviceType === 'general' ? 'Send Message' : 'Confirm Booking'}
+                           {serviceType === 'general' || serviceType === 'talent' ? 'Send Message' : 'Confirm Booking'}
                          </button>
                       </form>
                     </motion.div>
@@ -335,10 +381,10 @@ export default function ContactPage() {
                         <CheckCircle2 className="w-12 h-12 text-teal-900" />
                       </div>
                       <h2 className="font-display text-4xl font-bold text-teal-900 mb-4">
-                        {serviceType === 'general' ? 'Message Sent!' : 'Booking Confirmed!'}
+                        {serviceType === 'general' || serviceType === 'talent' ? 'Message Sent!' : 'Booking Confirmed!'}
                       </h2>
                       <p className="text-xl text-teal-900/80 font-medium mb-12 max-w-md mx-auto">
-                        {serviceType === 'general' 
+                        {serviceType === 'general' || serviceType === 'talent'
                           ? "Thanks for reaching out! We'll get back to you within 24-48 hours." 
                           : `We've received your request for ${selectedDate?.toLocaleDateString()} at ${selectedTime}. Check your email for the calendar invitation.`}
                       </p>

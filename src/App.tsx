@@ -5,6 +5,8 @@ import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom'
 import FarmPage from './pages/FarmPage';
 import TrainingPage from './pages/TrainingPage';
 import ContactPage from './pages/ContactPage';
+import TalentPage from './pages/TalentPage';
+import BreedPage from './pages/BreedPage';
 
 // Reusable tactile button styles
 const btnPrimary = "inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl border-2 border-teal-900 bg-sage text-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] hover:shadow-[2px_2px_0px_0px_#0B3B3C] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200";
@@ -86,6 +88,10 @@ function Navbar() {
               Training
               {underline}
             </Link>
+            <Link to="/talent" className={navLinkClass}>
+              Talent
+              {underline}
+            </Link>
             <Link to="/contact" onClick={handleContactClick} className={navLinkClass}>
               Contact
               {underline}
@@ -122,6 +128,9 @@ function Navbar() {
               </Link>
               <Link to="/training" onClick={() => setMobileOpen(false)} className="text-teal-900 font-bold text-xl py-2 border-b-2 border-sage-light">
                 Training
+              </Link>
+              <Link to="/talent" onClick={() => setMobileOpen(false)} className="text-teal-900 font-bold text-xl py-2 border-b-2 border-sage-light">
+                Talent
               </Link>
               <Link to="/contact" onClick={handleContactClick} className="text-teal-900 font-bold text-xl py-2">
                 Contact
@@ -560,11 +569,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/farm" element={<FarmPage />} />
-          <Route path="/farm/highlander-cattle" element={<PlaceholderPage title="Highlander Cattle" description="Learn about our Highlander Cattle breeding program." backLink="/farm" />} />
-          <Route path="/farm/dexter-cattle" element={<PlaceholderPage title="Dexter Cattle" description="Learn about our Dexter Cattle." backLink="/farm" />} />
-          <Route path="/farm/norwegian-goats" element={<PlaceholderPage title="Norwegian Goats" description="Learn about our Norwegian Goats." backLink="/farm" />} />
-          <Route path="/farm/silver-fox-rabbits" element={<PlaceholderPage title="Silver Fox Rabbits" description="Learn about our Silver Fox Rabbits." backLink="/farm" />} />
+          <Route path="/farm/:slug" element={<BreedPage />} />
           <Route path="/training" element={<TrainingPage />} />
+          <Route path="/talent" element={<TalentPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </main>

@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { PawPrint, Dog, ArrowRight, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { PawPrint, Dog, ArrowRight, ArrowLeft, CheckCircle2, Home, Sun, Moon, Shield, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 
@@ -24,6 +24,13 @@ const programs = [
     description: "True freedom through discipline. Advanced obedience proofing around livestock and heavy distractions.",
     features: ["E-collar conditioning", "Off-leash recall", "Distance commands", "Public access proofing"]
   }
+];
+
+const boardingFeatures = [
+  { icon: Home, title: 'Farm-Style Accommodations', description: 'Spacious, climate-controlled kennels with access to covered outdoor runs. No stacked crates, no concrete floors.' },
+  { icon: Sun, title: 'Daily Structured Activity', description: 'Multiple supervised outdoor sessions per day on our acreage. Your dog gets real exercise — not just a quick yard turnout.' },
+  { icon: Shield, title: 'Experienced Supervision', description: 'Every boarding dog is under the direct care of professional trainers. We monitor behavior, appetite, and temperament daily.' },
+  { icon: Heart, title: 'Small Group Sizes', description: 'We limit boarding capacity to ensure each dog receives individual attention and a low-stress environment.' },
 ];
 
 export default function TrainingPage() {
@@ -95,7 +102,7 @@ export default function TrainingPage() {
       </section>
 
       {/* Programs Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <h2 className="font-display text-5xl font-bold text-teal-900 mb-4 text-center">Training Programs</h2>
         <p className="text-xl text-teal-900/70 font-medium text-center mb-16 max-w-2xl mx-auto">
           We offer immersive board-and-train programs tailored to your dog's age and your behavioral goals.
@@ -139,6 +146,95 @@ export default function TrainingPage() {
               </div>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* Boarding Section */}
+      <section className="relative overflow-hidden">
+        {/* Wavy divider */}
+        <div className="w-full overflow-hidden leading-none">
+          <svg className="relative block w-full h-[50px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.62,192.27,101.5,235.9,88.94,278.43,73.5,321.39,56.44Z" className="fill-teal-950"></path>
+          </svg>
+        </div>
+
+        <div className="bg-teal-950 text-cream py-24 relative">
+          <PawPrint className="absolute bottom-10 right-10 w-80 h-80 text-teal-900/20 -rotate-12 pointer-events-none" />
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="inline-flex items-center gap-2 bg-clay text-cream px-5 py-2 rounded-full border-2 border-teal-900 mb-6">
+                  <Moon className="h-5 w-5" />
+                  <span className="font-bold text-sm uppercase tracking-wider">Also Available</span>
+                </div>
+                <h2 className="font-display text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                  Farm<br/>
+                  <span className="text-sage">Boarding</span>
+                </h2>
+                <div className="space-y-6 text-xl text-cream/90 font-medium leading-relaxed">
+                  <p>
+                    Not every stay needs to be a training program. For dogs that simply need a safe, stimulating place to stay while you're away, our farm boarding provides an experience that goes far beyond a standard kennel.
+                  </p>
+                  <p>
+                    Your dog will spend their days on open acreage under the supervision of professional trainers — not kennel attendants. They'll get real exercise, structured outdoor time, and the kind of environmental enrichment that only a working farm can provide.
+                  </p>
+                  <p className="text-sage font-bold">
+                    Available for overnight stays, extended trips, and recurring weekly schedules.
+                  </p>
+                </div>
+                <div className="mt-8">
+                  <Link to="/contact?service=boarding" className={btnPrimary}>
+                    Inquire About Boarding
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative"
+              >
+                <div className="aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-cream shadow-[-12px_12px_0px_0px_#C89F7E] bg-clay">
+                  <img
+                    src="/images/boarding.jpg"
+                    alt="Dog relaxing in a spacious farm-style boarding kennel with pastures visible through the open barn door"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Boarding Features Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {boardingFeatures.map((feature, index) => (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-teal-900 rounded-2xl p-8 border-2 border-teal-800 flex items-start gap-6"
+                >
+                  <div className="p-3 bg-sage rounded-xl border-2 border-teal-900 shrink-0">
+                    <feature.icon className="h-7 w-7 text-teal-900" />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-bold text-xl text-cream mb-2">{feature.title}</h3>
+                    <p className="text-cream/70 font-medium leading-relaxed">{feature.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </div>
