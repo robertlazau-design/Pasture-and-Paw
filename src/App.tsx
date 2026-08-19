@@ -155,11 +155,11 @@ function Hero() {
     <section ref={ref} className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-teal-950">
       <motion.div style={{ y }} className="absolute inset-0 z-0">
         <img
-          src="/images/hero-main.png"
-          alt="Belgian Malinois standing alert on a misty farm at sunrise"
-          className="w-full h-full object-cover opacity-60"
+          src="/images/hero-main.jpg"
+          alt="Pasture & Paw founder with Dexter calf and goat in front of the red farm barn"
+          className="w-full h-full object-cover object-center opacity-65"
         />
-        <div className="absolute inset-0 bg-teal-900/40 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-b from-teal-950/70 via-teal-900/40 to-teal-950/85 mix-blend-multiply" />
       </motion.div>
 
       {/* Playful Floating Elements */}

@@ -12,7 +12,7 @@ const talentDogs = [
     breed: 'Belgian Malinois',
     age: '4 years',
     skills: ['Off-leash precision work', 'Mark-to-mark movement', 'Controlled aggression on cue', 'Vehicle work', 'High-energy action sequences'],
-    image: '/images/hero-main.png',
+    image: '/images/training-action.png',
     color: 'bg-teal-800',
     description: 'Our lead production dog. Valor brings a rare combination of intensity and control to every set. Trained in advanced obedience, protection sport foundations, and on-command behavioral sequences, he is equally capable of high-energy chase scenes and calm, patient close-up work.',
   },
