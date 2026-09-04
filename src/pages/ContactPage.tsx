@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Calendar as CalendarIcon, Clock, ArrowLeft, ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, Mail, MapPin, Instagram, Dog, Leaf, PawPrint, Moon, Sparkles } from 'lucide-react';
+import { Calendar as CalendarIcon, Clock, ArrowLeft, ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, Mail, MapPin, Instagram, Dog, Leaf, Moon, Sparkles } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 const btnPrimary = "inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl border-2 border-teal-900 bg-sage text-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] hover:shadow-[2px_2px_0px_0px_#0B3B3C] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed";
 
-type ServiceType = 'farm' | 'training' | 'talent' | 'boarding' | 'wellness' | 'general' | null;
+type ServiceType = 'farm' | 'training' | 'boarding' | 'wellness' | 'general' | null;
 
 const serviceOptions = [
   {
@@ -33,12 +33,6 @@ const serviceOptions = [
     description: 'Book a full-day farm immersion for yourself, your group, or your team.',
   },
   {
-    type: 'talent' as ServiceType,
-    icon: PawPrint,
-    title: 'Talent & Production Inquiry',
-    description: 'Inquire about hiring our dogs and handler for film, TV, or commercial work.',
-  },
-  {
     type: 'general' as ServiceType,
     icon: Mail,
     title: 'General Inquiry',
@@ -61,9 +55,6 @@ export default function ContactPage() {
     if (serviceParam === 'farm' || serviceParam === 'training' || serviceParam === 'boarding' || serviceParam === 'wellness') {
       setServiceType(serviceParam as ServiceType);
       setBookingStep('calendar');
-    } else if (serviceParam === 'talent') {
-      setServiceType('talent');
-      setBookingStep('form');
     }
   }, [searchParams]);
 
@@ -98,7 +89,7 @@ export default function ContactPage() {
 
   const handleServiceSelect = (type: ServiceType) => {
     setServiceType(type);
-    if (type === 'general' || type === 'talent') {
+    if (type === 'general') {
       setBookingStep('form');
     } else {
       setBookingStep('calendar');
@@ -108,12 +99,12 @@ export default function ContactPage() {
   const getStepNumber = () => {
     if (bookingStep === 'service') return 1;
     if (bookingStep === 'calendar') return 2;
-    if (bookingStep === 'form') return serviceType === 'general' || serviceType === 'talent' ? 2 : 3;
+    if (bookingStep === 'form') return serviceType === 'general' ? 2 : 3;
     return 3;
   };
 
   const getTotalSteps = () => {
-    if (serviceType === 'general' || serviceType === 'talent') return 2;
+    if (serviceType === 'general') return 2;
     return 3;
   };
 
@@ -224,7 +215,7 @@ export default function ContactPage() {
             {/* Back Button */}
             {bookingStep !== 'service' && bookingStep !== 'success' && (
               <button onClick={() => {
-                  if (bookingStep === 'form' && serviceType !== 'general' && serviceType !== 'talent') setBookingStep('calendar');
+                  if (bookingStep === 'form' && serviceType !== 'general') setBookingStep('calendar');
                   else { setBookingStep('service'); setServiceType(null); }
                 }} 
                 className="flex items-center text-teal-900 font-bold hover:text-sage transition-colors mb-8"
@@ -251,16 +242,14 @@ export default function ContactPage() {
                       <button
                         key={option.type}
                         onClick={() => handleServiceSelect(option.type)}
-                        className="text-left p-6 rounded-2xl border-3 border-teal-900/15 hover:border-teal-900 hover:bg-sage-light hover:shadow-[6px_6px_0px_0px_#0B3B3C] transition-all group"
+                        className="flex items-start p-6 rounded-2xl border-2 border-teal-900 bg-cream/40 hover:bg-sage-light hover:border-teal-900 transition-all text-left group shadow-[4px_4px_0px_0px_rgba(11,59,60,0.1)] hover:shadow-[4px_4px_0px_0px_#0B3B3C] hover:-translate-y-0.5"
                       >
-                        <div className="flex items-start gap-4">
-                          <div className="p-3 bg-sage-light rounded-xl border-2 border-teal-900/20 group-hover:border-teal-900 group-hover:bg-sage transition-all shrink-0">
-                            <option.icon className="w-6 h-6 text-teal-900" />
-                          </div>
-                          <div>
-                            <h3 className="font-bold text-lg text-teal-900 mb-1">{option.title}</h3>
-                            <p className="text-teal-900/60 font-medium text-sm leading-relaxed">{option.description}</p>
-                          </div>
+                        <div className="p-3 bg-sage rounded-xl border-2 border-teal-900 mr-4 shrink-0 group-hover:scale-105 transition-transform">
+                          <option.icon className="w-6 h-6 text-teal-900" />
+                        </div>
+                        <div>
+                          <h3 className="font-display font-bold text-xl text-teal-900 mb-1">{option.title}</h3>
+                          <p className="text-teal-900/70 text-sm leading-relaxed">{option.description}</p>
                         </div>
                       </button>
                     ))}
@@ -268,91 +257,109 @@ export default function ContactPage() {
                 </motion.div>
               )}
 
-              {/* Step 2: Calendar */}
+              {/* Step 2: Calendar & Timeslot (for bookable services) */}
               {bookingStep === 'calendar' && (
                 <motion.div
                   key="calendar"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
                 >
-                  {/* Selected Service Badge */}
                   <div className="inline-flex items-center gap-2 bg-sage-light text-teal-900 px-4 py-2 rounded-full border-2 border-teal-900/30 mb-6">
                     <CheckCircle2 className="w-4 h-4" />
                     <span className="font-bold text-sm">{selectedServiceLabel}</span>
                   </div>
 
-                  <h2 className="font-display font-bold text-3xl text-teal-900 mb-2">
-                    {serviceType === 'training' ? 'Schedule a Consultation' : serviceType === 'boarding' ? 'Schedule a Drop-Off' : serviceType === 'wellness' ? 'Book Your Experience' : 'Book a Farm Visit'}
-                  </h2>
-                  <p className="text-teal-900/60 font-medium mb-10">Select a date and time that works for you.</p>
+                  <h2 className="font-display font-bold text-3xl text-teal-900 mb-2">Select Date & Time</h2>
+                  <p className="text-teal-900/60 font-medium mb-8">Available dates are highlighted. Weekends are reserved for farm chores.</p>
 
-                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-                    {/* Calendar - takes 3 columns */}
-                    <div className="lg:col-span-3">
-                      {renderCalendar()}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                    {/* Calendar Month View */}
+                    <div className="lg:col-span-7 bg-cream/40 border-2 border-teal-900 rounded-2xl p-6">
+                      <div className="flex justify-between items-center mb-6">
+                        <h3 className="font-display font-bold text-xl text-teal-900">
+                          {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+                        </h3>
+                        <div className="flex gap-2">
+                          <button onClick={handlePrevMonth} className="p-2 rounded-xl border-2 border-teal-900 bg-white hover:bg-sage-light transition-colors">
+                            <ChevronLeft className="w-4 h-4 text-teal-900" />
+                          </button>
+                          <button onClick={handleNextMonth} className="p-2 rounded-xl border-2 border-teal-900 bg-white hover:bg-sage-light transition-colors">
+                            <ChevronRight className="w-4 h-4 text-teal-900" />
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-7 gap-1 text-center font-bold text-xs text-teal-900/60 mb-2">
+                        {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((d, i) => (
+                          <div key={i} className="py-1">{d}</div>
+                        ))}
+                      </div>
+
+                      <div className="grid grid-cols-7 gap-1">
+                        {renderCalendar()}
+                      </div>
                     </div>
-                    
-                    {/* Time Selection - takes 2 columns */}
-                    <div className="lg:col-span-2">
-                      <h3 className="font-bold text-lg text-teal-900 mb-5 flex items-center gap-2">
-                        <Clock className="text-sage w-5 h-5" /> Available Times
+
+                    {/* Time Slots */}
+                    <div className="lg:col-span-5 flex flex-col">
+                      <h3 className="font-display font-bold text-xl text-teal-900 mb-4 flex items-center gap-2">
+                        <Clock className="w-5 h-5" /> Available Times
                       </h3>
-                      
-                      {selectedDate ? (
-                        <div className="space-y-3">
-                          {availableTimes.map(time => (
+
+                      {!selectedDate ? (
+                        <div className="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-teal-900/20 rounded-2xl p-6 text-center text-teal-900/60">
+                          <CalendarIcon className="w-8 h-8 mb-2 opacity-50" />
+                          <p className="font-medium text-sm">Please select a date from the calendar first</p>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col gap-3">
+                          {availableTimes.map((time) => (
                             <button
                               key={time}
                               onClick={() => setSelectedTime(time)}
-                              className={`w-full p-4 font-bold text-base rounded-xl border-3 transition-all text-center
+                              className={`p-4 rounded-xl border-2 font-bold text-left transition-all flex justify-between items-center
                                 ${selectedTime === time 
-                                  ? 'bg-sage border-teal-900 text-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C]' 
-                                  : 'bg-cream border-teal-900/20 text-teal-900 hover:border-teal-900 hover:shadow-[4px_4px_0px_0px_#0B3B3C]'}`}
+                                  ? 'bg-sage border-teal-900 text-teal-900 shadow-[3px_3px_0px_0px_#0B3B3C] -translate-y-0.5' 
+                                  : 'bg-cream/40 border-teal-900/30 text-teal-900 hover:bg-sage-light hover:border-teal-900'}`}
                             >
-                              {time}
+                              <span>{time}</span>
+                              {selectedTime === time && <CheckCircle2 className="w-5 h-5 text-teal-900" />}
                             </button>
                           ))}
                         </div>
-                      ) : (
-                        <div className="h-48 border-3 border-dashed border-teal-900/20 rounded-2xl flex items-center justify-center text-teal-900/40 font-medium text-base bg-cream/50 text-center px-6">
-                          Select a date first
-                        </div>
-                      )}
-
-                      {selectedTime && (
-                         <motion.div 
-                           initial={{ opacity: 0, y: 10 }} 
-                           animate={{ opacity: 1, y: 0 }}
-                           className="mt-6"
-                         >
-                           <button onClick={() => setBookingStep('form')} className={`${btnPrimary} w-full`}>
-                             Continue to Details
-                             <ArrowRight className="ml-2 w-5 h-5" />
-                           </button>
-                         </motion.div>
                       )}
                     </div>
+                  </div>
+
+                  <div className="flex justify-end pt-4 border-t-2 border-teal-900/10">
+                    <button
+                      disabled={!selectedDate || !selectedTime}
+                      onClick={() => setBookingStep('form')}
+                      className={btnPrimary}
+                    >
+                      Continue to Details
+                      <ArrowRight className="ml-2 w-5 h-5" />
+                    </button>
                   </div>
                 </motion.div>
               )}
 
-              {/* Step 3: Form */}
+              {/* Step 3: Contact Details & Form */}
               {bookingStep === 'form' && (
-                 <motion.div
+                <motion.div
                   key="form"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
                 >
-                  {/* Selected Service Badge */}
                   <div className="inline-flex items-center gap-2 bg-sage-light text-teal-900 px-4 py-2 rounded-full border-2 border-teal-900/30 mb-6">
                     <CheckCircle2 className="w-4 h-4" />
                     <span className="font-bold text-sm">{selectedServiceLabel}</span>
                   </div>
 
                   {/* Booking Summary Bar */}
-                  {serviceType !== 'general' && serviceType !== 'talent' && selectedDate && selectedTime && (
+                  {serviceType !== 'general' && selectedDate && selectedTime && (
                     <div className="mb-8 p-4 bg-sage-light border-2 border-teal-900 rounded-xl flex justify-between items-center">
                       <div className="flex items-center gap-3">
                         <CalendarIcon className="w-5 h-5 text-teal-900/60 shrink-0" />
@@ -367,7 +374,7 @@ export default function ContactPage() {
                   )}
 
                   <h2 className="font-display font-bold text-3xl text-teal-900 mb-8">
-                    {serviceType === 'general' || serviceType === 'talent' ? 'Send a Message' : 'Your Details'}
+                    {serviceType === 'general' ? 'Send a Message' : 'Your Details'}
                   </h2>
 
                   <form onSubmit={handleFormSubmit} className="space-y-6">
@@ -386,27 +393,6 @@ export default function ContactPage() {
                             <label className="block font-bold text-teal-900 mb-2 text-sm">Phone Number</label>
                             <input required type="tel" placeholder="(555) 000-0000" className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors" />
                           </div>
-                        )}
-
-                        {serviceType === 'talent' && (
-                          <>
-                            <div>
-                              <label className="block font-bold text-teal-900 mb-2 text-sm">Production Company</label>
-                              <input required type="text" placeholder="Company name" className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors" />
-                            </div>
-                            <div>
-                              <label className="block font-bold text-teal-900 mb-2 text-sm">Project Type</label>
-                              <select required className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors">
-                                <option value="">Select project type</option>
-                                <option value="film">Feature Film</option>
-                                <option value="tv">Television</option>
-                                <option value="commercial">Commercial</option>
-                                <option value="print">Print / Editorial</option>
-                                <option value="event">Live Event</option>
-                                <option value="other">Other</option>
-                              </select>
-                            </div>
-                          </>
                         )}
 
                         {serviceType === 'wellness' && (
@@ -431,12 +417,12 @@ export default function ContactPage() {
                      </div>
                      <div>
                         <label className="block font-bold text-teal-900 mb-2 text-sm">
-                          {serviceType === 'training' ? 'What are your primary goals or concerns?' : serviceType === 'talent' ? 'Project details, timeline, and requirements' : serviceType === 'boarding' ? 'Tell us about your dog and any special needs' : serviceType === 'wellness' ? 'Any dietary restrictions or accessibility needs?' : 'Message'}
+                          {serviceType === 'training' ? 'What are your primary goals or concerns?' : serviceType === 'boarding' ? 'Tell us about your dog and any special needs' : serviceType === 'wellness' ? 'Any dietary restrictions or accessibility needs?' : 'Message'}
                         </label>
                         <textarea required rows={4} placeholder="Tell us more..." className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors resize-none"></textarea>
                      </div>
                      <button type="submit" className={`${btnPrimary} w-full mt-2`}>
-                       {serviceType === 'general' || serviceType === 'talent' ? 'Send Message' : 'Confirm Booking'}
+                       {serviceType === 'general' ? 'Send Message' : 'Confirm Booking'}
                        <ArrowRight className="ml-2 w-5 h-5" />
                      </button>
                   </form>
@@ -455,10 +441,10 @@ export default function ContactPage() {
                     <CheckCircle2 className="w-12 h-12 text-teal-900" />
                   </div>
                   <h2 className="font-display text-4xl font-bold text-teal-900 mb-4">
-                    {serviceType === 'general' || serviceType === 'talent' ? 'Message Sent!' : 'Booking Confirmed!'}
+                    {serviceType === 'general' ? 'Message Sent!' : 'Booking Confirmed!'}
                   </h2>
                   <p className="text-xl text-teal-900/70 font-medium mb-12 max-w-md mx-auto">
-                    {serviceType === 'general' || serviceType === 'talent'
+                    {serviceType === 'general'
                       ? "Thanks for reaching out! We'll get back to you within 24–48 hours." 
                       : `We've received your request for ${selectedDate?.toLocaleDateString()} at ${selectedTime}. Check your email for the calendar invitation.`}
                   </p>

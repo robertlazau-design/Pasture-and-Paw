@@ -5,7 +5,6 @@ import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom'
 import FarmPage from './pages/FarmPage';
 import TrainingPage from './pages/TrainingPage';
 import ContactPage from './pages/ContactPage';
-import TalentPage from './pages/TalentPage';
 import BreedPage from './pages/BreedPage';
 
 // Reusable tactile button styles
@@ -88,10 +87,6 @@ function Navbar() {
               Training
               {underline}
             </Link>
-            <Link to="/talent" className={navLinkClass}>
-              Talent
-              {underline}
-            </Link>
             <Link to="/contact" onClick={handleContactClick} className={navLinkClass}>
               Contact
               {underline}
@@ -128,9 +123,6 @@ function Navbar() {
               </Link>
               <Link to="/training" onClick={() => setMobileOpen(false)} className="text-teal-900 font-bold text-xl py-2 border-b-2 border-sage-light">
                 Training
-              </Link>
-              <Link to="/talent" onClick={() => setMobileOpen(false)} className="text-teal-900 font-bold text-xl py-2 border-b-2 border-sage-light">
-                Talent
               </Link>
               <Link to="/contact" onClick={handleContactClick} className="text-teal-900 font-bold text-xl py-2">
                 Contact
@@ -576,7 +568,6 @@ export default function App() {
           <Route path="/farm" element={<FarmPage />} />
           <Route path="/farm/:slug" element={<BreedPage />} />
           <Route path="/training" element={<TrainingPage />} />
-          <Route path="/talent" element={<TalentPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </main>
