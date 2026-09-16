@@ -12,37 +12,37 @@ const animals = [
     image: '/images/highland-cattle.png',
     color: 'bg-clay',
     slug: 'highlander-cattle',
-    description: 'The anchor of our rotational grazing program. Known for their docile nature and exceptional hardiness, our Highlanders thrive on marginal pasture, build topsoil through managed grazing, and require minimal supplemental care year-round.',
+    description: 'The heart of our pastures. Known for their calm temperament and thick double coats, our Scottish Highlands thrive on rough forage, help rebuild healthy topsoil as we rotate paddocks, and handle Pacific Northwest weather with ease.',
   },
   {
     name: 'Dexter Cattle',
     image: '/images/dexter-cattle.png',
     color: 'bg-sage',
     slug: 'dexter-cattle',
-    description: 'A compact, dual-purpose heritage breed ideal for small-acreage operations. Their light hoofprint makes them perfect for grazing sensitive riparian areas and newly seeded paddocks without compacting the soil.',
+    description: 'A small-framed heritage breed from Ireland known for friendly personalities and rich milk. Because they are lighter on their feet, they graze our hillside pastures and newly planted paddocks without packing down the soil.',
   },
   {
     name: 'Norwegian Goats',
     image: '/images/norwegian-goats.png',
     color: 'bg-teal-800',
     slug: 'norwegian-goats',
-    description: 'Our biological brush management crew. These cold-hardy Scandinavian browsers target invasive blackberry, scotch broom, and thistle — clearing overgrown acreage without chemical or mechanical intervention.',
+    description: 'Our natural brush clearing team and farm favorites. These hardy Scandinavian goats love munching on wild blackberry vines, thistle, and woody shrubs, opening up overgrown ground naturally while delighting every visitor who stops by.',
   },
   {
     name: 'Silver Fox Rabbits',
     image: '/images/silver-fox-rabbit.png',
     color: 'bg-clay',
     slug: 'silver-fox-rabbits',
-    description: 'A rare American heritage breed listed as "threatened" by the Livestock Conservancy. We maintain a pedigreed breeding colony focused on genetic diversity, supporting breed preservation and local 4-H youth agricultural programs.',
+    description: 'A gentle American heritage breed with silver-tipped fur and a docile disposition. We maintain a pedigreed breeding line to help protect this rare breed, while mentoring local 4-H students in animal husbandry and showmanship.',
   },
 ];
 
 const wellnessIncludes = [
-  { icon: Sun, text: 'Guided morning farm walk and animal feeding rounds' },
-  { icon: Heart, text: 'Hands-on interaction with Highlander cattle, Norwegian goats, and Silver Fox rabbits' },
-  { icon: Utensils, text: 'A seasonal farm-to-table lunch prepared with ingredients from our garden' },
-  { icon: Flower2, text: 'Afternoon mindfulness session in the pasture' },
-  { icon: Leaf, text: 'Take-home farm goods basket' },
+  { icon: Sun, text: 'Morning pasture walk and hands-on morning chore rounds' },
+  { icon: Heart, text: 'Up-close time grooming and feeding our Scottish Highlands, goats, and rabbits' },
+  { icon: Utensils, text: 'Fresh seasonal farm lunch prepared with locally sourced ingredients' },
+  { icon: Flower2, text: 'Relaxed afternoon pasture walkthrough and regenerative farming discussion' },
+  { icon: Leaf, text: 'Basket of seasonal farm goods to take home' },
 ];
 
 export default function FarmPage() {
@@ -73,7 +73,7 @@ export default function FarmPage() {
               <span className="text-clay">Farm</span>
             </h1>
             <p className="text-2xl text-teal-900/80 font-medium mb-8 leading-relaxed">
-              Where rotational grazing, heritage breed stewardship, and regenerative agriculture aren't just buzzwords — they're the daily rhythm of our operation.
+              Rotational grazing, heritage livestock, and healthy soil are part of our everyday chores. We work with the land so it stays rich and productive for years to come.
             </p>
             <Link to="/contact?service=farm" className={btnPrimary}>
               Book a Farm Visit
@@ -113,13 +113,13 @@ export default function FarmPage() {
          </div>
          
          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-8">Stewardship as a Lifestyle</h2>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-8">Working With the Land</h2>
             <div className="space-y-6 text-xl text-cream/90 font-medium leading-relaxed">
               <p>
-                Our pastures are more than just open space — they're actively managed ecosystems. We practice rotational grazing on a scheduled paddock rotation, moving cattle, goats, and other livestock through designated areas to allow grazed sections to rest, regenerate, and rebuild topsoil naturally. This reduces our reliance on synthetic fertilizers, encourages native plant diversity, and sequesters carbon back into the ground where it belongs.
+                Good pasture does not happen by accident. We rotate our cattle and goats through designated paddocks on a steady schedule, giving grazed grass ample time to rest and grow deep root systems. This natural cycle builds dark, rich topsoil, brings back native grasses, and keeps the fields healthy without synthetic fertilizers.
               </p>
               <p>
-                Every animal on our farm serves a distinct agricultural purpose. Our heavy-grazing Highland and Dexter cattle manage the open pastures. Our Norwegian goats clear invasive brush from wooded hillsides. Our Silver Fox rabbits anchor our youth education and breed conservation efforts. This multi-species, symbiotic approach to land management is the foundation of everything we do at Pasture & Paw.
+                Each animal here has an important job. The Highland and Dexter cattle keep open fields grazed down evenly. The Norwegian goats work along tree lines and slopes to clean up invasive blackberry and brush. Our Silver Fox rabbits give local youth a hands-on introduction to heritage livestock through 4-H. Bringing these animals together keeps the entire property thriving.
               </p>
             </div>
          </div>
@@ -170,7 +170,7 @@ export default function FarmPage() {
         </div>
       </section>
 
-      {/* Farm Wellness Experience */}
+      {/* Farm Immersion Experience */}
       <section className="relative overflow-hidden mb-24">
         {/* Wavy top divider */}
         <div className="w-full overflow-hidden leading-none rotate-180">
@@ -190,21 +190,21 @@ export default function FarmPage() {
               >
                 <div className="inline-flex items-center gap-2 bg-clay text-cream px-5 py-2 rounded-full border-2 border-teal-900 mb-6 shadow-[4px_4px_0px_0px_#0B3B3C]">
                   <Flower2 className="h-5 w-5" />
-                  <span className="font-bold text-sm uppercase tracking-wider">New Offering</span>
+                  <span className="font-bold text-sm uppercase tracking-wider">Farm Visits &amp; Days</span>
                 </div>
                 <h2 className="font-display text-5xl md:text-6xl font-bold text-teal-900 mb-6 leading-tight">
-                  Farm Wellness<br/>
+                  The Full Farm<br/>
                   <span className="text-clay">Experience</span>
                 </h2>
-                <p className="text-2xl text-teal-900 font-bold mb-6 italic">
-                  A full-day immersion on our working farm designed to reset your nervous system and reconnect you to the land.
+                <p className="text-2xl text-teal-900 font-bold mb-6">
+                  Spend an unhurried day out on the acreage getting your boots dirty, meeting the herds, and experiencing life on a working family farm.
                 </p>
                 <div className="space-y-6 text-xl text-teal-900/80 font-medium leading-relaxed mb-8">
                   <p>
-                    The Farm Wellness Experience is not a spa day — it's something deeper. Spend the morning with your hands in the soil alongside our team, participate in guided animal interactions with our heritage livestock, and learn the rhythms of regenerative agriculture firsthand.
+                    This is an authentic, hands-on day in the open air. You will join our team out in the fields, help with morning feeding, learn how rotational grazing works up close, and spend relaxed time with our Scottish Highland cattle, dairy goats, and rabbits.
                   </p>
                   <p>
-                    Grounded in the belief that proximity to animals, open land, and purposeful physical work has a measurable impact on human well-being, this experience was designed for individuals, small groups, and corporate teams seeking something more meaningful than a conference room retreat.
+                    Taking a break from screens to work with your hands and be around animals clears the head in a way few other things can. We welcome individuals, families, small private groups, and team retreats looking for an honest, refreshing day on the land.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -269,10 +269,10 @@ export default function FarmPage() {
               </div>
               <div className="mt-10 p-6 bg-sage-light rounded-2xl border-2 border-teal-900 text-center">
                 <p className="text-teal-900 font-bold text-lg">
-                  Available for individuals, small groups (up to 8), and private corporate bookings.
+                  Available for individuals, small groups (up to 8), and private bookings.
                 </p>
                 <p className="text-teal-900/70 font-medium mt-2">
-                  Contact us for seasonal availability and group rates.
+                  Contact us for seasonal scheduling and group rates.
                 </p>
               </div>
             </motion.div>

@@ -12,31 +12,31 @@ const serviceOptions = [
     type: 'training' as ServiceType,
     icon: Dog,
     title: 'Dog Training Consultation',
-    description: 'Book a free phone consultation to discuss your dog\'s behavioral goals.',
+    description: 'Book a free phone consultation to discuss your dog and what you would like to achieve.',
   },
   {
     type: 'boarding' as ServiceType,
     icon: Moon,
     title: 'Farm Boarding',
-    description: 'Schedule a drop-off for overnight, extended, or recurring boarding stays.',
+    description: 'Schedule an overnight, extended, or recurring farm boarding stay for your dog.',
   },
   {
     type: 'farm' as ServiceType,
     icon: Leaf,
     title: 'Farm Tour or Visit',
-    description: 'Schedule a time to visit the farm, see the animals, and pick up local goods.',
+    description: 'Schedule a time to visit the farm, meet the animals, and pick up fresh goods.',
   },
   {
     type: 'wellness' as ServiceType,
     icon: Sparkles,
-    title: 'Farm Wellness Experience',
-    description: 'Book a full-day farm immersion for yourself, your group, or your team.',
+    title: 'Farm Day Experience',
+    description: 'Book an unhurried full-day farm immersion for yourself, your family, or your team.',
   },
   {
     type: 'general' as ServiceType,
     icon: Mail,
     title: 'General Inquiry',
-    description: 'Have a different question? Send us a message directly.',
+    description: 'Have a question about our farm or animals? Send us a note.',
   },
 ];
 
@@ -172,7 +172,7 @@ export default function ContactPage() {
             Let's Connect
           </h1>
           <p className="text-xl md:text-2xl text-teal-900/70 font-medium max-w-2xl mx-auto">
-            Whether you're looking for expert dog training, a farm visit, or just have a question — we're here to help.
+            Reach out to discuss training for your dog, schedule a farm visit, or ask about our heritage livestock.
           </p>
         </motion.div>
       </section>
@@ -401,8 +401,8 @@ export default function ContactPage() {
                             <select required className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors">
                               <option value="">Select group size</option>
                               <option value="1">Individual (1 person)</option>
-                              <option value="2-4">Small Group (2–4)</option>
-                              <option value="5-8">Group (5–8)</option>
+                              <option value="2-4">Small Group (2 to 4)</option>
+                              <option value="5-8">Group (5 to 8)</option>
                               <option value="corporate">Corporate / Private Event</option>
                             </select>
                           </div>
@@ -445,7 +445,7 @@ export default function ContactPage() {
                   </h2>
                   <p className="text-xl text-teal-900/70 font-medium mb-12 max-w-md mx-auto">
                     {serviceType === 'general'
-                      ? "Thanks for reaching out! We'll get back to you within 24–48 hours." 
+                      ? "Thanks for reaching out! We'll get back to you within 24 to 48 hours." 
                       : `We've received your request for ${selectedDate?.toLocaleDateString()} at ${selectedTime}. Check your email for the calendar invitation.`}
                   </p>
                   <Link to="/" className={btnPrimary}>

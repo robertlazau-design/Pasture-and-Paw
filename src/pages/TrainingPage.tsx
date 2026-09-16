@@ -9,32 +9,32 @@ const goalAreas = [
   {
     icon: Compass,
     title: 'Leash Manners & Walking',
-    description: `Pulling, lunging, or just general chaos on the leash — we'll build calm, connected walks you actually enjoy.`,
+    description: `Tired of getting dragged down the street or dreading walks? We teach your dog calm, loose-leash focus so walks feel relaxing for both of you.`,
   },
   {
     icon: PawPrint,
     title: 'Recall & Off-Leash Freedom',
-    description: `Dream of hiking or adventuring without the worry? We'll build a recall you can actually trust.`,
+    description: `Whether you want to explore hiking trails or enjoy open fields, we build a dependable recall so your dog comes back the first time you call.`,
   },
   {
     icon: Shield,
     title: 'Reactivity & Anxiety',
-    description: `Whether it's other dogs, strangers, or loud noises — we'll help your dog find confidence and calm.`,
+    description: `If your dog barks, lunges, or panics around other dogs, guests, or sudden noises, we work on confidence and emotional control in real settings.`,
   },
   {
     icon: Home,
     title: 'Household Manners',
-    description: 'Jumping, counter-surfing, door-dashing — the everyday stuff that makes life with your dog harder than it should be.',
+    description: 'Jumping on guests, stealing food from the counter, and bolting out the door. We build reliable household boundaries that make daily life peaceful.',
   },
   {
     icon: Users,
     title: 'Socialization & Confidence',
-    description: 'For puppies or under-socialized dogs who need safe, structured exposure to the world around them.',
+    description: 'For puppies and timid dogs who need thoughtful, structured exposure to new sights, sounds, footing, and friendly farm animals.',
   },
   {
     icon: Target,
     title: 'Advanced Obedience',
-    description: `Already have a solid foundation? We'll push the boundaries with distance work, duration, and distraction proofing.`,
+    description: `Take your dog's training to a higher level with off-leash control, distance cues, extended stays, and focus through heavy distractions.`,
   },
 ];
 
@@ -42,30 +42,30 @@ const processSteps = [
   {
     number: '01',
     title: 'Tell Us About Your Dog',
-    description: 'Start with a free phone consultation. We want to hear about your dog — their personality, their quirks, the things that frustrate you, and the things you love about them. No detail is too small.',
+    description: 'We start with a thorough phone consultation. Tell us about your dog\'s temperament, daily habits, where you struggle, and what you love about them. Every detail helps us understand what is really going on.',
   },
   {
     number: '02',
     title: 'Share Your Goals',
-    description: `What does life with your dog look like in your perfect world? Whether it's a calm walk through the neighborhood, reliable off-leash hiking, or just being able to have guests over without chaos — we want to know.`,
+    description: `Tell us what your ideal day together looks like. Maybe you want calm neighborhood strolls, off-leash trail adventures, or peaceful evenings without constant barking. Your lifestyle sets our targets.`,
   },
   {
     number: '03',
     title: 'We Build Your Program',
-    description: 'Based on everything you share, we design a training plan from the ground up — just for your dog. The duration, the focus areas, the methods — all of it is built around who they are and where you want to go.',
+    description: 'We design a custom training plan specifically for your dog. We set the timeline, training milestones, and routines around your dog\'s temperament and the real-world skills you need most.',
   },
   {
     number: '04',
     title: 'Training on the Farm',
-    description: `Your dog joins us on our working farm, where they'll train alongside moving livestock, open pastures, and the unpredictable rhythm of agricultural life. It's real-world proofing you simply can't replicate in a facility.`,
+    description: `Your dog works with us right on the farm. Practicing obedience around cattle, goats, open fields, and daily chores builds deep focus and impulse control that holds up anywhere.`,
   },
 ];
 
 const boardingFeatures = [
-  { icon: Home, title: 'Farm-Style Accommodations', description: 'Spacious, climate-controlled kennels with access to covered outdoor runs. No stacked crates, no concrete floors.' },
-  { icon: Sun, title: 'Daily Structured Activity', description: 'Multiple supervised outdoor sessions per day on our acreage. Your dog gets real exercise — not just a quick yard turnout.' },
-  { icon: Shield, title: 'Experienced Supervision', description: 'Every boarding dog is under the direct care of professional trainers. We monitor behavior, appetite, and temperament daily.' },
-  { icon: Heart, title: 'Small Group Sizes', description: 'We limit boarding capacity to ensure each dog receives individual attention and a low-stress environment.' },
+  { icon: Home, title: 'Farm-Style Accommodations', description: 'Spacious, clean indoor runs with natural light, heating, and cooling. No stacked wire crates or concrete warehouse cages.' },
+  { icon: Sun, title: 'Daily Structured Activity', description: 'Multiple outdoor sessions every day on open farm pastures. Dogs get genuine exercise, fresh air, and enrichment.' },
+  { icon: Shield, title: 'Experienced Trainer Care', description: 'Every boarding dog is watched and handled directly by professional trainers who understand dog behavior, body language, and daily care.' },
+  { icon: Heart, title: 'Small Capacity', description: 'We limit our guest count so every dog gets personal attention, quiet rest, and a calm, low-stress stay.' },
 ];
 
 export default function TrainingPage() {
@@ -96,10 +96,10 @@ export default function TrainingPage() {
               <span className="text-sage">Academy</span>
             </h1>
             <p className="text-2xl text-teal-900/80 font-medium mb-4 leading-relaxed">
-              No two dogs are the same — and neither are our training programs.
+              Every dog learns differently, and every owner needs something different.
             </p>
             <p className="text-lg text-teal-900/70 font-medium mb-8 leading-relaxed">
-              Tell us about your dog, share your goals, and we'll build a program from the ground up that's as unique as the bond you share.
+              Tell us what challenges you are facing and what you want life with your dog to look like. We build a personalized program around you and your dog.
             </p>
             <Link to="/contact?service=training" className={btnPrimary}>
               Start Your Consultation
@@ -127,19 +127,19 @@ export default function TrainingPage() {
       {/* Philosophy Section */}
       <section className="bg-teal-900 text-cream py-24 mb-24 relative overflow-hidden">
          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-8">Why the Farm?</h2>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-8">Why We Train on a Working Farm</h2>
             <div className="space-y-6 text-xl text-cream/90 font-medium leading-relaxed">
               <p>
-                A sterile training room can only take a dog so far. Our dogs train on a working farm — surrounded by grazing cattle, free-roaming goats, the sounds of daily chores, and the unpredictable rhythm of agricultural life. This isn't simulated distraction. It's the real thing.
+                Training inside a quiet, empty room only prepares a dog for quiet, empty rooms. Out in the real world, dogs encounter squirrels, delivery drivers, bicycles, and barking neighborhood dogs.
               </p>
               <p>
-                By proofing behaviors alongside moving livestock and the honest chaos of daily farm operations, we ensure that when your dog goes home — whether that's the suburbs, the city, or a rural homestead — they have the clarity, confidence, and composure to listen when it matters most.
+                Our dogs train directly on our working farm. Working around cattle in the pasture, goats along the fence line, tractor sounds, and open fields gives dogs authentic proofing. When a dog learns to keep their head and listen here, going home to a busy suburban neighborhood or city sidewalk feels simple.
               </p>
             </div>
          </div>
       </section>
 
-      {/* "Your Dog Is One of a Kind" - Personalized Approach Section */}
+      {/* Personalized Approach Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -153,18 +153,18 @@ export default function TrainingPage() {
               <span className="font-bold text-sm uppercase tracking-wider">Our Approach</span>
             </div>
             <h2 className="font-display text-5xl md:text-6xl font-bold text-teal-900 mb-6 leading-tight">
-              Your Dog Is<br/>
-              <span className="text-clay">One of a Kind</span>
+              Personalized Training<br/>
+              <span className="text-clay">Built Around You</span>
             </h2>
             <div className="space-y-6 text-xl text-teal-900/80 font-medium leading-relaxed">
               <p>
-                We don't believe in cookie-cutter programs or one-size-fits-all packages. Every dog that comes through our gate is an individual — with their own temperament, their own history, and their own way of seeing the world.
+                We do not push dogs into rigid, pre-packaged programs. A fearful rescue, an energetic adolescent retriever, and a reactive terrier each need completely different handling, pacing, and motivation.
               </p>
               <p>
-                That's why every training program at Pasture & Paw starts with <strong className="text-teal-900">you</strong>. We sit down, we listen, and we learn everything we can about your dog and your goals. What drives them? What scares them? What does your ideal day together look like?
+                That's why every training program at Pasture &amp; Paw starts with <strong className="text-teal-900">you</strong>. We sit down, listen to your daily challenges, and learn what drives your dog. We want to know where things feel frustrating and what your ideal routine looks like.
               </p>
               <p>
-                From there, we design a program from scratch — built entirely around your dog's needs and your vision for life together. The timeline, the focus, the methods — all of it tailored, all of it intentional.
+                From there, we build a program specifically for you. The length of training, the specific milestones, and the hands-on owner coaching sessions are all arranged to give you lasting results at home.
               </p>
             </div>
           </motion.div>
@@ -182,12 +182,12 @@ export default function TrainingPage() {
               </div>
               <ul className="space-y-5">
                 {[
-                  'No preset packages — your program is designed from the ground up',
-                  'We train on a real working farm, not in a sterile facility',
-                  'Every program is shaped around your lifestyle and goals',
-                  'Your dog trains alongside livestock, terrain, and real-world distractions',
-                  'We stay in close communication throughout the entire process',
-                  'You receive a comprehensive handoff so the training carries home',
+                  'Custom plans created for your specific dog and household goals',
+                  'Real farm acreage with natural distractions instead of an indoor box',
+                  'Training around livestock, open trails, and practical daily scenarios',
+                  'Direct updates and video check-ins throughout your dog\'s stay',
+                  'Thorough owner handoff lessons so good habits transfer smoothly to your home',
+                  'Ongoing support to ensure long-term consistency and success',
                 ].map((item, i) => (
                   <motion.li
                     key={i}
@@ -213,7 +213,7 @@ export default function TrainingPage() {
           <div className="text-center mb-16">
             <h2 className="font-display text-5xl font-bold text-teal-900 mb-4">What Are Your Goals?</h2>
             <p className="text-xl text-teal-900/70 font-medium max-w-3xl mx-auto leading-relaxed">
-              Whether you're working through a specific challenge or just want to build a stronger foundation, tell us what matters to you — and we'll make it the heart of your dog's program.
+              From fundamental puppy foundations to complex behavioral struggles, tell us what matters most to your family. We will build your dog's training around those exact priorities.
             </p>
           </div>
 
@@ -248,10 +248,10 @@ export default function TrainingPage() {
           >
             <div className="inline-block bg-cream rounded-2xl px-8 py-5 border-2 border-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C]">
               <p className="text-teal-900 font-bold text-lg">
-                Don't see your specific goal listed? <span className="text-clay">That's okay — just tell us.</span>
+                Have a unique situation or specific goal? <span className="text-clay">Just let us know during your consultation.</span>
               </p>
               <p className="text-teal-900/70 font-medium mt-1">
-                Every program is built from scratch. If it matters to you, it matters to us.
+                Every program is custom. If it is important for your household, we can address it.
               </p>
             </div>
           </motion.div>
@@ -263,7 +263,7 @@ export default function TrainingPage() {
         <div className="text-center mb-16">
           <h2 className="font-display text-5xl font-bold text-teal-900 mb-4">How It Works</h2>
           <p className="text-xl text-teal-900/70 font-medium max-w-2xl mx-auto">
-            From the first conversation to the final handoff, here's what the journey looks like.
+            From your initial phone consultation through your final handoff lesson, here is how our training process works.
           </p>
         </div>
 
@@ -333,10 +333,10 @@ export default function TrainingPage() {
                 </h2>
                 <div className="space-y-6 text-xl text-cream/90 font-medium leading-relaxed">
                   <p>
-                    Not every stay needs to be a training program. For dogs that simply need a safe, stimulating place to stay while you're away, our farm boarding provides an experience that goes far beyond a standard kennel.
+                    If you are heading out of town and need a safe, engaging place for your dog, our farm boarding gives them plenty of room to breathe. Unlike commercial kennel warehouses, dogs staying with us enjoy fresh country air, large outdoor turnouts, and quiet rest.
                   </p>
                   <p>
-                    Your dog will spend their days on open acreage under the supervision of professional trainers — not kennel attendants. They'll get real exercise, structured outdoor time, and the kind of environmental enrichment that only a working farm can provide.
+                    Our boarding dogs are cared for directly by experienced trainers rather than temporary kennel staff. Your dog gets structured daily exercise, mental enrichment on the acreage, and attentive care in a peaceful setting.
                   </p>
                   <p className="text-sage font-bold">
                     Available for overnight stays, extended trips, and recurring weekly schedules.
