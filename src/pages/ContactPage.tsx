@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Calendar as CalendarIcon, Clock, ArrowLeft, ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, Mail, MapPin, Instagram, Dog, Leaf, Moon, Sparkles } from 'lucide-react';
+import { Calendar as CalendarIcon, Clock, ArrowLeft, ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, Mail, MapPin, Instagram, Dog, Leaf, Moon, Sparkles, Loader2, AlertCircle } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { sendBookingEmail, TARGET_EMAIL } from '../services/emailService';
 
 const btnPrimary = "inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl border-2 border-teal-900 bg-sage text-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] hover:shadow-[2px_2px_0px_0px_#0B3B3C] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed";
 
@@ -48,7 +49,19 @@ export default function ContactPage() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [bookingStep, setBookingStep] = useState<'service' | 'calendar' | 'form' | 'success'>('service');
-  
+
+  // Form input state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    groupSize: '',
+    dogDetails: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     const serviceParam = searchParams.get('service');
@@ -82,9 +95,52 @@ export default function ContactPage() {
     }
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errorMessage) setErrorMessage(null);
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setTimeout(() => setBookingStep('success'), 800);
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    const formattedDate = selectedDate
+      ? selectedDate.toLocaleDateString('en-US', {
+          weekday: 'long',
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric',
+        })
+      : undefined;
+
+    const currentServiceTitle = serviceOptions.find((s) => s.type === serviceType)?.title || 'General Inquiry';
+
+    const result = await sendBookingEmail({
+      service: currentServiceTitle,
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      date: formattedDate,
+      time: selectedTime || undefined,
+      dogDetails: formData.dogDetails || undefined,
+      groupSize: formData.groupSize || undefined,
+      message: formData.message,
+    });
+
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setBookingStep('success');
+    } else {
+      setErrorMessage(
+        result.message ||
+          `We were unable to deliver your request automatically. Please try again or reach out directly at ${TARGET_EMAIL}.`
+      );
+    }
   };
 
   const handleServiceSelect = (type: ServiceType) => {
@@ -380,24 +436,54 @@ export default function ContactPage() {
                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                           <label className="block font-bold text-teal-900 mb-2 text-sm">Your Name</label>
-                          <input required type="text" placeholder="Full name" className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors" />
+                          <input
+                            required
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            placeholder="Full name"
+                            className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors"
+                          />
                         </div>
                         <div>
                           <label className="block font-bold text-teal-900 mb-2 text-sm">Email Address</label>
-                          <input required type="email" placeholder="you@email.com" className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors" />
+                          <input
+                            required
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            placeholder="you@email.com"
+                            className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors"
+                          />
                         </div>
                         
                         {serviceType !== 'general' && (
                           <div>
                             <label className="block font-bold text-teal-900 mb-2 text-sm">Phone Number</label>
-                            <input required type="tel" placeholder="(555) 000-0000" className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors" />
+                            <input
+                              required
+                              type="tel"
+                              name="phone"
+                              value={formData.phone}
+                              onChange={handleInputChange}
+                              placeholder="(555) 000-0000"
+                              className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors"
+                            />
                           </div>
                         )}
 
                         {serviceType === 'wellness' && (
                           <div>
                             <label className="block font-bold text-teal-900 mb-2 text-sm">Group Size</label>
-                            <select required className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors">
+                            <select
+                              required
+                              name="groupSize"
+                              value={formData.groupSize}
+                              onChange={handleInputChange}
+                              className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors"
+                            >
                               <option value="">Select group size</option>
                               <option value="1">Individual (1 person)</option>
                               <option value="2-4">Small Group (2 to 4)</option>
@@ -407,22 +493,77 @@ export default function ContactPage() {
                           </div>
                         )}
 
-                        {serviceType === 'training' && (
+                        {(serviceType === 'training' || serviceType === 'boarding') && (
                           <div>
                             <label className="block font-bold text-teal-900 mb-2 text-sm">Dog's Name & Breed</label>
-                            <input required type="text" placeholder="e.g. Luna, Golden Retriever" className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors" />
+                            <input
+                              required
+                              type="text"
+                              name="dogDetails"
+                              value={formData.dogDetails}
+                              onChange={handleInputChange}
+                              placeholder="e.g. Luna, Golden Retriever"
+                              className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors"
+                            />
                           </div>
                         )}
                      </div>
                      <div>
                         <label className="block font-bold text-teal-900 mb-2 text-sm">
-                          {serviceType === 'training' ? 'What are your primary goals or concerns?' : serviceType === 'boarding' ? 'Tell us about your dog and any special needs' : serviceType === 'wellness' ? 'Any dietary restrictions or accessibility needs?' : 'Message'}
+                          {serviceType === 'training'
+                            ? 'What are your primary goals or concerns?'
+                            : serviceType === 'boarding'
+                            ? 'Tell us about your dog and any special needs'
+                            : serviceType === 'wellness'
+                            ? 'Any dietary restrictions or accessibility needs?'
+                            : 'Message'}
                         </label>
-                        <textarea required rows={4} placeholder="Tell us more..." className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors resize-none"></textarea>
+                        <textarea
+                          required
+                          rows={4}
+                          name="message"
+                          value={formData.message}
+                          onChange={handleInputChange}
+                          placeholder="Tell us more about how we can help..."
+                          className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors resize-none"
+                        ></textarea>
                      </div>
-                     <button type="submit" className={`${btnPrimary} w-full mt-2`}>
-                       {serviceType === 'general' ? 'Send Message' : 'Confirm Booking'}
-                       <ArrowRight className="ml-2 w-5 h-5" />
+
+                     {errorMessage && (
+                       <div className="p-4 bg-red-50 border-2 border-red-300 rounded-xl text-red-900 text-sm font-medium flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                         <div className="flex items-center gap-2">
+                           <AlertCircle className="w-5 h-5 text-red-600 shrink-0" />
+                           <span>{errorMessage}</span>
+                         </div>
+                         <a
+                           href={`mailto:${TARGET_EMAIL}?subject=${encodeURIComponent(
+                             `Inquiry: ${selectedServiceLabel}`
+                           )}&body=${encodeURIComponent(
+                             `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nService: ${selectedServiceLabel}\nDate: ${selectedDate?.toLocaleDateString() || 'N/A'}\nTime: ${selectedTime || 'N/A'}\n\nNotes:\n${formData.message}`
+                           )}`}
+                           className="underline font-bold text-red-900 hover:text-red-700 shrink-0"
+                         >
+                           Send via Email &rarr;
+                         </a>
+                       </div>
+                     )}
+
+                     <button
+                       type="submit"
+                       disabled={isSubmitting}
+                       className={`${btnPrimary} w-full mt-2 flex items-center justify-center gap-2`}
+                     >
+                       {isSubmitting ? (
+                         <>
+                           <Loader2 className="w-5 h-5 animate-spin" />
+                           <span>Sending Your Request...</span>
+                         </>
+                       ) : (
+                         <>
+                           <span>{serviceType === 'general' ? 'Send Message' : 'Confirm Booking Request'}</span>
+                           <ArrowRight className="w-5 h-5" />
+                         </>
+                       )}
                      </button>
                   </form>
                 </motion.div>
@@ -440,12 +581,15 @@ export default function ContactPage() {
                     <CheckCircle2 className="w-12 h-12 text-teal-900" />
                   </div>
                   <h2 className="font-display text-4xl font-bold text-teal-900 mb-4">
-                    {serviceType === 'general' ? 'Message Sent!' : 'Booking Confirmed!'}
+                    {serviceType === 'general' ? 'Message Sent!' : 'Booking Request Sent!'}
                   </h2>
-                  <p className="text-xl text-teal-900/70 font-medium mb-12 max-w-md mx-auto">
+                  <p className="text-xl text-teal-900/70 font-medium mb-4 max-w-md mx-auto">
                     {serviceType === 'general'
-                      ? "Thanks for reaching out! We'll get back to you within 24 to 48 hours." 
-                      : `We've received your request for ${selectedDate?.toLocaleDateString()} at ${selectedTime}. Check your email for the calendar invitation.`}
+                      ? "Thanks for reaching out! We've received your inquiry and will get back to you within 24 to 48 hours." 
+                      : `We've received your request for ${selectedDate?.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} at ${selectedTime}. Our team has been notified and will follow up shortly.`}
+                  </p>
+                  <p className="text-sm text-teal-900/60 mb-10">
+                    Requests are forwarded to <span className="font-bold text-teal-900">{TARGET_EMAIL}</span>.
                   </p>
                   <Link to="/" className={btnPrimary}>
                     Return to Home
@@ -462,7 +606,7 @@ export default function ContactPage() {
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <motion.a
-            href="mailto:hello@pastureandpaw.com"
+            href={`mailto:${TARGET_EMAIL}`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -475,7 +619,7 @@ export default function ContactPage() {
             </div>
             <h3 className="font-bold text-teal-900 text-lg mb-1">Email Us</h3>
             <p className="text-teal-900/70 font-medium text-sm group-hover:text-teal-900 transition-colors">
-              hello@pastureandpaw.com
+              {TARGET_EMAIL}
             </p>
           </motion.a>
 

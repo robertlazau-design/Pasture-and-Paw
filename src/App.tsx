@@ -481,11 +481,11 @@ function Footer() {
             <h4 className="font-display font-bold text-2xl mb-8 text-sage">Contact Us</h4>
             <ul className="space-y-6">
               <li>
-                <a href="mailto:hello@pastureandpaw.com" className="flex items-center gap-4 text-cream/90 hover:text-sage transition-colors text-lg font-medium group">
+                <a href="mailto:mak@pasturepaw.com" className="flex items-center gap-4 text-cream/90 hover:text-sage transition-colors text-lg font-medium group">
                   <div className="p-2 bg-teal-900 rounded-lg group-hover:scale-110 transition-transform">
                     <Mail className="h-6 w-6 text-sage" />
                   </div>
-                  hello@pastureandpaw.com
+                  mak@pasturepaw.com
                 </a>
               </li>
               <li>
