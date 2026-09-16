@@ -21,7 +21,7 @@ export interface SendResult {
 export const TARGET_EMAIL = 'mak@pasturepaw.com';
 
 export async function sendBookingEmail(data: BookingData): Promise<SendResult> {
-  const web3FormsKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+  const web3FormsKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || 'fccaf290-c495-4539-9eaf-f0e0e988096a';
   const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT;
 
   const subject = `New ${data.service} Request from ${data.name}`;
