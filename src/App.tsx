@@ -1,8 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
-import { ArrowRight, Leaf, Dog, MapPin, Mail, Instagram, ChevronRight, PawPrint, Sprout, Cloud, Sun, ArrowLeft, Menu, X, Play, Camera } from 'lucide-react';
+import { ArrowRight, Leaf, Dog, MapPin, Mail, Instagram, ChevronRight, PawPrint, Sprout, Cloud, Sun, ArrowLeft, Menu, X } from 'lucide-react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
-import BeholdWidget from '@behold/react';
 import FarmPage from './pages/FarmPage';
 import TrainingPage from './pages/TrainingPage';
 import ContactPage from './pages/ContactPage';
@@ -450,144 +449,6 @@ function TrainingPreview() {
   );
 }
 
-// ========================
-// INSTAGRAM GALLERY
-// ========================
-
-/*
- * SETUP INSTRUCTIONS FOR BEHOLD.SO:
- * 1. Go to https://behold.so and create a free account
- * 2. Connect the @pastureandpaw Instagram account as a "Source"
- * 3. Create a new Feed → choose "Widget" as the output type
- * 4. Customize the layout in the Behold dashboard (Flexible Grid or Gallery Wall recommended)
- * 5. Copy your Feed ID from the embed code
- * 6. Replace "YOUR_FEED_ID_HERE" below with your actual Feed ID
- *
- * The widget will automatically pull and display the latest posts from @pastureandpaw.
- * It updates automatically when new content is posted.
- */
-const BEHOLD_FEED_ID = 'YOUR_FEED_ID_HERE';
-
-function InstagramGallery() {
-  return (
-    <section className="relative overflow-hidden">
-      {/* Wavy top divider */}
-      <div className="w-full overflow-hidden leading-none rotate-180">
-        <svg className="relative block w-full h-[50px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.62,192.27,101.5,235.9,88.94,278.43,73.5,321.39,56.44Z" className="fill-sage-light"></path>
-        </svg>
-      </div>
-
-      <div className="bg-sage-light py-24 border-y-4 border-teal-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center justify-center p-4 bg-cream rounded-full border-4 border-teal-900 shadow-[6px_6px_0px_0px_#0B3B3C] mb-8"
-            >
-              <Camera className="h-10 w-10 text-teal-900" />
-            </motion.div>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="font-display text-5xl md:text-6xl font-bold text-teal-900 mb-6"
-            >
-              Daily Life on the Farm
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-xl text-teal-900/70 font-medium max-w-2xl mx-auto mb-8 leading-relaxed"
-            >
-              Morning chore rounds, dogs working through real-world exercises, newborn calves, and friendly goats. Follow along on Instagram to see what daily life looks like out here.
-            </motion.p>
-
-            <motion.a
-              href="https://www.instagram.com/pastureandpaw"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              whileHover={{ scale: 1.03, rotate: -1 }}
-              className="inline-flex items-center gap-3 bg-cream px-6 py-3 rounded-2xl border-2 border-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] hover:shadow-[2px_2px_0px_0px_#0B3B3C] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 group"
-            >
-              <div className="p-2 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-xl">
-                <Instagram className="h-5 w-5 text-white" />
-              </div>
-              <span className="font-bold text-teal-900 text-lg">@pastureandpaw</span>
-              <ArrowRight className="h-5 w-5 text-teal-900 group-hover:translate-x-1 transition-transform" />
-            </motion.a>
-          </div>
-
-          {/* Behold Widget */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="rounded-[2rem] overflow-hidden border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C] bg-cream p-4 md:p-6"
-          >
-            {BEHOLD_FEED_ID !== 'YOUR_FEED_ID_HERE' ? (
-              <BeholdWidget feedId={BEHOLD_FEED_ID} />
-            ) : (
-              /* Placeholder shown until Behold is configured */
-              <div className="py-16 text-center">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-sage-light rounded-full border-4 border-teal-900 mb-6">
-                  <Instagram className="h-10 w-10 text-teal-900" />
-                </div>
-                <h3 className="font-display font-bold text-2xl text-teal-900 mb-3">
-                  Instagram Feed
-                </h3>
-                <p className="text-teal-900/60 font-medium max-w-md mx-auto mb-8">
-                  Our latest videos, training clips, and pasture updates from @pastureandpaw will display here once connected.
-                </p>
-                <a
-                  href="https://www.instagram.com/pastureandpaw"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={btnPrimary}
-                >
-                  Visit Us on Instagram
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
-              </div>
-            )}
-          </motion.div>
-
-          {/* Bottom CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mt-10"
-          >
-            <a
-              href="https://www.instagram.com/pastureandpaw"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-teal-900 font-bold text-lg hover:text-clay transition-colors group"
-            >
-              See more videos and photos on Instagram
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Footer() {
   return (
     <footer id="contact" className="bg-teal-950 text-cream pt-24 pb-12 relative overflow-hidden">
@@ -692,7 +553,6 @@ function Home() {
       <Story />
       <FarmPreview />
       <TrainingPreview />
-      <InstagramGallery />
     </>
   );
 }
