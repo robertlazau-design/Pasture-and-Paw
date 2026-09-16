@@ -12,28 +12,28 @@ const animals = [
     image: '/images/highland-cattle.png',
     color: 'bg-clay',
     slug: 'highlander-cattle',
-    description: 'Known for their docile nature and hardiness, our Highlander herd is the heart of our pasture management, contributing to soil health and sustainable grazing.',
+    description: 'The anchor of our rotational grazing program. Known for their docile nature and exceptional hardiness, our Highlanders thrive on marginal pasture, build topsoil through managed grazing, and require minimal supplemental care year-round.',
   },
   {
     name: 'Dexter Cattle',
     image: '/images/dexter-cattle.png',
     color: 'bg-sage',
     slug: 'dexter-cattle',
-    description: 'A smaller, dual-purpose breed that thrives on our diverse pastures. They are efficient foragers and perfect for our regenerative agriculture model.',
+    description: 'A compact, dual-purpose heritage breed ideal for small-acreage operations. Their light hoofprint makes them perfect for grazing sensitive riparian areas and newly seeded paddocks without compacting the soil.',
   },
   {
     name: 'Norwegian Goats',
     image: '/images/norwegian-goats.png',
     color: 'bg-teal-800',
     slug: 'norwegian-goats',
-    description: 'Our primary brush management team. These goats help clear invasive species and maintain the delicate balance of our wooded pasture areas.',
+    description: 'Our biological brush management crew. These cold-hardy Scandinavian browsers target invasive blackberry, scotch broom, and thistle — clearing overgrown acreage without chemical or mechanical intervention.',
   },
   {
     name: 'Silver Fox Rabbits',
     image: '/images/silver-fox-rabbit.png',
     color: 'bg-clay',
     slug: 'silver-fox-rabbits',
-    description: 'A heritage breed we raise with a focus on preserving genetic diversity and supporting local 4-H youth agricultural programs.',
+    description: 'A rare American heritage breed listed as "threatened" by the Livestock Conservancy. We maintain a pedigreed breeding colony focused on genetic diversity, supporting breed preservation and local 4-H youth agricultural programs.',
   },
 ];
 
@@ -73,7 +73,7 @@ export default function FarmPage() {
               <span className="text-clay">Farm</span>
             </h1>
             <p className="text-2xl text-teal-900/80 font-medium mb-8 leading-relaxed">
-              Where ethical breeding, land stewardship, and regenerative agriculture meet daily practice.
+              Where rotational grazing, heritage breed stewardship, and regenerative agriculture aren't just buzzwords — they're the daily rhythm of our operation.
             </p>
             <Link to="/contact?service=farm" className={btnPrimary}>
               Book a Farm Visit
@@ -116,10 +116,10 @@ export default function FarmPage() {
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-8">Stewardship as a Lifestyle</h2>
             <div className="space-y-6 text-xl text-cream/90 font-medium leading-relaxed">
               <p>
-                Our pastures are more than just open space; they are actively managed ecosystems. We practice rotational grazing, utilizing different species to naturally manage the land, build soil health, and reduce reliance on synthetic inputs.
+                Our pastures are more than just open space — they're actively managed ecosystems. We practice rotational grazing on a scheduled paddock rotation, moving cattle, goats, and other livestock through designated areas to allow grazed sections to rest, regenerate, and rebuild topsoil naturally. This reduces our reliance on synthetic fertilizers, encourages native plant diversity, and sequesters carbon back into the ground where it belongs.
               </p>
               <p>
-                Every animal on our farm serves a distinct purpose, from our heavy-grazing cattle to our brush-clearing goats. This symbiotic relationship between livestock and land is the foundation of Pasture & Paw.
+                Every animal on our farm serves a distinct agricultural purpose. Our heavy-grazing Highland and Dexter cattle manage the open pastures. Our Norwegian goats clear invasive brush from wooded hillsides. Our Silver Fox rabbits anchor our youth education and breed conservation efforts. This multi-species, symbiotic approach to land management is the foundation of everything we do at Pasture & Paw.
               </p>
             </div>
          </div>

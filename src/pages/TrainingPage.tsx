@@ -1,29 +1,64 @@
 import { motion } from 'motion/react';
-import { PawPrint, Dog, ArrowRight, ArrowLeft, CheckCircle2, Home, Sun, Moon, Shield, Heart } from 'lucide-react';
+import { PawPrint, Dog, ArrowRight, ArrowLeft, CheckCircle2, Home, Sun, Moon, Shield, Heart, Target, MessageCircleHeart, Sparkles, Users, Clock, Compass } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const btnPrimary = "inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl border-2 border-teal-900 bg-sage text-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] hover:shadow-[2px_2px_0px_0px_#0B3B3C] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200";
 
-const programs = [
+const goalAreas = [
   {
-    title: "Puppy Foundations",
-    duration: "4 Weeks",
-    description: "Start your puppy off right with critical socialization, basic obedience, and exposure to real-world sights and sounds on the farm.",
-    features: ["Crate training basics", "Leash introduction", "Environmental exposure", "Confidence building"]
+    icon: Compass,
+    title: 'Leash Manners & Walking',
+    description: `Pulling, lunging, or just general chaos on the leash — we'll build calm, connected walks you actually enjoy.`,
   },
   {
-    title: "On-Leash Mastery",
-    duration: "6 Weeks",
-    description: "Build reliable obedience in distracting environments. We focus on clear communication and handler engagement.",
-    features: ["Loose leash walking", "Reliable recall on long line", "Place command", "Polite greetings"]
+    icon: PawPrint,
+    title: 'Recall & Off-Leash Freedom',
+    description: `Dream of hiking or adventuring without the worry? We'll build a recall you can actually trust.`,
   },
   {
-    title: "Off-Leash Reliability",
-    duration: "8 Weeks",
-    description: "True freedom through discipline. Advanced obedience proofing around livestock and heavy distractions.",
-    features: ["E-collar conditioning", "Off-leash recall", "Distance commands", "Public access proofing"]
-  }
+    icon: Shield,
+    title: 'Reactivity & Anxiety',
+    description: `Whether it's other dogs, strangers, or loud noises — we'll help your dog find confidence and calm.`,
+  },
+  {
+    icon: Home,
+    title: 'Household Manners',
+    description: 'Jumping, counter-surfing, door-dashing — the everyday stuff that makes life with your dog harder than it should be.',
+  },
+  {
+    icon: Users,
+    title: 'Socialization & Confidence',
+    description: 'For puppies or under-socialized dogs who need safe, structured exposure to the world around them.',
+  },
+  {
+    icon: Target,
+    title: 'Advanced Obedience',
+    description: `Already have a solid foundation? We'll push the boundaries with distance work, duration, and distraction proofing.`,
+  },
+];
+
+const processSteps = [
+  {
+    number: '01',
+    title: 'Tell Us About Your Dog',
+    description: 'Start with a free phone consultation. We want to hear about your dog — their personality, their quirks, the things that frustrate you, and the things you love about them. No detail is too small.',
+  },
+  {
+    number: '02',
+    title: 'Share Your Goals',
+    description: `What does life with your dog look like in your perfect world? Whether it's a calm walk through the neighborhood, reliable off-leash hiking, or just being able to have guests over without chaos — we want to know.`,
+  },
+  {
+    number: '03',
+    title: 'We Build Your Program',
+    description: 'Based on everything you share, we design a training plan from the ground up — just for your dog. The duration, the focus areas, the methods — all of it is built around who they are and where you want to go.',
+  },
+  {
+    number: '04',
+    title: 'Training on the Farm',
+    description: `Your dog joins us on our working farm, where they'll train alongside moving livestock, open pastures, and the unpredictable rhythm of agricultural life. It's real-world proofing you simply can't replicate in a facility.`,
+  },
 ];
 
 const boardingFeatures = [
@@ -60,11 +95,14 @@ export default function TrainingPage() {
               Canine <br/>
               <span className="text-sage">Academy</span>
             </h1>
-            <p className="text-2xl text-teal-900/80 font-medium mb-8 leading-relaxed">
-              Real-world obedience forged in the heart of a working farm.
+            <p className="text-2xl text-teal-900/80 font-medium mb-4 leading-relaxed">
+              No two dogs are the same — and neither are our training programs.
+            </p>
+            <p className="text-lg text-teal-900/70 font-medium mb-8 leading-relaxed">
+              Tell us about your dog, share your goals, and we'll build a program from the ground up that's as unique as the bond you share.
             </p>
             <Link to="/contact?service=training" className={btnPrimary}>
-              Book a Consultation
+              Start Your Consultation
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </motion.div>
@@ -92,61 +130,175 @@ export default function TrainingPage() {
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-8">Why the Farm?</h2>
             <div className="space-y-6 text-xl text-cream/90 font-medium leading-relaxed">
               <p>
-                A sterile training room can only take a dog so far. The working farm environment provides natural, dynamic distractions—moving livestock, unpredictable sounds, and varying terrain.
+                A sterile training room can only take a dog so far. Our dogs train on a working farm — surrounded by grazing cattle, free-roaming goats, the sounds of daily chores, and the unpredictable rhythm of agricultural life. This isn't simulated distraction. It's the real thing.
               </p>
               <p>
-                By proofing behaviors in this environment, we ensure that when you take your dog back to the suburbs, the city, or the trails, they have the clarity and confidence to listen under pressure.
+                By proofing behaviors alongside moving livestock and the honest chaos of daily farm operations, we ensure that when your dog goes home — whether that's the suburbs, the city, or a rural homestead — they have the clarity, confidence, and composure to listen when it matters most.
               </p>
             </div>
          </div>
       </section>
 
-      {/* Programs Grid */}
+      {/* "Your Dog Is One of a Kind" - Personalized Approach Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <h2 className="font-display text-5xl font-bold text-teal-900 mb-4 text-center">Training Programs</h2>
-        <p className="text-xl text-teal-900/70 font-medium text-center mb-16 max-w-2xl mx-auto">
-          We offer immersive board-and-train programs tailored to your dog's age and your behavioral goals.
-        </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-flex items-center gap-2 bg-sage-light text-teal-900 px-5 py-2 rounded-full border-2 border-teal-900 mb-6 shadow-[4px_4px_0px_0px_#0B3B3C]">
+              <MessageCircleHeart className="h-5 w-5" />
+              <span className="font-bold text-sm uppercase tracking-wider">Our Approach</span>
+            </div>
+            <h2 className="font-display text-5xl md:text-6xl font-bold text-teal-900 mb-6 leading-tight">
+              Your Dog Is<br/>
+              <span className="text-clay">One of a Kind</span>
+            </h2>
+            <div className="space-y-6 text-xl text-teal-900/80 font-medium leading-relaxed">
+              <p>
+                We don't believe in cookie-cutter programs or one-size-fits-all packages. Every dog that comes through our gate is an individual — with their own temperament, their own history, and their own way of seeing the world.
+              </p>
+              <p>
+                That's why every training program at Pasture & Paw starts with <strong className="text-teal-900">you</strong>. We sit down, we listen, and we learn everything we can about your dog and your goals. What drives them? What scares them? What does your ideal day together look like?
+              </p>
+              <p>
+                From there, we design a program from scratch — built entirely around your dog's needs and your vision for life together. The timeline, the focus, the methods — all of it tailored, all of it intentional.
+              </p>
+            </div>
+          </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {programs.map((program, index) => (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="bg-sage-light rounded-[2rem] p-10 border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C]">
+              <div className="flex items-center gap-3 mb-8">
+                <Sparkles className="w-8 h-8 text-clay" />
+                <h3 className="font-display font-bold text-2xl text-teal-900">What makes us different</h3>
+              </div>
+              <ul className="space-y-5">
+                {[
+                  'No preset packages — your program is designed from the ground up',
+                  'We train on a real working farm, not in a sterile facility',
+                  'Every program is shaped around your lifestyle and goals',
+                  'Your dog trains alongside livestock, terrain, and real-world distractions',
+                  'We stay in close communication throughout the entire process',
+                  'You receive a comprehensive handoff so the training carries home',
+                ].map((item, i) => (
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                    className="flex items-start gap-4"
+                  >
+                    <CheckCircle2 className="w-6 h-6 text-clay shrink-0 mt-0.5" />
+                    <span className="text-lg text-teal-900/80 font-medium leading-relaxed">{item}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Goal Areas - What We Can Help With */}
+      <section className="bg-sage-light py-24 mb-24 border-y-4 border-teal-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="font-display text-5xl font-bold text-teal-900 mb-4">What Are Your Goals?</h2>
+            <p className="text-xl text-teal-900/70 font-medium max-w-3xl mx-auto leading-relaxed">
+              Whether you're working through a specific challenge or just want to build a stronger foundation, tell us what matters to you — and we'll make it the heart of your dog's program.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {goalAreas.map((goal, index) => (
+              <motion.div
+                key={goal.title}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: index * 0.08 }}
+                className="bg-cream rounded-[2rem] p-8 border-4 border-teal-900 shadow-[8px_8px_0px_0px_#0B3B3C] flex flex-col h-full hover:-translate-y-1 transition-transform"
+              >
+                <div className="inline-flex items-center justify-center p-3 bg-sage rounded-xl border-2 border-teal-900 mb-6 w-fit shadow-[3px_3px_0px_0px_#0B3B3C]">
+                  <goal.icon className="h-7 w-7 text-teal-900" />
+                </div>
+                <h3 className="font-display font-bold text-2xl text-teal-900 mb-3">
+                  {goal.title}
+                </h3>
+                <p className="text-teal-900/75 text-lg font-medium leading-relaxed">
+                  {goal.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-12 text-center"
+          >
+            <div className="inline-block bg-cream rounded-2xl px-8 py-5 border-2 border-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C]">
+              <p className="text-teal-900 font-bold text-lg">
+                Don't see your specific goal listed? <span className="text-clay">That's okay — just tell us.</span>
+              </p>
+              <p className="text-teal-900/70 font-medium mt-1">
+                Every program is built from scratch. If it matters to you, it matters to us.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* How It Works - Process */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <div className="text-center mb-16">
+          <h2 className="font-display text-5xl font-bold text-teal-900 mb-4">How It Works</h2>
+          <p className="text-xl text-teal-900/70 font-medium max-w-2xl mx-auto">
+            From the first conversation to the final handoff, here's what the journey looks like.
+          </p>
+        </div>
+
+        <div className="space-y-8">
+          {processSteps.map((step, index) => (
             <motion.div
-              key={program.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              key={step.number}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-cream rounded-[2rem] p-8 border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C] flex flex-col h-full relative"
+              className="bg-cream rounded-[2rem] p-8 md:p-10 border-4 border-teal-900 shadow-[8px_8px_0px_0px_#0B3B3C] flex flex-col md:flex-row items-start gap-6 md:gap-10"
             >
-              <div className="absolute -top-6 -right-6 bg-sage border-4 border-teal-900 w-20 h-20 rounded-full flex items-center justify-center rotate-12 shadow-[4px_4px_0px_0px_#0B3B3C]">
-                 <span className="font-display font-bold text-teal-900 text-center leading-tight">
-                    {program.duration.split(' ')[0]}<br/>{program.duration.split(' ')[1]}
-                 </span>
+              <div className="bg-clay text-cream w-16 h-16 rounded-2xl border-2 border-teal-900 flex items-center justify-center shrink-0 shadow-[4px_4px_0px_0px_#0B3B3C]">
+                <span className="font-display font-bold text-2xl">{step.number}</span>
               </div>
-              
-              <h3 className="font-display font-bold text-3xl text-teal-900 mb-4 pr-12">
-                {program.title}
-              </h3>
-              <p className="text-teal-900/80 text-lg font-medium leading-relaxed mb-8">
-                {program.description}
-              </p>
-              
-              <div className="mt-auto">
-                <h4 className="font-bold text-teal-900 mb-4 flex items-center gap-2">
-                  <PawPrint className="w-5 h-5 text-sage" /> Core Focus:
-                </h4>
-                <ul className="space-y-3">
-                  {program.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3 text-teal-900/80 font-medium">
-                      <CheckCircle2 className="w-6 h-6 text-clay shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+              <div>
+                <h3 className="font-display font-bold text-2xl md:text-3xl text-teal-900 mb-3">{step.title}</h3>
+                <p className="text-teal-900/80 text-lg font-medium leading-relaxed">{step.description}</p>
               </div>
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mt-12"
+        >
+          <Link to="/contact?service=training" className={btnPrimary}>
+            Start With a Free Consultation
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Link>
+        </motion.div>
       </section>
 
       {/* Boarding Section */}

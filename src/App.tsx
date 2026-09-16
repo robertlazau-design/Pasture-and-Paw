@@ -334,10 +334,10 @@ function FarmPreview() {
             The Farm & Livestock
           </h2>
           <p className="text-2xl text-teal-900 font-bold mb-6">
-            Ethical breeding, land stewardship, and community connection.
+            Rotational grazing, heritage breeds, and regenerative land stewardship.
           </p>
           <p className="text-teal-900/80 text-xl leading-relaxed font-medium mb-8">
-            As a dedicated working farm, our daily focus is the health of our land and the quality of our animals. Our pastures are actively managed and home to a diverse range of livestock. We proudly support youth involvement through breeding for local 4-H programs.
+            This is a working agricultural operation — our days start at dawn with feeding rounds, pasture rotations, and herd management. We raise heritage-breed cattle, dairy goats, and conservation-status rabbits on actively managed acreage, practicing rotational grazing and regenerative methods that build topsoil, support native plant diversity, and keep our land thriving for the next generation. We're also proud to support youth involvement through breeding partnerships with local 4-H programs.
           </p>
           <Link to="/farm" className={btnPrimary}>
             Explore the Farm
@@ -423,23 +423,23 @@ function TrainingPreview() {
               Premier Dog<br />Training
             </h2>
             <p className="text-2xl text-sage font-bold mb-8">
-              Real-world obedience for every lifestyle.
+              Custom-built programs for every dog, every goal.
             </p>
             <div className="space-y-6 text-cream/90 text-xl leading-relaxed mb-12 font-medium">
               <p>
-                Because our training program operates in the heart of a working farm, our philosophy is entirely grounded in reality. The sights, sounds, and active movement of agricultural life provide the ultimate environment for proofing behavior.
+                We don't do cookie-cutter packages. Every training program starts with a conversation — tell us about your dog, share your goals, and we'll design a plan from the ground up that's built entirely around the two of you.
               </p>
               <p>
-                We don't train in sterile, controlled settings. We build clear-minded dogs with strong foundational obedience, true off-leash reliability, and dependable recall.
+                Because our program operates on a working farm — alongside grazing cattle, free-roaming goats, and the daily rhythm of agricultural life — your dog is proofed in real-world conditions that no indoor facility can replicate.
               </p>
               <div className="bg-teal-950 p-6 rounded-2xl border-2 border-teal-800">
                 <p className="font-bold text-sage-light">
-                  Every breed, every age, and every behavioral goal is welcome in our program.
+                  Every breed, every age, every challenge. Your goals become our blueprint.
                 </p>
               </div>
             </div>
             <Link to="/training" className={btnSecondary}>
-              View Training Programs
+              Tell Us Your Goals
               <ChevronRight className="ml-2 h-6 w-6" />
             </Link>
           </motion.div>
