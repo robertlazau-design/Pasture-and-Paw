@@ -490,16 +490,18 @@ export default function ContactPage() {
             <div className="w-12 h-12 bg-sage rounded-xl border-2 border-teal-900 flex items-center justify-center mx-auto mb-4">
               <MapPin className="w-6 h-6 text-teal-900" />
             </div>
-            <h3 className="font-bold text-teal-900 text-lg mb-1">Visit the Farm</h3>
+            <h3 className="font-bold text-teal-900 text-lg mb-1">Location</h3>
             <p className="text-teal-900/70 font-medium text-sm">
-              123 Farm Road<br />
-              Seattle County, WA 98000
+              Enumclaw, Washington<br />
+              Serving greater King County
             </p>
             <p className="text-xs text-teal-900/50 mt-2 font-medium italic">*Visits by appointment only</p>
           </motion.div>
 
           <motion.a
-            href="#"
+            href="https://www.instagram.com/pastureandpaw"
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

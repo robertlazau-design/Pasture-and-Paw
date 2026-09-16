@@ -612,7 +612,7 @@ function Footer() {
               Honest Farm Work.<br />Dependable Dog Training.
             </p>
             <p className="text-cream/70 max-w-md text-lg font-medium">
-              Pasture &amp; Paw is a working family farm and private canine training facility based in Washington.
+              Pasture &amp; Paw is a working family farm and private canine training facility based in Enumclaw, Washington, serving greater King County.
             </p>
           </div>
           
@@ -632,7 +632,7 @@ function Footer() {
                   <div className="p-2 bg-teal-900 rounded-lg mt-1">
                     <MapPin className="h-6 w-6 text-sage shrink-0" />
                   </div>
-                  <span>123 Farm Road<br />Seattle County, WA 98000</span>
+                  <span>Enumclaw, Washington<br />Serving greater King County</span>
                 </div>
               </li>
             </ul>
