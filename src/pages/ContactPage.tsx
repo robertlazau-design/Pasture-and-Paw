@@ -109,20 +109,25 @@ export default function ContactPage() {
   };
 
   const renderCalendar = () => {
-    const blanks = Array.from({ length: firstDayOfMonth }, (_, i) => <div key={`blank-${i}`} className="p-2 border border-teal-900/10"></div>);
+    const blanks = Array.from({ length: firstDayOfMonth }, (_, i) => (
+      <div key={`blank-${i}`} className="p-2 border border-teal-900/10 min-h-[44px]"></div>
+    ));
     const days = Array.from({ length: daysInMonth }, (_, i) => {
       const day = i + 1;
       const disabled = isDateDisabled(day);
-      const isSelected = selectedDate?.getDate() === day && selectedDate?.getMonth() === currentDate.getMonth();
+      const isSelected = selectedDate?.getDate() === day && 
+                         selectedDate?.getMonth() === currentDate.getMonth() && 
+                         selectedDate?.getFullYear() === currentDate.getFullYear();
       
       return (
         <button
           key={`day-${day}`}
+          type="button"
           disabled={disabled}
           onClick={() => handleDateSelect(day)}
-          className={`p-3 md:p-4 border border-teal-900/10 font-bold text-base transition-colors
-            ${disabled ? 'text-teal-900/20 cursor-not-allowed bg-cream/50' : 'text-teal-900 hover:bg-sage-light cursor-pointer'}
-            ${isSelected ? 'bg-sage border-teal-900 text-teal-900 shadow-inner' : ''}
+          className={`p-2 sm:p-3 border border-teal-900/10 font-bold text-sm sm:text-base transition-all flex items-center justify-center min-h-[44px]
+            ${disabled ? 'text-teal-900/20 cursor-not-allowed bg-cream/40' : 'text-teal-900 hover:bg-sage-light cursor-pointer bg-white'}
+            ${isSelected ? '!bg-sage !border-teal-900 text-teal-900 shadow-[2px_2px_0px_0px_#0B3B3C] scale-105 z-10' : ''}
           `}
         >
           {day}
@@ -132,16 +137,32 @@ export default function ContactPage() {
 
     return (
       <div className="bg-cream border-4 border-teal-900 rounded-[2rem] shadow-[8px_8px_0px_0px_#0B3B3C] overflow-hidden">
-        <div className="flex justify-between items-center p-5 bg-sage-light border-b-4 border-teal-900">
-          <button onClick={handlePrevMonth} className="p-2 hover:bg-sage rounded-xl transition-colors border-2 border-transparent hover:border-teal-900"><ChevronLeft /></button>
-          <h3 className="font-display font-bold text-xl text-teal-900">
+        <div className="flex justify-between items-center p-4 sm:p-5 bg-sage-light border-b-4 border-teal-900">
+          <button
+            type="button"
+            onClick={handlePrevMonth}
+            className="p-2 hover:bg-sage rounded-xl transition-colors border-2 border-transparent hover:border-teal-900 cursor-pointer"
+            aria-label="Previous Month"
+          >
+            <ChevronLeft className="w-5 h-5 text-teal-900" />
+          </button>
+          <h3 className="font-display font-bold text-lg sm:text-xl text-teal-900">
             {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
           </h3>
-          <button onClick={handleNextMonth} className="p-2 hover:bg-sage rounded-xl transition-colors border-2 border-transparent hover:border-teal-900"><ChevronRight /></button>
+          <button
+            type="button"
+            onClick={handleNextMonth}
+            className="p-2 hover:bg-sage rounded-xl transition-colors border-2 border-transparent hover:border-teal-900 cursor-pointer"
+            aria-label="Next Month"
+          >
+            <ChevronRight className="w-5 h-5 text-teal-900" />
+          </button>
         </div>
         <div className="grid grid-cols-7 text-center border-b-2 border-teal-900/20 bg-cream">
           {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-            <div key={day} className="py-2.5 font-bold text-teal-900/50 text-xs uppercase tracking-wider">{day}</div>
+            <div key={day} className="py-2.5 font-bold text-teal-900/60 text-xs uppercase tracking-wider">
+              {day}
+            </div>
           ))}
         </div>
         <div className="grid grid-cols-7 bg-cream">
@@ -273,32 +294,10 @@ export default function ContactPage() {
                   <h2 className="font-display font-bold text-3xl text-teal-900 mb-2">Select Date & Time</h2>
                   <p className="text-teal-900/60 font-medium mb-8">Available dates are highlighted. Weekends are reserved for farm chores.</p>
 
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8 items-start">
                     {/* Calendar Month View */}
-                    <div className="lg:col-span-7 bg-cream/40 border-2 border-teal-900 rounded-2xl p-6">
-                      <div className="flex justify-between items-center mb-6">
-                        <h3 className="font-display font-bold text-xl text-teal-900">
-                          {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
-                        </h3>
-                        <div className="flex gap-2">
-                          <button onClick={handlePrevMonth} className="p-2 rounded-xl border-2 border-teal-900 bg-white hover:bg-sage-light transition-colors">
-                            <ChevronLeft className="w-4 h-4 text-teal-900" />
-                          </button>
-                          <button onClick={handleNextMonth} className="p-2 rounded-xl border-2 border-teal-900 bg-white hover:bg-sage-light transition-colors">
-                            <ChevronRight className="w-4 h-4 text-teal-900" />
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-7 gap-1 text-center font-bold text-xs text-teal-900/60 mb-2">
-                        {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((d, i) => (
-                          <div key={i} className="py-1">{d}</div>
-                        ))}
-                      </div>
-
-                      <div className="grid grid-cols-7 gap-1">
-                        {renderCalendar()}
-                      </div>
+                    <div className="lg:col-span-7">
+                      {renderCalendar()}
                     </div>
 
                     {/* Time Slots */}
