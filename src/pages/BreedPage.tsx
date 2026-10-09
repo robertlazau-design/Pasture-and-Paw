@@ -24,7 +24,7 @@ const breeds: Record<string, BreedData> = {
   'highlander-cattle': {
     name: 'Highlander Cattle',
     subtitle: 'The Hardy Heart of Our Pastures',
-    heroImage: '/images/highland-cattle.png',
+    heroImage: '/images/highland-cattle.jpg',
     heroColor: 'bg-clay',
     origin: 'Scottish Highlands',
     temperament: 'Docile, Calm, Hardy',
@@ -48,7 +48,7 @@ const breeds: Record<string, BreedData> = {
   'dexter-cattle': {
     name: 'Dexter Cattle',
     subtitle: 'Small in Stature, Big in Purpose',
-    heroImage: '/images/dexter-cattle.png',
+    heroImage: '/images/dexter-cattle.jpg',
     heroColor: 'bg-sage',
     origin: 'Southern Ireland',
     temperament: 'Friendly, Intelligent, Adaptable',
@@ -71,7 +71,7 @@ const breeds: Record<string, BreedData> = {
   'norwegian-goats': {
     name: 'Norwegian Goats',
     subtitle: 'Our Natural Brush Clearing Team',
-    heroImage: '/images/norwegian-goats.png',
+    heroImage: '/images/norwegian-goats.jpg',
     heroColor: 'bg-teal-800',
     origin: 'Norway / Scandinavia',
     temperament: 'Curious, Social, Energetic',
@@ -95,7 +95,7 @@ const breeds: Record<string, BreedData> = {
   'silver-fox-rabbits': {
     name: 'Silver Fox Rabbits',
     subtitle: 'Preserving an American Heritage Breed',
-    heroImage: '/images/silver-fox-rabbit.png',
+    heroImage: '/images/silver-fox-rabbit.jpg',
     heroColor: 'bg-clay',
     origin: 'United States (Ohio, 1925)',
     temperament: 'Gentle, Docile, Even-tempered',

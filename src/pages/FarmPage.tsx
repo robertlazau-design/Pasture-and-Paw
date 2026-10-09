@@ -9,28 +9,28 @@ const btnSecondary = "inline-flex items-center justify-center px-8 py-4 text-bas
 const animals = [
   {
     name: 'Highlander Cattle',
-    image: '/images/highland-cattle.png',
+    image: '/images/highland-cattle.jpg',
     color: 'bg-clay',
     slug: 'highlander-cattle',
     description: 'The heart of our pastures. Known for their calm temperament and thick double coats, our Scottish Highlands thrive on rough forage, help rebuild healthy topsoil as we rotate paddocks, and handle Pacific Northwest weather with ease.',
   },
   {
     name: 'Dexter Cattle',
-    image: '/images/dexter-cattle.png',
+    image: '/images/dexter-cattle.jpg',
     color: 'bg-sage',
     slug: 'dexter-cattle',
     description: 'A small-framed heritage breed from Ireland known for friendly personalities and rich milk. Because they are lighter on their feet, they graze our hillside pastures and newly planted paddocks without packing down the soil.',
   },
   {
     name: 'Norwegian Goats',
-    image: '/images/norwegian-goats.png',
+    image: '/images/norwegian-goats.jpg',
     color: 'bg-teal-800',
     slug: 'norwegian-goats',
     description: 'Our natural brush clearing team and farm favorites. These hardy Scandinavian goats love munching on wild blackberry vines, thistle, and woody shrubs, opening up overgrown ground naturally while delighting every visitor who stops by.',
   },
   {
     name: 'Silver Fox Rabbits',
-    image: '/images/silver-fox-rabbit.png',
+    image: '/images/silver-fox-rabbit.jpg',
     color: 'bg-clay',
     slug: 'silver-fox-rabbits',
     description: 'A gentle American heritage breed with silver-tipped fur and a docile disposition. We maintain a pedigreed breeding line to help protect this rare breed, while mentoring local 4-H students in animal husbandry and showmanship.',
@@ -89,7 +89,7 @@ export default function FarmPage() {
           >
             <div className="aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C] bg-sage">
                <img
-                src="/images/farm-hero.png"
+                src="/images/farm-hero.jpg"
                 alt="Aerial view of Pasture & Paw working farm"
                 className="w-full h-full object-cover"
               />

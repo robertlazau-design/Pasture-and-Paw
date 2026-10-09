@@ -115,7 +115,7 @@ export default function TrainingPage() {
           >
             <div className="aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C] bg-clay">
                <img
-                src="/images/training-hero.png"
+                src="/images/training-hero.jpg"
                 alt="Well-trained pack of dogs demonstrating focus and obedience"
                 className="w-full h-full object-cover"
               />

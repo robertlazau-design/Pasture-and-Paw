@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { ArrowRight, Leaf, Dog, MapPin, Mail, Instagram, ChevronRight, PawPrint, Sprout, Cloud, Sun, ArrowLeft, Menu, X } from 'lucide-react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import FarmPage from './pages/FarmPage';
@@ -144,7 +146,7 @@ function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-teal-950">
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center pt-28 pb-16 md:pt-20 md:pb-0 overflow-hidden bg-teal-950">
       <motion.div style={{ y }} className="absolute inset-0 z-0">
         <img
           src="/images/hero-main.jpg"
@@ -166,9 +168,9 @@ function Hero() {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
-          className="inline-block mb-6 bg-cream px-6 py-2 rounded-full border-2 border-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] -rotate-2"
+          className="inline-block mb-6 bg-cream px-4 py-1.5 sm:px-6 sm:py-2 rounded-full border-2 border-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] -rotate-2"
         >
-          <span className="font-bold text-teal-900 flex items-center gap-2">
+          <span className="font-bold text-sm sm:text-base text-teal-900 flex items-center gap-2">
             <Sprout className="w-5 h-5 text-sage" />
             Working Farm & Canine Academy
           </span>
@@ -178,7 +180,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="font-display text-6xl md:text-8xl font-bold text-cream mb-6 tracking-tight leading-[1.1]"
+          className="font-display text-[2.75rem] sm:text-6xl md:text-8xl font-bold text-cream mb-6 tracking-tight leading-[1.1]"
         >
           A Working Farm.<br />
           <span className="text-sage">Real-World Dog Training.</span>
@@ -188,7 +190,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="max-w-3xl mx-auto text-xl md:text-2xl text-cream/90 mb-10 leading-relaxed font-medium"
+          className="max-w-3xl mx-auto text-lg sm:text-xl md:text-2xl text-cream/90 mb-10 leading-relaxed font-medium"
         >
           We train dogs in the middle of daily farm chores, open pastures, and livestock. When your dog learns to focus here, handling life at home becomes second nature.
         </motion.p>
@@ -311,10 +313,10 @@ function Marquee() {
 
 function FarmPreview() {
   const animals = [
-    { name: 'Highlander Cattle', seed: 'highlandcow', color: 'bg-clay', path: '/farm/highlander-cattle' },
-    { name: 'Dexter Cattle', seed: 'dextercow', color: 'bg-sage', path: '/farm/dexter-cattle' },
-    { name: 'Norwegian Goats', seed: 'goat', color: 'bg-teal-800', path: '/farm/norwegian-goats' },
-    { name: 'Silver Fox Rabbits', seed: 'rabbit', color: 'bg-clay', path: '/farm/silver-fox-rabbits' },
+    { name: 'Highlander Cattle', seed: 'highland-cattle', color: 'bg-clay', path: '/farm/highlander-cattle' },
+    { name: 'Dexter Cattle', seed: 'dexter-cattle', color: 'bg-sage', path: '/farm/dexter-cattle' },
+    { name: 'Norwegian Goats', seed: 'norwegian-goats', color: 'bg-teal-800', path: '/farm/norwegian-goats' },
+    { name: 'Silver Fox Rabbits', seed: 'silver-fox-rabbit', color: 'bg-clay', path: '/farm/silver-fox-rabbits' },
   ];
 
   return (
@@ -359,7 +361,7 @@ function FarmPreview() {
                 <div className={`aspect-square rounded-[1.5rem] overflow-hidden mb-6 border-4 border-teal-900 ${animal.color} relative`}>
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-teal-900/20 transition-opacity z-10" />
                   <img
-                    src={`/images/${animal.seed}.png`}
+                    src={`/images/${animal.seed}.jpg`}
                     alt={animal.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -557,10 +559,64 @@ function Home() {
   );
 }
 
+const SITE_URL = 'https://www.pasturepaw.com';
+
+const PAGE_META: Record<string, { title: string; description: string }> = {
+  '/': {
+    title: 'Pasture & Paw | Working Farm & Dog Training in Enumclaw, WA',
+    description: 'Pasture & Paw is a working family farm and canine academy in Enumclaw, Washington, serving greater King County. Heritage livestock, healthy pastures, and real-world dog training.',
+  },
+  '/farm': {
+    title: 'The Farm | Heritage Cattle, Goats & Rabbits | Pasture & Paw',
+    description: 'Meet the heritage cattle, Norwegian goats, and Silver Fox rabbits raised on rotational pastures at Pasture & Paw in Enumclaw, WA.',
+  },
+  '/training': {
+    title: 'Dog Training & Farm Boarding in Enumclaw, WA | Pasture & Paw',
+    description: 'Personalized dog training on a working farm. Dogs learn calm focus around livestock, open fields, and daily chores. Serving Enumclaw and greater King County.',
+  },
+  '/contact': {
+    title: 'Book Training or a Farm Visit | Pasture & Paw',
+    description: 'Request dog training, farm boarding, or a farm visit at Pasture & Paw in Enumclaw, Washington.',
+  },
+  '/farm/highlander-cattle': {
+    title: 'Highlander Cattle | Pasture & Paw',
+    description: 'Hardy, gentle Highlander cattle are the heart of the pastures at Pasture & Paw in Enumclaw, WA.',
+  },
+  '/farm/dexter-cattle': {
+    title: 'Dexter Cattle | Pasture & Paw',
+    description: 'Small in stature, big in purpose: Dexter cattle help graze and manage the pastures at Pasture & Paw.',
+  },
+  '/farm/norwegian-goats': {
+    title: 'Norwegian Goats | Pasture & Paw',
+    description: "Norwegian dairy goats are Pasture & Paw's natural brush-clearing team, working tree lines and slopes in Enumclaw, WA.",
+  },
+  '/farm/silver-fox-rabbits': {
+    title: 'Silver Fox Rabbits | Pasture & Paw',
+    description: 'Pasture & Paw raises Silver Fox rabbits, a rare American heritage breed, and shares them with local 4-H youth.',
+  },
+};
+
+function PageMeta() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const path = pathname.replace(/\/+$/, '') || '/';
+    const meta = PAGE_META[path] ?? PAGE_META['/'];
+    const url = `${SITE_URL}${path === '/' ? '/' : path}`;
+    document.title = meta.title;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', meta.description);
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', url);
+    document.querySelector('meta[property="og:url"]')?.setAttribute('content', url);
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', meta.title);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', meta.description);
+  }, [pathname]);
+  return null;
+}
+
 export default function App() {
   return (
     <div className="min-h-screen bg-cream font-sans text-teal-900 selection:bg-sage selection:text-teal-900 overflow-x-hidden">
       <ScrollToTop />
+      <PageMeta />
       <Navbar />
       <main>
         <Routes>
@@ -572,6 +628,8 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
