@@ -9,6 +9,7 @@ import TrainingPage from './pages/TrainingPage';
 import ContactPage from './pages/ContactPage';
 import BreedPage from './pages/BreedPage';
 import NotFoundPage from './pages/NotFoundPage';
+import AreasServed from './components/AreasServed';
 import { NOT_FOUND_META, canonicalUrl, normalizePath, pageMeta } from './seo';
 
 // Reusable tactile button styles
@@ -557,6 +558,7 @@ function Home() {
       <Story />
       <FarmPreview />
       <TrainingPreview />
+      <AreasServed />
     </>
   );
 }

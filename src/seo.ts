@@ -1,3 +1,5 @@
+import { SERVICE_AREAS, TRAINING_FAQS } from './content/local';
+
 // Per-page search metadata. Used by the app when navigating and by
 // scripts/prerender.mjs when it writes a static HTML file for each page.
 
@@ -76,7 +78,7 @@ export const pageMeta = (pathname: string): PageMeta | null => PAGE_META[normali
 export const canonicalUrl = (path: string) => `${SITE_URL}${path === '/' ? '/' : path}`;
 
 const AREA_SERVED = [
-  { '@type': 'City', name: 'Enumclaw' },
+  ...SERVICE_AREAS.map((name) => ({ '@type': 'City', name: `${name}, WA` })),
   { '@type': 'AdministrativeArea', name: 'King County, Washington' },
 ];
 
@@ -120,6 +122,15 @@ export const pageJsonLd = (path: string): object[] => {
         url: canonicalUrl('/training'),
         provider: { '@id': BUSINESS_ID },
         areaServed: AREA_SERVED,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: TRAINING_FAQS.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+        })),
       },
     );
   }

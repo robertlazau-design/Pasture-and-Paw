@@ -1,7 +1,9 @@
 import { motion } from 'motion/react';
-import { PawPrint, Dog, ArrowRight, ArrowLeft, CheckCircle2, Home, Sun, Moon, Shield, Heart, Target, MessageCircleHeart, Sparkles, Users, Clock, Compass } from 'lucide-react';
+import { PawPrint, Dog, ArrowRight, ArrowLeft, CheckCircle2, Home, Sun, Moon, Shield, Heart, Target, MessageCircleHeart, Sparkles, Users, Clock, Compass, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
+import AreasServed from '../components/AreasServed';
+import { TRAINING_FAQS } from '../content/local';
 
 const btnPrimary = "inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl border-2 border-teal-900 bg-sage text-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] hover:shadow-[2px_2px_0px_0px_#0B3B3C] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200";
 
@@ -391,6 +393,34 @@ export default function TrainingPage() {
           </div>
         </div>
       </section>
+
+      {/* FAQ */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className="text-center mb-12">
+          <h2 className="font-display text-5xl font-bold text-teal-900 mb-4">Common Questions</h2>
+          <p className="text-xl text-teal-900/70 font-medium max-w-2xl mx-auto">
+            Quick answers about training and boarding at Pasture &amp; Paw.
+          </p>
+        </div>
+        <div className="space-y-4">
+          {TRAINING_FAQS.map((faq) => (
+            <details
+              key={faq.question}
+              className="group bg-cream rounded-2xl border-4 border-teal-900 shadow-[6px_6px_0px_0px_#0B3B3C] open:bg-sage-light transition-colors"
+            >
+              <summary className="flex items-center justify-between gap-4 cursor-pointer list-none p-6 md:p-8 font-display font-bold text-xl md:text-2xl text-teal-900 [&::-webkit-details-marker]:hidden">
+                <h3>{faq.question}</h3>
+                <span className="shrink-0 w-9 h-9 rounded-xl border-2 border-teal-900 bg-sage flex items-center justify-center" aria-hidden="true">
+                  <Plus className="h-5 w-5 text-teal-900 transition-transform group-open:rotate-45" />
+                </span>
+              </summary>
+              <p className="px-6 md:px-8 pb-6 md:pb-8 -mt-2 text-teal-900/80 text-lg font-medium leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <AreasServed />
     </div>
   );
 }
