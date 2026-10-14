@@ -6,7 +6,7 @@ const sections: { heading: string; body: string[] }[] = [
   {
     heading: 'What we collect',
     body: [
-      'When you send a request through our booking form, we receive the details you enter: your name, email address, phone number (optional), the service you are interested in, your preferred date and time, information about your dog or group, and any notes you include.',
+      'When you send a request through our booking form, we receive the details you enter: your name, email address, phone number, the service you are interested in, your preferred date and time, information about your dog or group, and any notes you include.',
     ],
   },
   {
@@ -44,7 +44,7 @@ export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-cream pt-32 pb-24">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="inline-flex items-center text-teal-900 font-bold hover:text-sage transition-colors mb-12">
+        <Link to="/" className="inline-flex items-center text-teal-900 font-bold hover:text-sage transition-colors py-3 -mt-3 mb-9">
           <ArrowLeft className="mr-2 h-5 w-5" />
           Back to Home
         </Link>

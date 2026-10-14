@@ -73,7 +73,7 @@ export default function TrainingPage() {
     <div className="min-h-screen bg-cream pt-24 pb-24">
       {/* Hero Section */}
       <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-24">
-        <Link to="/" className="inline-flex items-center text-teal-900 font-bold hover:text-sage transition-colors mb-12">
+        <Link to="/" className="inline-flex items-center text-teal-900 font-bold hover:text-sage transition-colors py-3 -mt-3 mb-9">
           <ArrowLeft className="mr-2 h-5 w-5" />
           Back to Home
         </Link>

@@ -526,7 +526,7 @@ function Footer() {
         
         <div className="border-t-4 border-teal-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-cream/50 font-medium">
           <p suppressHydrationWarning>&copy; {new Date().getFullYear()} Pasture & Paw. All rights reserved.</p>
-          <Link to="/privacy" className="hover:text-sage transition-colors">Privacy Policy</Link>
+          <Link to="/privacy" className="py-3 -my-3 hover:text-sage transition-colors">Privacy Policy</Link>
         </div>
       </div>
     </footer>
@@ -539,7 +539,7 @@ function PlaceholderPage({ title, description, backLink = "/" }: { title: string
   return (
     <div className="min-h-screen bg-cream pt-32 pb-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link to={backLink} className="inline-flex items-center text-teal-900 font-bold hover:text-sage transition-colors mb-8">
+        <Link to={backLink} className="inline-flex items-center text-teal-900 font-bold hover:text-sage transition-colors py-3 -mt-3 mb-5">
           <ArrowLeft className="mr-2 h-5 w-5" />
           Back
         </Link>

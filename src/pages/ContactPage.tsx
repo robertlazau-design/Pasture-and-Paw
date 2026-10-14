@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Calendar as CalendarIcon, Clock, ArrowLeft, ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, Mail, MapPin, Instagram, Dog, Leaf, Moon, Sparkles, Loader2, AlertCircle } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
@@ -49,6 +49,20 @@ export default function ContactPage() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [bookingStep, setBookingStep] = useState<'service' | 'calendar' | 'form' | 'success'>('service');
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isFirstStep = useRef(true);
+
+  // On phones the next step can render below the fold; bring the card's top back into view.
+  useEffect(() => {
+    if (isFirstStep.current) {
+      isFirstStep.current = false;
+      return;
+    }
+    const card = cardRef.current;
+    if (card && card.getBoundingClientRect().top < 0) {
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [bookingStep]);
 
   // Form input state
   const [formData, setFormData] = useState({
@@ -241,7 +255,7 @@ export default function ContactPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <Link to="/" className="inline-flex items-center text-teal-900 font-bold hover:text-sage transition-colors mb-10">
+          <Link to="/" className="inline-flex items-center text-teal-900 font-bold hover:text-sage transition-colors py-3 -mt-3 mb-7">
             <ArrowLeft className="mr-2 h-5 w-5" />
             Back to Home
           </Link>
@@ -287,7 +301,7 @@ export default function ContactPage() {
           )}
 
           {/* Booking Card */}
-          <div className="bg-white border-4 border-teal-900 rounded-[2rem] p-8 md:p-12 shadow-[12px_12px_0px_0px_#0B3B3C]">
+          <div ref={cardRef} className="bg-white border-4 border-teal-900 rounded-[2rem] p-5 sm:p-8 md:p-12 shadow-[6px_6px_0px_0px_#0B3B3C] md:shadow-[12px_12px_0px_0px_#0B3B3C] scroll-mt-28">
             
             {/* Back Button */}
             {bookingStep !== 'service' && bookingStep !== 'success' && (
@@ -295,7 +309,7 @@ export default function ContactPage() {
                   if (bookingStep === 'form' && serviceType !== 'general') setBookingStep('calendar');
                   else { setBookingStep('service'); setServiceType(null); }
                 }} 
-                className="flex items-center text-teal-900 font-bold hover:text-sage transition-colors mb-8"
+                className="flex items-center text-teal-900 font-bold hover:text-sage transition-colors py-3 -mt-3 mb-5"
               >
                 <ArrowLeft className="mr-2 h-5 w-5" />
                 Back
@@ -319,9 +333,9 @@ export default function ContactPage() {
                       <button
                         key={option.type}
                         onClick={() => handleServiceSelect(option.type)}
-                        className="flex items-start p-6 rounded-2xl border-2 border-teal-900 bg-cream/40 hover:bg-sage-light hover:border-teal-900 transition-all text-left group shadow-[4px_4px_0px_0px_rgba(11,59,60,0.1)] hover:shadow-[4px_4px_0px_0px_#0B3B3C] hover:-translate-y-0.5"
+                        className="flex items-start p-4 sm:p-6 rounded-2xl border-2 border-teal-900 bg-cream/40 hover:bg-sage-light hover:border-teal-900 transition-all text-left group shadow-[4px_4px_0px_0px_rgba(11,59,60,0.1)] hover:shadow-[4px_4px_0px_0px_#0B3B3C] hover:-translate-y-0.5"
                       >
-                        <div className="p-3 bg-sage rounded-xl border-2 border-teal-900 mr-4 shrink-0 group-hover:scale-105 transition-transform">
+                        <div className="p-3 bg-sage rounded-xl border-2 border-teal-900 mr-3 sm:mr-4 shrink-0 group-hover:scale-105 transition-transform">
                           <option.icon className="w-6 h-6 text-teal-900" />
                         </div>
                         <div>
@@ -440,6 +454,7 @@ export default function ContactPage() {
                             required
                             type="text"
                             name="name"
+                            autoComplete="name"
                             value={formData.name}
                             onChange={handleInputChange}
                             placeholder="Full name"
@@ -452,6 +467,7 @@ export default function ContactPage() {
                             required
                             type="email"
                             name="email"
+                            autoComplete="email"
                             value={formData.email}
                             onChange={handleInputChange}
                             placeholder="you@email.com"
@@ -466,6 +482,7 @@ export default function ContactPage() {
                               required
                               type="tel"
                               name="phone"
+                              autoComplete="tel"
                               value={formData.phone}
                               onChange={handleInputChange}
                               placeholder="(555) 000-0000"
