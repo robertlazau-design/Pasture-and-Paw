@@ -1,4 +1,4 @@
-import { SERVICE_AREAS, TRAINING_FAQS } from './content/local';
+import { BOARDING_FAQS, SERVICE_AREAS, TRAINING_FAQS } from './content/local';
 
 // Per-page search metadata. Used by the app when navigating and by
 // scripts/prerender.mjs when it writes a static HTML file for each page.
@@ -47,9 +47,14 @@ export const PAGE_META: Record<string, PageMeta> = {
     crumbs: [['The Farm', '/farm']],
   },
   '/training': {
-    title: 'Dog Training & Farm Boarding in Enumclaw, WA | Pasture & Paw',
+    title: 'Dog Training in Enumclaw, WA | Pasture & Paw',
     description: 'Personalized dog training on a working farm. Dogs learn calm focus around livestock, open fields, and daily chores. Serving Enumclaw and greater King County.',
     crumbs: [['Dog Training', '/training']],
+  },
+  '/dog-boarding': {
+    title: 'Dog Boarding in Enumclaw, WA | Farm Boarding | Pasture & Paw',
+    description: 'Farm dog boarding in Enumclaw, WA. Cared for by experienced trainers, with daily outdoor time on open pasture and a small, calm guest count. Overnight, extended, and weekly stays.',
+    crumbs: [['Dog Boarding', '/dog-boarding']],
   },
   '/contact': {
     title: 'Book Training or a Farm Visit | Pasture & Paw',
@@ -101,6 +106,16 @@ export const pageJsonLd = (path: string): object[] => {
     });
   }
 
+  const faqPage = (faqs: { question: string; answer: string }[]) => ({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  });
+
   if (path === '/training') {
     data.push(
       {
@@ -113,25 +128,23 @@ export const pageJsonLd = (path: string): object[] => {
         provider: { '@id': BUSINESS_ID },
         areaServed: AREA_SERVED,
       },
+      faqPage(TRAINING_FAQS),
+    );
+  }
+
+  if (path === '/dog-boarding') {
+    data.push(
       {
         '@context': 'https://schema.org',
         '@type': 'Service',
         name: 'Farm Dog Boarding',
         serviceType: 'Dog boarding',
         description: 'Farm dog boarding in Enumclaw, WA, with care from experienced trainers, daily outdoor exercise on open pasture, and a small, calm guest count.',
-        url: canonicalUrl('/training'),
+        url: canonicalUrl('/dog-boarding'),
         provider: { '@id': BUSINESS_ID },
         areaServed: AREA_SERVED,
       },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: TRAINING_FAQS.map((faq) => ({
-          '@type': 'Question',
-          name: faq.question,
-          acceptedAnswer: { '@type': 'Answer', text: faq.answer },
-        })),
-      },
+      faqPage(BOARDING_FAQS),
     );
   }
 

@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { PawPrint, Dog, ArrowRight, ArrowLeft, CheckCircle2, Home, Sun, Moon, Shield, Heart, Target, MessageCircleHeart, Sparkles, Users, Clock, Compass, Plus } from 'lucide-react';
+import { PawPrint, Dog, ArrowRight, ArrowLeft, CheckCircle2, Home, Moon, Shield, Target, MessageCircleHeart, Sparkles, Users, Clock, Compass, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import AreasServed from '../components/AreasServed';
@@ -63,12 +63,6 @@ const processSteps = [
   },
 ];
 
-const boardingFeatures = [
-  { icon: Home, title: 'Farm-Style Accommodations', description: 'Spacious, clean indoor runs with natural light, heating, and cooling. No stacked wire crates or concrete warehouse cages.' },
-  { icon: Sun, title: 'Daily Structured Activity', description: 'Multiple outdoor sessions every day on open farm pastures. Dogs get genuine exercise, fresh air, and enrichment.' },
-  { icon: Shield, title: 'Experienced Trainer Care', description: 'Every boarding dog is watched and handled directly by professional trainers who understand dog behavior, body language, and daily care.' },
-  { icon: Heart, title: 'Small Capacity', description: 'We limit our guest count so every dog gets personal attention, quiet rest, and a calm, low-stress stay.' },
-];
 
 export default function TrainingPage() {
   useEffect(() => {
@@ -303,95 +297,42 @@ export default function TrainingPage() {
         </motion.div>
       </section>
 
-      {/* Boarding Section */}
-      <section className="relative overflow-hidden">
-        {/* Wavy divider */}
-        <div className="w-full overflow-hidden leading-none">
-          <svg className="relative block w-full h-[50px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.62,192.27,101.5,235.9,88.94,278.43,73.5,321.39,56.44Z" className="fill-teal-950"></path>
-          </svg>
-        </div>
-
-        <div className="bg-teal-950 text-cream py-24 relative">
-          <div className="absolute bottom-6 right-6 w-96 h-96 opacity-10 pointer-events-none select-none">
-            <img src="/images/logo-light.png" alt="" className="w-full h-full object-contain -rotate-12" />
-          </div>
-          
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-              >
-                <div className="inline-flex items-center gap-2 bg-clay text-cream px-5 py-2 rounded-full border-2 border-teal-900 mb-6">
-                  <Moon className="h-5 w-5" />
-                  <span className="font-bold text-sm uppercase tracking-wider">Also Available</span>
-                </div>
-                <h2 className="font-display text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                  Farm<br/>
-                  <span className="text-sage">Boarding</span>
-                </h2>
-                <div className="space-y-6 text-xl text-cream/90 font-medium leading-relaxed">
-                  <p>
-                    If you are heading out of town and need a safe, engaging place for your dog, our farm boarding gives them plenty of room to breathe. Unlike commercial kennel warehouses, dogs staying with us enjoy fresh country air, large outdoor turnouts, and quiet rest.
-                  </p>
-                  <p>
-                    Our boarding dogs are cared for directly by experienced trainers rather than temporary kennel staff. Your dog gets structured daily exercise, mental enrichment on the acreage, and attentive care in a peaceful setting.
-                  </p>
-                  <p className="text-sage font-bold">
-                    Available for overnight stays, extended trips, and recurring weekly schedules.
-                  </p>
-                </div>
-                <div className="mt-8">
-                  <Link to="/contact?service=boarding" className={btnPrimary}>
-                    Inquire About Boarding
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative"
-              >
-                <div className="aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-cream shadow-[-12px_12px_0px_0px_#C89F7E] bg-clay">
-                  <img
-                    src="/images/boarding.jpg"
-                    alt="Dogs resting calmly in our clean, spacious farm boarding kennel facility"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </motion.div>
+      {/* Boarding Teaser */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="bg-teal-950 text-cream rounded-[2rem] border-4 border-teal-900 shadow-[12px_12px_0px_0px_#C89F7E] overflow-hidden grid grid-cols-1 lg:grid-cols-2"
+        >
+          <div className="p-8 md:p-12">
+            <div className="inline-flex items-center gap-2 bg-clay text-cream px-5 py-2 rounded-full border-2 border-teal-900 mb-6">
+              <Moon className="h-5 w-5" />
+              <span className="font-bold text-sm uppercase tracking-wider">Also Available</span>
             </div>
-
-            {/* Boarding Features Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {boardingFeatures.map((feature, index) => (
-                <motion.div
-                  key={feature.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-teal-900 rounded-2xl p-8 border-2 border-teal-800 flex items-start gap-6"
-                >
-                  <div className="p-3 bg-sage rounded-xl border-2 border-teal-900 shrink-0">
-                    <feature.icon className="h-7 w-7 text-teal-900" />
-                  </div>
-                  <div>
-                    <h3 className="font-display font-bold text-xl text-cream mb-2">{feature.title}</h3>
-                    <p className="text-cream/70 font-medium leading-relaxed">{feature.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              Farm <span className="text-sage">Boarding</span>
+            </h2>
+            <p className="text-xl text-cream/90 font-medium leading-relaxed mb-4">
+              Heading out of town? Your dog can stay on the farm, cared for by the same experienced trainers, with daily outdoor time on open pasture.
+            </p>
+            <p className="text-sage font-bold text-lg mb-8">
+              Overnight stays, extended trips, and recurring weekly schedules.
+            </p>
+            <Link to="/dog-boarding" className={btnPrimary}>
+              About Farm Boarding
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
           </div>
-        </div>
+          <div className="min-h-[260px] lg:min-h-0 bg-clay">
+            <img
+              src="/images/boarding.jpg"
+              alt="Dogs resting calmly in the farm boarding kennel at Pasture & Paw"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </motion.div>
       </section>
 
       {/* FAQ */}

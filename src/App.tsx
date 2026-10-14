@@ -8,6 +8,7 @@ import FarmPage from './pages/FarmPage';
 import TrainingPage from './pages/TrainingPage';
 import ContactPage from './pages/ContactPage';
 import BreedPage from './pages/BreedPage';
+import BoardingPage from './pages/BoardingPage';
 import NotFoundPage from './pages/NotFoundPage';
 import AreasServed from './components/AreasServed';
 import { NOT_FOUND_META, canonicalUrl, normalizePath, pageMeta } from './seo';
@@ -92,6 +93,10 @@ function Navbar() {
               Training
               {underline}
             </Link>
+            <Link to="/dog-boarding" className={navLinkClass}>
+              Boarding
+              {underline}
+            </Link>
             <Link to="/contact" onClick={handleContactClick} className={navLinkClass}>
               Contact
               {underline}
@@ -128,6 +133,9 @@ function Navbar() {
               </Link>
               <Link to="/training" onClick={() => setMobileOpen(false)} className="text-teal-900 font-bold text-xl py-2 border-b-2 border-sage-light">
                 Training
+              </Link>
+              <Link to="/dog-boarding" onClick={() => setMobileOpen(false)} className="text-teal-900 font-bold text-xl py-2 border-b-2 border-sage-light">
+                Boarding
               </Link>
               <Link to="/contact" onClick={handleContactClick} className="text-teal-900 font-bold text-xl py-2">
                 Contact
@@ -601,6 +609,7 @@ export default function App() {
           <Route path="/farm" element={<FarmPage />} />
           <Route path="/farm/:slug" element={<BreedPage />} />
           <Route path="/training" element={<TrainingPage />} />
+          <Route path="/dog-boarding" element={<BoardingPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
