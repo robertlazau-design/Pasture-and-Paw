@@ -1,5 +1,7 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/farm/highlander-cattle", "destination": "/farm/highland-cattle", "permanent": true }
   ]
 }

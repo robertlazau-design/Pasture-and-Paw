@@ -8,6 +8,8 @@ import FarmPage from './pages/FarmPage';
 import TrainingPage from './pages/TrainingPage';
 import ContactPage from './pages/ContactPage';
 import BreedPage from './pages/BreedPage';
+import NotFoundPage from './pages/NotFoundPage';
+import { NOT_FOUND_META, canonicalUrl, normalizePath, pageMeta } from './seo';
 
 // Reusable tactile button styles
 const btnPrimary = "inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl border-2 border-teal-900 bg-sage text-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] hover:shadow-[2px_2px_0px_0px_#0B3B3C] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200";
@@ -313,7 +315,7 @@ function Marquee() {
 
 function FarmPreview() {
   const animals = [
-    { name: 'Highlander Cattle', seed: 'highland-cattle', color: 'bg-clay', path: '/farm/highlander-cattle' },
+    { name: 'Highlander Cattle', seed: 'highland-cattle', color: 'bg-clay', path: '/farm/highland-cattle' },
     { name: 'Dexter Cattle', seed: 'dexter-cattle', color: 'bg-sage', path: '/farm/dexter-cattle' },
     { name: 'Norwegian Goats', seed: 'norwegian-goats', color: 'bg-teal-800', path: '/farm/norwegian-goats' },
     { name: 'Silver Fox Rabbits', seed: 'silver-fox-rabbit', color: 'bg-clay', path: '/farm/silver-fox-rabbits' },
@@ -513,7 +515,7 @@ function Footer() {
         </div>
         
         <div className="border-t-4 border-teal-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-cream/50 font-medium">
-          <p>&copy; {new Date().getFullYear()} Pasture & Paw. All rights reserved.</p>
+          <p suppressHydrationWarning>&copy; {new Date().getFullYear()} Pasture & Paw. All rights reserved.</p>
           <div className="flex gap-8">
             <a href="#" className="hover:text-sage transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-sage transition-colors">Terms of Service</a>
@@ -559,55 +561,28 @@ function Home() {
   );
 }
 
-const SITE_URL = 'https://www.pasturepaw.com';
-
-const PAGE_META: Record<string, { title: string; description: string }> = {
-  '/': {
-    title: 'Pasture & Paw | Working Farm & Dog Training in Enumclaw, WA',
-    description: 'Pasture & Paw is a working family farm and canine academy in Enumclaw, Washington, serving greater King County. Heritage livestock, healthy pastures, and real-world dog training.',
-  },
-  '/farm': {
-    title: 'The Farm | Heritage Cattle, Goats & Rabbits | Pasture & Paw',
-    description: 'Meet the heritage cattle, Norwegian goats, and Silver Fox rabbits raised on rotational pastures at Pasture & Paw in Enumclaw, WA.',
-  },
-  '/training': {
-    title: 'Dog Training & Farm Boarding in Enumclaw, WA | Pasture & Paw',
-    description: 'Personalized dog training on a working farm. Dogs learn calm focus around livestock, open fields, and daily chores. Serving Enumclaw and greater King County.',
-  },
-  '/contact': {
-    title: 'Book Training or a Farm Visit | Pasture & Paw',
-    description: 'Request dog training, farm boarding, or a farm visit at Pasture & Paw in Enumclaw, Washington.',
-  },
-  '/farm/highlander-cattle': {
-    title: 'Highlander Cattle | Pasture & Paw',
-    description: 'Hardy, gentle Highlander cattle are the heart of the pastures at Pasture & Paw in Enumclaw, WA.',
-  },
-  '/farm/dexter-cattle': {
-    title: 'Dexter Cattle | Pasture & Paw',
-    description: 'Small in stature, big in purpose: Dexter cattle help graze and manage the pastures at Pasture & Paw.',
-  },
-  '/farm/norwegian-goats': {
-    title: 'Norwegian Goats | Pasture & Paw',
-    description: "Norwegian dairy goats are Pasture & Paw's natural brush-clearing team, working tree lines and slopes in Enumclaw, WA.",
-  },
-  '/farm/silver-fox-rabbits': {
-    title: 'Silver Fox Rabbits | Pasture & Paw',
-    description: 'Pasture & Paw raises Silver Fox rabbits, a rare American heritage breed, and shares them with local 4-H youth.',
-  },
-};
-
 function PageMeta() {
   const { pathname } = useLocation();
   useEffect(() => {
-    const path = pathname.replace(/\/+$/, '') || '/';
-    const meta = PAGE_META[path] ?? PAGE_META['/'];
-    const url = `${SITE_URL}${path === '/' ? '/' : path}`;
-    document.title = meta.title;
-    document.querySelector('meta[name="description"]')?.setAttribute('content', meta.description);
+    const path = normalizePath(pathname);
+    const meta = pageMeta(path);
+    const { title, description } = meta ?? NOT_FOUND_META;
+    const url = canonicalUrl(path);
+    document.title = title;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', description);
     document.querySelector('link[rel="canonical"]')?.setAttribute('href', url);
     document.querySelector('meta[property="og:url"]')?.setAttribute('content', url);
-    document.querySelector('meta[property="og:title"]')?.setAttribute('content', meta.title);
-    document.querySelector('meta[property="og:description"]')?.setAttribute('content', meta.description);
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
+    let robots = document.querySelector('meta[name="robots"]');
+    if (!meta && !robots) {
+      robots = document.createElement('meta');
+      robots.setAttribute('name', 'robots');
+      robots.setAttribute('content', 'noindex');
+      document.head.appendChild(robots);
+    } else if (meta && robots) {
+      robots.remove();
+    }
   }, [pathname]);
   return null;
 }
@@ -625,6 +600,7 @@ export default function App() {
           <Route path="/farm/:slug" element={<BreedPage />} />
           <Route path="/training" element={<TrainingPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
       <Footer />

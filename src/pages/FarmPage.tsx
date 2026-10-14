@@ -11,7 +11,7 @@ const animals = [
     name: 'Highlander Cattle',
     image: '/images/highland-cattle.jpg',
     color: 'bg-clay',
-    slug: 'highlander-cattle',
+    slug: 'highland-cattle',
     description: 'The heart of our pastures. Known for their calm temperament and thick double coats, our Scottish Highlands thrive on rough forage, help rebuild healthy topsoil as we rotate paddocks, and handle Pacific Northwest weather with ease.',
   },
   {
