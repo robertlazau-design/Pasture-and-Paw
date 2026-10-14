@@ -9,6 +9,7 @@ import TrainingPage from './pages/TrainingPage';
 import ContactPage from './pages/ContactPage';
 import BreedPage from './pages/BreedPage';
 import BoardingPage from './pages/BoardingPage';
+import PrivacyPage from './pages/PrivacyPage';
 import NotFoundPage from './pages/NotFoundPage';
 import AreasServed from './components/AreasServed';
 import { NOT_FOUND_META, canonicalUrl, normalizePath, pageMeta } from './seo';
@@ -324,7 +325,7 @@ function Marquee() {
 
 function FarmPreview() {
   const animals = [
-    { name: 'Highlander Cattle', seed: 'highland-cattle', color: 'bg-clay', path: '/farm/highland-cattle' },
+    { name: 'Highland Cattle', seed: 'highland-cattle', color: 'bg-clay', path: '/farm/highland-cattle' },
     { name: 'Dexter Cattle', seed: 'dexter-cattle', color: 'bg-sage', path: '/farm/dexter-cattle' },
     { name: 'Norwegian Goats', seed: 'norwegian-goats', color: 'bg-teal-800', path: '/farm/norwegian-goats' },
     { name: 'Silver Fox Rabbits', seed: 'silver-fox-rabbit', color: 'bg-clay', path: '/farm/silver-fox-rabbits' },
@@ -525,10 +526,7 @@ function Footer() {
         
         <div className="border-t-4 border-teal-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-cream/50 font-medium">
           <p suppressHydrationWarning>&copy; {new Date().getFullYear()} Pasture & Paw. All rights reserved.</p>
-          <div className="flex gap-8">
-            <a href="#" className="hover:text-sage transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-sage transition-colors">Terms of Service</a>
-          </div>
+          <Link to="/privacy" className="hover:text-sage transition-colors">Privacy Policy</Link>
         </div>
       </div>
     </footer>
@@ -611,6 +609,7 @@ export default function App() {
           <Route path="/training" element={<TrainingPage />} />
           <Route path="/dog-boarding" element={<BoardingPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

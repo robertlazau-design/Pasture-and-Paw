@@ -22,7 +22,7 @@ interface BreedData {
 
 const breeds: Record<string, BreedData> = {
   'highland-cattle': {
-    name: 'Highlander Cattle',
+    name: 'Highland Cattle',
     subtitle: 'The Hardy Heart of Our Pastures',
     heroImage: '/images/highland-cattle.jpg',
     heroColor: 'bg-clay',

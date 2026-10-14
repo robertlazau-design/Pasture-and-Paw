@@ -54,7 +54,7 @@ console.log('prerendered 404.html');
 
 const today = new Date().toISOString().slice(0, 10);
 const priority = (p) =>
-  p === '/' ? '1.0' : p === '/training' || p === '/dog-boarding' || p === '/contact' ? '0.9' : p === '/farm' ? '0.8' : '0.6';
+  p === '/' ? '1.0' : p === '/training' || p === '/dog-boarding' || p === '/contact' ? '0.9' : p === '/farm' ? '0.8' : p === '/privacy' ? '0.2' : '0.6';
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${ALL_PATHS.map(

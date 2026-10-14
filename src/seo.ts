@@ -61,6 +61,11 @@ export const PAGE_META: Record<string, PageMeta> = {
     description: 'Request dog training, farm boarding, or a farm visit at Pasture & Paw in Enumclaw, Washington.',
     crumbs: [['Contact', '/contact']],
   },
+  '/privacy': {
+    title: 'Privacy Policy | Pasture & Paw',
+    description: 'How Pasture & Paw handles the information you share through our booking form and how we measure site visits.',
+    crumbs: [['Privacy Policy', '/privacy']],
+  },
   ...Object.fromEntries(
     Object.entries(BREEDS).map(([slug, b]) => [
       `/farm/${slug}`,

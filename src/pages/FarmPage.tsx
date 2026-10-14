@@ -8,7 +8,7 @@ const btnSecondary = "inline-flex items-center justify-center px-8 py-4 text-bas
 
 const animals = [
   {
-    name: 'Highlander Cattle',
+    name: 'Highland Cattle',
     image: '/images/highland-cattle.jpg',
     color: 'bg-clay',
     slug: 'highland-cattle',
