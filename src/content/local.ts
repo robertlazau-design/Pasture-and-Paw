@@ -59,6 +59,10 @@ export const BOARDING_FAQS: { question: string; answer: string }[] = [
     answer: 'We keep our guest count small on purpose so every dog gets personal attention, quiet rest, and a calm, low-stress stay.',
   },
   {
+    question: 'Do you board over Thanksgiving and Christmas?',
+    answer: 'Yes. Because we keep our guest count small, holiday dates fill early, so send your dates as soon as your plans are set.',
+  },
+  {
     question: 'How do I reserve a stay?',
     answer: 'Use the booking form on our contact page, choose Farm Boarding, and pick your preferred dates. We will reply by email to confirm.',
   },
