@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ArrowRight, ArrowLeft, Moon, Home, Sun, Shield, Heart, Dog, Plus } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Moon, Home, Sun, Shield, Heart, Dog, Plus, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import AreasServed from '../components/AreasServed';
@@ -52,6 +52,17 @@ export default function BoardingPage() {
               Inquire About Boarding
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
+
+            {/* Holiday notice: remove after the new year */}
+            <div className="mt-8 flex items-start gap-4 bg-sage-light rounded-2xl border-2 border-teal-900 p-5 shadow-[4px_4px_0px_0px_#0B3B3C]">
+              <div className="p-2 bg-clay rounded-lg border-2 border-teal-900 shrink-0">
+                <Calendar className="h-5 w-5 text-cream" />
+              </div>
+              <p className="text-teal-900 font-medium leading-relaxed">
+                <span className="font-bold">Now booking Thanksgiving and Christmas stays.</span> We keep our guest count small, so holiday dates fill early.{' '}
+                <Link to="/contact?service=boarding" className="font-bold underline underline-offset-4 decoration-2 hover:text-sage">Request your dates</Link>
+              </p>
+            </div>
           </motion.div>
 
           <motion.div
@@ -147,6 +158,29 @@ export default function BoardingPage() {
           </div>
           <Link to="/training" className={btnSecondary}>
             Dog Training
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Link>
+        </motion.div>
+      </section>
+
+      {/* New boarding home */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="bg-cream rounded-[2rem] p-8 md:p-12 border-4 border-teal-900 shadow-[8px_8px_0px_0px_#0B3B3C]"
+        >
+          <h2 className="font-display font-bold text-3xl md:text-4xl text-teal-900 mb-4">Looking for a New Boarding Home Near Enumclaw?</h2>
+          <p className="text-teal-900/80 text-lg font-medium leading-relaxed mb-4">
+            If the place your dog has stayed for years is closing or booked up, we would love to meet your dog. Boarding here means a quiet farm, daily time on open pasture, and care from experienced trainers.
+          </p>
+          <p className="text-teal-900/80 text-lg font-medium leading-relaxed mb-8">
+            Send us your dog's details and your travel dates, and we will reply to plan the first stay.
+          </p>
+          <Link to="/contact?service=boarding" className={btnPrimary}>
+            Tell Us About Your Dog
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </motion.div>
