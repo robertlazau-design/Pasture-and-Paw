@@ -69,7 +69,7 @@ const breeds: Record<string, BreedData> = {
     farmStory: 'We introduced our first Dexter trio in 2020 specifically to diversify our grazing program. Their gentle nature and manageable size have made them a favorite among our visitors and the first animals we introduce to anyone new to cattle. Our small herd has grown steadily, and we occasionally have registered calves available for other small farms.',
   },
   'norwegian-goats': {
-    name: 'Norwegian Goats',
+    name: 'Norwegian Dairy Goats',
     subtitle: 'Our Natural Brush Clearing Team',
     heroImage: '/images/norwegian-goats.jpg',
     heroColor: 'bg-teal-800',

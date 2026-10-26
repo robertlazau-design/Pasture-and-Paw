@@ -25,8 +25,8 @@ const BREEDS: Record<string, { name: string; title: string; description: string 
     description: 'Small in stature, big in purpose: Dexter cattle help graze and manage the pastures at Pasture & Paw in Enumclaw, WA.',
   },
   'norwegian-goats': {
-    name: 'Norwegian Goats',
-    title: 'Norwegian Goats | Pasture & Paw',
+    name: 'Norwegian Dairy Goats',
+    title: 'Norwegian Dairy Goats in Enumclaw, WA | Pasture & Paw',
     description: "Norwegian dairy goats are Pasture & Paw's natural brush-clearing team, working tree lines and slopes in Enumclaw, WA.",
   },
   'silver-fox-rabbits': {
