@@ -48,6 +48,10 @@ export default function ContactPage() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  // Boarding picks a stay (drop-off and pick-up days) instead of a time slot.
+  const [dropOff, setDropOff] = useState<Date | null>(null);
+  const [pickUp, setPickUp] = useState<Date | null>(null);
+  const isBoarding = serviceType === 'boarding';
   const [bookingStep, setBookingStep] = useState<'service' | 'calendar' | 'form' | 'success'>('service');
   const cardRef = useRef<HTMLDivElement>(null);
   const isFirstStep = useRef(true);
@@ -103,11 +107,30 @@ export default function ContactPage() {
   };
 
   const handleDateSelect = (day: number) => {
-    if (!isDateDisabled(day)) {
-      setSelectedDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), day));
-      setSelectedTime(null);
+    if (isDateDisabled(day)) return;
+    const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+    if (isBoarding) {
+      // First tap sets drop-off, the next later day sets pick-up; any other tap starts over.
+      if (dropOff && !pickUp && date > dropOff) {
+        setPickUp(date);
+      } else {
+        setDropOff(date);
+        setPickUp(null);
+      }
+      return;
     }
+    setSelectedDate(date);
+    setSelectedTime(null);
   };
+
+  const sameDay = (a: Date | null, b: Date) =>
+    !!a && a.getDate() === b.getDate() && a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear();
+  const nights = dropOff && pickUp ? Math.round((pickUp.getTime() - dropOff.getTime()) / 86400000) : 0;
+  const shortDate = (d: Date) => d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  const longDate = (d: Date) => d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  const stayLabel = dropOff && pickUp
+    ? `${shortDate(dropOff)} to ${shortDate(pickUp)} (${nights} ${nights === 1 ? 'night' : 'nights'})`
+    : '';
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -138,8 +161,11 @@ export default function ContactPage() {
       name: formData.name,
       email: formData.email,
       phone: formData.phone,
-      date: formattedDate,
-      time: selectedTime || undefined,
+      date: isBoarding ? undefined : formattedDate,
+      time: isBoarding ? undefined : selectedTime || undefined,
+      dropOff: isBoarding && dropOff ? longDate(dropOff) : undefined,
+      pickUp: isBoarding && pickUp ? longDate(pickUp) : undefined,
+      nights: isBoarding ? nights : undefined,
       dogDetails: formData.dogDetails || undefined,
       groupSize: formData.groupSize || undefined,
       message: formData.message,
@@ -159,6 +185,10 @@ export default function ContactPage() {
 
   const handleServiceSelect = (type: ServiceType) => {
     setServiceType(type);
+    setSelectedDate(null);
+    setSelectedTime(null);
+    setDropOff(null);
+    setPickUp(null);
     if (type === 'general') {
       setBookingStep('form');
     } else {
@@ -185,9 +215,11 @@ export default function ContactPage() {
     const days = Array.from({ length: daysInMonth }, (_, i) => {
       const day = i + 1;
       const disabled = isDateDisabled(day);
-      const isSelected = selectedDate?.getDate() === day && 
-                         selectedDate?.getMonth() === currentDate.getMonth() && 
-                         selectedDate?.getFullYear() === currentDate.getFullYear();
+      const cellDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+      const isSelected = isBoarding
+        ? sameDay(dropOff, cellDate) || sameDay(pickUp, cellDate)
+        : sameDay(selectedDate, cellDate);
+      const inStay = isBoarding && !!dropOff && !!pickUp && cellDate > dropOff && cellDate < pickUp;
       
       return (
         <button
@@ -197,6 +229,7 @@ export default function ContactPage() {
           onClick={() => handleDateSelect(day)}
           className={`p-2 sm:p-3 border border-teal-900/10 font-bold text-sm sm:text-base transition-all flex items-center justify-center min-h-[44px]
             ${disabled ? 'text-teal-900/20 cursor-not-allowed bg-cream/40' : 'text-teal-900 hover:bg-sage-light cursor-pointer bg-white'}
+            ${inStay ? '!bg-sage-light' : ''}
             ${isSelected ? '!bg-sage !border-teal-900 text-teal-900 shadow-[2px_2px_0px_0px_#0B3B3C] scale-105 z-10' : ''}
           `}
         >
@@ -361,8 +394,12 @@ export default function ContactPage() {
                     <span className="font-bold text-sm">{selectedServiceLabel}</span>
                   </div>
 
-                  <h2 className="font-display font-bold text-3xl text-teal-900 mb-2">Select Date & Time</h2>
-                  <p className="text-teal-900/60 font-medium mb-8">Available dates are highlighted. Weekends are reserved for farm chores.</p>
+                  <h2 className="font-display font-bold text-3xl text-teal-900 mb-2">{isBoarding ? 'Select Your Boarding Dates' : 'Select Date & Time'}</h2>
+                  <p className="text-teal-900/60 font-medium mb-8">
+                    {isBoarding
+                      ? 'Tap your drop-off day, then your pick-up day. Drop-off and pick-up are on weekdays; weekends are reserved for farm chores.'
+                      : 'Available dates are highlighted. Weekends are reserved for farm chores.'}
+                  </p>
 
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8 items-start">
                     {/* Calendar Month View */}
@@ -370,7 +407,35 @@ export default function ContactPage() {
                       {renderCalendar()}
                     </div>
 
-                    {/* Time Slots */}
+                    {/* Boarding: the stay instead of time slots */}
+                    {isBoarding ? (
+                    <div className="lg:col-span-5 flex flex-col">
+                      <h3 className="font-display font-bold text-xl text-teal-900 mb-4 flex items-center gap-2">
+                        <Moon className="w-5 h-5" /> Your Stay
+                      </h3>
+                      <div className="flex flex-col gap-3">
+                        {[
+                          { label: 'Drop-off', date: dropOff, hint: 'Tap a day on the calendar' },
+                          { label: 'Pick-up', date: pickUp, hint: dropOff ? 'Now tap your pick-up day' : 'Choose drop-off first' },
+                        ].map(({ label, date, hint }) => (
+                          <div
+                            key={label}
+                            className={`p-4 rounded-xl border-2 font-bold flex justify-between items-center
+                              ${date ? 'bg-sage border-teal-900 text-teal-900 shadow-[3px_3px_0px_0px_#0B3B3C]' : 'bg-cream/40 border-dashed border-teal-900/30 text-teal-900/60'}`}
+                          >
+                            <span>{label}</span>
+                            <span className={date ? '' : 'font-medium text-sm'}>{date ? shortDate(date) : hint}</span>
+                          </div>
+                        ))}
+                        {nights > 0 && (
+                          <p className="text-teal-900 font-bold text-center mt-1">
+                            {nights} {nights === 1 ? 'night' : 'nights'} on the farm
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    ) : (
+                    /* Time Slots */
                     <div className="lg:col-span-5 flex flex-col">
                       <h3 className="font-display font-bold text-xl text-teal-900 mb-4 flex items-center gap-2">
                         <Clock className="w-5 h-5" /> Available Times
@@ -399,11 +464,12 @@ export default function ContactPage() {
                         </div>
                       )}
                     </div>
+                    )}
                   </div>
 
                   <div className="flex justify-end pt-4 border-t-2 border-teal-900/10">
                     <button
-                      disabled={!selectedDate || !selectedTime}
+                      disabled={isBoarding ? !dropOff || !pickUp : !selectedDate || !selectedTime}
                       onClick={() => setBookingStep('form')}
                       className={btnPrimary}
                     >
@@ -428,13 +494,15 @@ export default function ContactPage() {
                   </div>
 
                   {/* Booking Summary Bar */}
-                  {serviceType !== 'general' && selectedDate && selectedTime && (
+                  {serviceType !== 'general' && (isBoarding ? stayLabel : selectedDate && selectedTime) && (
                     <div className="mb-8 p-4 bg-sage-light border-2 border-teal-900 rounded-xl flex justify-between items-center">
                       <div className="flex items-center gap-3">
                         <CalendarIcon className="w-5 h-5 text-teal-900/60 shrink-0" />
                         <div>
                            <p className="font-medium text-teal-900">
-                             {selectedDate?.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} at {selectedTime}
+                             {isBoarding
+                               ? stayLabel
+                               : `${selectedDate?.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} at ${selectedTime}`}
                            </p>
                         </div>
                       </div>
@@ -475,21 +543,19 @@ export default function ContactPage() {
                           />
                         </div>
                         
-                        {serviceType !== 'general' && (
-                          <div>
-                            <label className="block font-bold text-teal-900 mb-2 text-sm">Phone Number</label>
-                            <input
-                              required
-                              type="tel"
-                              name="phone"
-                              autoComplete="tel"
-                              value={formData.phone}
-                              onChange={handleInputChange}
-                              placeholder="(555) 000-0000"
-                              className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors"
-                            />
-                          </div>
-                        )}
+                        <div>
+                          <label className="block font-bold text-teal-900 mb-2 text-sm">Phone Number</label>
+                          <input
+                            required
+                            type="tel"
+                            name="phone"
+                            autoComplete="tel"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            placeholder="(555) 000-0000"
+                            className="w-full bg-cream border-2 border-teal-900/30 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-sage focus:border-teal-900 transition-colors"
+                          />
+                        </div>
 
                         {serviceType === 'wellness' && (
                           <div>
@@ -556,7 +622,7 @@ export default function ContactPage() {
                            href={`mailto:${TARGET_EMAIL}?subject=${encodeURIComponent(
                              `Inquiry: ${selectedServiceLabel}`
                            )}&body=${encodeURIComponent(
-                             `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nService: ${selectedServiceLabel}\nDate: ${selectedDate?.toLocaleDateString() || 'N/A'}\nTime: ${selectedTime || 'N/A'}\n\nNotes:\n${formData.message}`
+                             `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nService: ${selectedServiceLabel}\n${isBoarding ? `Stay: ${stayLabel || 'N/A'}` : `Date: ${selectedDate?.toLocaleDateString() || 'N/A'}\nTime: ${selectedTime || 'N/A'}`}\n\nNotes:\n${formData.message}`
                            )}`}
                            className="underline font-bold text-red-900 hover:text-red-700 shrink-0"
                          >
@@ -603,7 +669,7 @@ export default function ContactPage() {
                   <p className="text-xl text-teal-900/70 font-medium mb-4 max-w-md mx-auto">
                     {serviceType === 'general'
                       ? "Thanks for reaching out! We've received your inquiry and will get back to you within 24 to 48 hours." 
-                      : `We've received your request for ${selectedDate?.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} at ${selectedTime}. Our team has been notified and will follow up shortly.`}
+                      : `We've received your request for ${isBoarding ? stayLabel : `${selectedDate?.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} at ${selectedTime}`}. Our team has been notified and will follow up shortly.`}
                   </p>
                   <p className="text-sm text-teal-900/60 mb-10">
                     Requests are forwarded to <span className="font-bold text-teal-900">{TARGET_EMAIL}</span>.

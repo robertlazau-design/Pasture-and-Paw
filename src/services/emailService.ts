@@ -8,6 +8,10 @@ export interface BookingData {
   phone?: string;
   date?: string;
   time?: string;
+  /** Boarding stays send these instead of date/time. */
+  dropOff?: string;
+  pickUp?: string;
+  nights?: number;
   dogDetails?: string;
   groupSize?: string;
   message: string;
@@ -41,8 +45,9 @@ export async function sendBookingEmail(data: BookingData): Promise<SendResult> {
           client_name: data.name,
           client_email: data.email,
           client_phone: data.phone || 'Not provided',
-          requested_date: data.date || 'N/A',
-          requested_time: data.time || 'N/A',
+          ...(data.dropOff
+            ? { drop_off: data.dropOff, pick_up: data.pickUp, nights: data.nights }
+            : { requested_date: data.date || 'N/A', requested_time: data.time || 'N/A' }),
           dog_details: data.dogDetails || 'N/A',
           group_size: data.groupSize || 'N/A',
           notes: data.message,
@@ -82,8 +87,9 @@ export async function sendBookingEmail(data: BookingData): Promise<SendResult> {
           email: data.email,
           phone: data.phone || 'Not provided',
           service: data.service,
-          date: data.date || 'N/A',
-          time: data.time || 'N/A',
+          ...(data.dropOff
+            ? { drop_off: data.dropOff, pick_up: data.pickUp, nights: data.nights }
+            : { date: data.date || 'N/A', time: data.time || 'N/A' }),
           dog_name_and_breed: data.dogDetails || 'N/A',
           group_size: data.groupSize || 'N/A',
           message: data.message,
