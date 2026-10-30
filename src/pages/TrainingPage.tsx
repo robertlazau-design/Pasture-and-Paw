@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { PawPrint, Dog, ArrowRight, ArrowLeft, CheckCircle2, Home, Moon, Shield, Target, MessageCircleHeart, Sparkles, Users, Clock, Compass, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Picture from '../components/Picture';
 import { useEffect } from 'react';
 import AreasServed from '../components/AreasServed';
 import { TRAINING_FAQS } from '../content/local';
@@ -80,8 +81,8 @@ export default function TrainingPage() {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ x: -20 }}
+            animate={{ x: 0 }}
             transition={{ duration: 0.8 }}
           >
             <div className="inline-flex items-center justify-center p-3 bg-clay rounded-xl border-2 border-teal-900 mb-6 shadow-[4px_4px_0px_0px_#0B3B3C]">
@@ -104,15 +105,17 @@ export default function TrainingPage() {
           </motion.div>
           
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
             <div className="aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C] bg-clay">
-               <img
+               <Picture
                 src="/images/training-hero.jpg"
                 alt="Well-trained pack of dogs demonstrating focus and obedience"
+                loading="eager"
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -326,9 +329,10 @@ export default function TrainingPage() {
             </Link>
           </div>
           <div className="min-h-[260px] lg:min-h-0 bg-clay">
-            <img
+            <Picture
               src="/images/boarding.jpg"
               alt="Dogs resting calmly in the farm boarding kennel at Pasture & Paw"
+              sizes="(min-width: 1024px) 50vw, 100vw"
               className="w-full h-full object-cover"
             />
           </div>

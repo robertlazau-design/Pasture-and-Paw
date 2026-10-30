@@ -251,8 +251,8 @@ export default function ContactPage() {
       {/* Hero Section */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <Link to="/" className="inline-flex items-center text-teal-900 font-bold hover:text-sage transition-colors py-3 -mt-3 mb-7">
@@ -271,8 +271,8 @@ export default function ContactPage() {
       {/* Main Booking Flow */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 30 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
           {/* Step Indicator */}

@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { ArrowRight, Leaf, Dog, MapPin, Mail, Instagram, ChevronRight, PawPrint, Sprout, Cloud, Sun, ArrowLeft, Menu, X } from 'lucide-react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
+import Picture from './components/Picture';
 import FarmPage from './pages/FarmPage';
 import TrainingPage from './pages/TrainingPage';
 import ContactPage from './pages/ContactPage';
@@ -160,9 +161,11 @@ function Hero() {
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center pt-28 pb-16 md:pt-20 md:pb-0 overflow-hidden bg-teal-950">
       <motion.div style={{ y }} className="absolute inset-0 z-0">
-        <img
+        <Picture
           src="/images/hero-main.jpg"
           alt="Pasture & Paw founder with Dexter calf and goat in front of the red farm barn"
+          loading="eager"
+          fetchPriority="high"
           className="w-full h-full object-cover object-center opacity-65"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-teal-950/70 via-teal-900/40 to-teal-950/85 mix-blend-multiply" />
@@ -177,8 +180,8 @@ function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
+          initial={{ scale: 0.9 }}
+          animate={{ scale: 1 }}
           transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
           className="inline-block mb-6 bg-cream px-4 py-1.5 sm:px-6 sm:py-2 rounded-full border-2 border-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] -rotate-2"
         >
@@ -189,8 +192,8 @@ function Hero() {
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
           className="font-display text-[2.75rem] sm:text-6xl md:text-8xl font-bold text-cream mb-6 tracking-tight leading-[1.1]"
         >
@@ -199,8 +202,8 @@ function Hero() {
         </motion.h1>
         
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="max-w-3xl mx-auto text-lg sm:text-xl md:text-2xl text-cream/90 mb-10 leading-relaxed font-medium"
         >
@@ -208,8 +211,8 @@ function Hero() {
         </motion.p>
         
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex flex-col sm:flex-row gap-6 justify-center items-center"
         >
@@ -272,9 +275,10 @@ function Story() {
           >
             {/* Organic Blob Image Mask */}
             <div className="aspect-square overflow-hidden border-4 border-teal-900 shadow-[16px_16px_0px_0px_#95C0A1] rounded-[40%_60%_70%_30%/40%_50%_60%_50%] bg-sage">
-              <img
+              <Picture
                 src="/images/founder-story.jpg"
                 alt="Pasture & Paw founder with calf on the farm in golden sunlight"
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 className="w-full h-full object-cover object-[center_25%] hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -285,7 +289,7 @@ function Story() {
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -bottom-6 -left-6 bg-cream border-4 border-teal-900 p-4 rounded-3xl shadow-[8px_8px_0px_0px_#0B3B3C] hidden md:flex flex-col items-center justify-center w-40 h-40"
             >
-              <img src="/images/logo-teal.png" alt="Pasture & Paw Official Crest" className="w-20 h-20 object-contain mb-1" />
+              <img src="/images/logo-teal.png" alt="Pasture & Paw Official Crest" loading="lazy" className="w-20 h-20 object-contain mb-1" />
               <p className="font-display font-bold text-teal-900 text-xs tracking-wider uppercase text-center">Est. 2017</p>
             </motion.div>
           </motion.div>
@@ -372,9 +376,10 @@ function FarmPreview() {
               >
                 <div className={`aspect-square rounded-[1.5rem] overflow-hidden mb-6 border-4 border-teal-900 ${animal.color} relative`}>
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-teal-900/20 transition-opacity z-10" />
-                  <img
+                  <Picture
                     src={`/images/${animal.seed}.jpg`}
                     alt={animal.name}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
@@ -407,9 +412,10 @@ function TrainingPreview() {
             className="order-2 lg:order-1 relative"
           >
             <div className="aspect-[4/5] overflow-hidden border-4 border-cream shadow-[-16px_16px_0px_0px_#C89F7E] rounded-[60%_40%_30%_70%/60%_30%_70%_40%] bg-clay">
-              <img
+              <Picture
                 src="/images/training-action.jpg"
                 alt="Trainer with four well-trained dogs resting calmly on a forest trail"
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 className="w-full h-full object-cover object-[center_35%] hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -468,7 +474,7 @@ function Footer() {
     <footer id="contact" className="bg-teal-950 text-cream pt-24 pb-12 relative overflow-hidden">
       {/* Massive subtle logo watermark in background */}
       <div className="absolute -bottom-20 -right-20 w-[520px] h-[520px] opacity-10 pointer-events-none select-none">
-        <img src="/images/logo-light.png" alt="" className="w-full h-full object-contain -rotate-12" />
+        <img src="/images/logo-light.png" alt="" loading="lazy" className="w-full h-full object-contain -rotate-12" />
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -476,7 +482,7 @@ function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-4 mb-8">
               <div className="bg-cream/10 p-2.5 rounded-2xl border-2 border-sage/40 backdrop-blur w-16 h-16 flex items-center justify-center overflow-hidden shrink-0 shadow-[4px_4px_0px_0px_#0B3B3C]">
-                <img src="/images/logo-light.png" alt="Pasture & Paw Logo" className="w-full h-full object-contain" />
+                <img src="/images/logo-light.png" alt="Pasture & Paw Logo" loading="lazy" className="w-full h-full object-contain" />
               </div>
               <div>
                 <span className="font-display font-bold text-3xl sm:text-4xl text-cream tracking-tight block">Pasture & Paw</span>

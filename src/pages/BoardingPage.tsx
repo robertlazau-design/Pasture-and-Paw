@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { ArrowRight, ArrowLeft, Moon, Home, Sun, Shield, Heart, Dog, Plus, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Picture from '../components/Picture';
 import { useEffect } from 'react';
 import AreasServed from '../components/AreasServed';
 import { BOARDING_FAQS } from '../content/local';
@@ -31,8 +32,8 @@ export default function BoardingPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ x: -20 }}
+            animate={{ x: 0 }}
             transition={{ duration: 0.8 }}
           >
             <div className="inline-flex items-center justify-center p-3 bg-clay rounded-xl border-2 border-teal-900 mb-6 shadow-[4px_4px_0px_0px_#0B3B3C]">
@@ -66,15 +67,17 @@ export default function BoardingPage() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
             <div className="aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C] bg-clay">
-              <img
+              <Picture
                 src="/images/boarding.jpg"
                 alt="Dogs resting calmly in the clean, spacious farm boarding kennel at Pasture & Paw"
+                loading="eager"
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -92,7 +95,7 @@ export default function BoardingPage() {
 
         <div className="bg-teal-950 text-cream py-24 relative">
           <div className="absolute bottom-6 right-6 w-96 h-96 opacity-10 pointer-events-none select-none">
-            <img src="/images/logo-light.png" alt="" className="w-full h-full object-contain -rotate-12" />
+            <img src="/images/logo-light.png" alt="" loading="lazy" className="w-full h-full object-contain -rotate-12" />
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Leaf, Sprout, PawPrint, ArrowRight, ArrowLeft, Sun, Heart, CheckCircle2, Utensils, Flower2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Picture from '../components/Picture';
 import { useEffect } from 'react';
 
 const btnPrimary = "inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl border-2 border-teal-900 bg-sage text-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] hover:shadow-[2px_2px_0px_0px_#0B3B3C] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200";
@@ -61,8 +62,8 @@ export default function FarmPage() {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 20 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.8 }}
           >
             <div className="inline-flex items-center justify-center p-3 bg-sage rounded-xl border-2 border-teal-900 mb-6 shadow-[4px_4px_0px_0px_#0B3B3C]">
@@ -82,15 +83,17 @@ export default function FarmPage() {
           </motion.div>
           
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
             <div className="aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C] bg-sage">
-               <img
+               <Picture
                 src="/images/farm-hero.jpg"
                 alt="Aerial view of Pasture & Paw working farm"
+                loading="eager"
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -99,7 +102,7 @@ export default function FarmPage() {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -bottom-8 -left-8 bg-cream border-4 border-teal-900 p-3 rounded-full shadow-[8px_8px_0px_0px_#0B3B3C] w-36 h-36 flex flex-col items-center justify-center"
             >
-              <img src="/images/logo-teal.png" alt="Pasture & Paw Emblem" className="w-16 h-16 object-contain mb-1" />
+              <img src="/images/logo-teal.png" alt="Pasture & Paw Emblem" loading="lazy" className="w-16 h-16 object-contain mb-1" />
               <p className="font-display font-bold text-teal-900 text-xs text-center leading-tight uppercase tracking-wider">Working<br/>Farm</p>
             </motion.div>
           </motion.div>
@@ -109,7 +112,7 @@ export default function FarmPage() {
       {/* Philosophy Section */}
       <section className="bg-teal-950 text-cream py-24 mb-24 relative overflow-hidden">
          <div className="absolute top-6 right-6 w-80 h-80 opacity-10 pointer-events-none select-none">
-           <img src="/images/logo-light.png" alt="" className="w-full h-full object-contain rotate-12" />
+           <img src="/images/logo-light.png" alt="" loading="lazy" className="w-full h-full object-contain rotate-12" />
          </div>
          
          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -148,9 +151,10 @@ export default function FarmPage() {
                       Learn More
                     </span>
                   </div>
-                   <img
+                   <Picture
                       src={animal.image}
                       alt={animal.name}
+                      sizes="(min-width: 1024px) 50vw, 100vw"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                 </div>
@@ -223,9 +227,10 @@ export default function FarmPage() {
                 className="relative"
               >
                 <div className="aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C] bg-clay">
-                  <img
+                  <Picture
                     src="/images/farm-wellness.jpg"
                     alt="Guests interacting with Highland cattle and goats during a Farm Wellness Experience"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
                     className="w-full h-full object-cover"
                   />
                 </div>
