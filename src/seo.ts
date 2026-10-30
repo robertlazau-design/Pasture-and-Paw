@@ -39,7 +39,7 @@ const BREEDS: Record<string, { name: string; title: string; description: string 
 export const PAGE_META: Record<string, PageMeta> = {
   '/': {
     title: 'Pasture & Paw | Working Farm & Dog Training in Enumclaw, WA',
-    description: 'Pasture & Paw is a working family farm and canine academy in Enumclaw, Washington, serving greater King County. Heritage livestock, healthy pastures, and real-world dog training.',
+    description: 'A working family farm and canine academy in Enumclaw, WA, serving greater King County. Heritage livestock, healthy pastures and real-world dog training.',
   },
   '/farm': {
     title: 'The Farm | Heritage Cattle, Goats & Rabbits | Pasture & Paw',
@@ -53,7 +53,7 @@ export const PAGE_META: Record<string, PageMeta> = {
   },
   '/dog-boarding': {
     title: 'Dog Boarding in Enumclaw, WA | Farm Boarding | Pasture & Paw',
-    description: 'Farm dog boarding in Enumclaw, WA. Cared for by experienced trainers, with daily outdoor time on open pasture and a small, calm guest count. Overnight, extended, and weekly stays.',
+    description: 'Farm dog boarding in Enumclaw, WA: experienced trainers, daily time on open pasture and a small, calm guest count. Overnight, extended and weekly stays.',
     crumbs: [['Dog Boarding', '/dog-boarding']],
   },
   '/contact': {

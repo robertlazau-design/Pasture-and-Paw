@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { ArrowLeft, Leaf, Sprout, PawPrint, Heart, CheckCircle2 } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
+import Picture from '../components/Picture';
 import { useEffect } from 'react';
 
 const btnPrimary = "inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-2xl border-2 border-teal-900 bg-sage text-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C] hover:shadow-[2px_2px_0px_0px_#0B3B3C] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200";
@@ -149,8 +150,8 @@ export default function BreedPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 20 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.8 }}
           >
             <div className="inline-flex items-center justify-center p-3 bg-sage rounded-xl border-2 border-teal-900 mb-6 shadow-[4px_4px_0px_0px_#0B3B3C]">
@@ -166,15 +167,17 @@ export default function BreedPage() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
             <div className={`aspect-square rounded-[2rem] overflow-hidden border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C] ${breed.heroColor}`}>
-              <img
+              <Picture
                 src={breed.heroImage}
                 alt={breed.name}
+                loading="eager"
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -185,7 +188,7 @@ export default function BreedPage() {
       {/* Quick Stats */}
       <section className="bg-teal-950 text-cream py-16 mb-24 relative overflow-hidden">
         <div className="absolute top-4 right-6 w-72 h-72 opacity-10 pointer-events-none select-none">
-          <img src="/images/logo-light.png" alt="" className="w-full h-full object-contain rotate-12" />
+          <img src="/images/logo-light.png" alt="" loading="lazy" className="w-full h-full object-contain rotate-12" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
