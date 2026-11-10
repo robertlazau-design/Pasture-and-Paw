@@ -13,6 +13,7 @@ import BoardingPage from './pages/BoardingPage';
 import PrivacyPage from './pages/PrivacyPage';
 import NotFoundPage from './pages/NotFoundPage';
 import AreasServed from './components/AreasServed';
+import { LightLeak, usePageEffects } from './effects';
 import { NOT_FOUND_META, canonicalUrl, normalizePath, pageMeta } from './seo';
 
 // Reusable tactile button styles
@@ -170,6 +171,7 @@ function Hero() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-teal-950/70 via-teal-900/40 to-teal-950/85 mix-blend-multiply" />
       </motion.div>
+      <LightLeak />
 
       {/* Playful Floating Elements */}
       <FloatingIcon icon={Cloud} className="top-32 left-10 text-cream/20 w-32 h-32" delay={0} duration={6} />
@@ -198,7 +200,7 @@ function Hero() {
           className="font-display text-[2.75rem] sm:text-6xl md:text-8xl font-bold text-cream mb-6 tracking-tight leading-[1.1]"
         >
           A Working Farm.<br />
-          <span className="text-sage">Real-World Dog Training.</span>
+          <span className="text-sage pp-sweep-text">Real-World Dog Training.</span>
         </motion.h1>
         
         <motion.p
@@ -244,12 +246,7 @@ function Story() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, type: "spring" }}
-          >
+          <div data-reveal="left">
             <h2 className="font-display text-5xl md:text-6xl font-bold text-teal-900 mb-8 leading-tight">
               Born on the Land.<br />
               <span className="text-clay">Built for Everyday Life.</span>
@@ -265,12 +262,9 @@ function Story() {
                 Pasture &amp; Paw brings both worlds together. We raise heritage cattle, goats, and rabbits using thoughtful pasture rotation, and we train dogs right out on the farm. Dogs learn to stay calm and listen around real livestock, open fields, and daily chores.
               </p>
             </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+          </div>
+          <div
+            data-reveal="tilt"
             className="relative"
           >
             {/* Organic Blob Image Mask */}
@@ -292,7 +286,7 @@ function Story() {
               <img src="/images/logo-teal.png" alt="Pasture & Paw Official Crest" loading="lazy" className="w-20 h-20 object-contain mb-1" />
               <p className="font-display font-bold text-teal-900 text-xs tracking-wider uppercase text-center">Est. 2017</p>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
@@ -340,14 +334,12 @@ function FarmPreview() {
       <Marquee />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24">
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <div
+            data-reveal="up"
             className="inline-flex items-center justify-center p-4 bg-cream rounded-full border-4 border-teal-900 shadow-[6px_6px_0px_0px_#0B3B3C] mb-8"
           >
             <Sprout className="h-10 w-10 text-teal-900" />
-          </motion.div>
+          </div>
           <h2 className="font-display text-5xl md:text-6xl font-bold text-teal-900 mb-6">
             The Farm &amp; Livestock
           </h2>
@@ -367,10 +359,8 @@ function FarmPreview() {
           {animals.map((animal, index) => (
             <Link to={animal.path} key={animal.name}>
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.1, type: "spring" }}
+                data-reveal="card"
+                transition={{ type: "spring", stiffness: 320, damping: 20 }}
                 whileHover={{ y: -10, rotate: index % 2 === 0 ? 2 : -2 }}
                 className="bg-cream rounded-[2rem] p-4 border-4 border-teal-900 shadow-[8px_8px_0px_0px_#0B3B3C] group cursor-pointer h-full"
               >
@@ -404,11 +394,8 @@ function TrainingPreview() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -40, rotate: 5 }}
-            whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+          <div
+            data-reveal="tilt-left"
             className="order-2 lg:order-1 relative"
           >
             <div className="aspect-[4/5] overflow-hidden border-4 border-cream shadow-[-16px_16px_0px_0px_#C89F7E] rounded-[60%_40%_30%_70%/60%_30%_70%_40%] bg-clay">
@@ -427,13 +414,10 @@ function TrainingPreview() {
               <Dog className="h-12 w-12 text-teal-900 mb-2" />
               <p className="font-display font-bold text-teal-900 text-xl text-center leading-tight">Real-World<br/>Ready</p>
             </motion.div>
-          </motion.div>
+          </div>
           
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, type: "spring" }}
+          <div
+            data-reveal="right"
             className="order-1 lg:order-2"
           >
             <div className="inline-flex items-center justify-center p-3 bg-clay rounded-xl border-2 border-cream mb-8">
@@ -462,7 +446,7 @@ function TrainingPreview() {
               Tell Us Your Goals
               <ChevronRight className="ml-2 h-6 w-6" />
             </Link>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
@@ -602,6 +586,7 @@ function PageMeta() {
 }
 
 export default function App() {
+  usePageEffects();
   return (
     <div className="min-h-screen bg-cream font-sans text-teal-900 selection:bg-sage selection:text-teal-900 overflow-x-hidden">
       <ScrollToTop />
