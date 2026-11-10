@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { MapPin, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SERVICE_AREAS } from '../content/local';
@@ -9,12 +8,7 @@ export default function AreasServed() {
   return (
     <section className="bg-cream py-24 border-t-4 border-teal-900">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <div data-reveal="up">
           <div className="inline-flex p-3 bg-sage rounded-xl border-2 border-teal-900 mb-6 shadow-[4px_4px_0px_0px_#0B3B3C]">
             <MapPin className="h-7 w-7 text-teal-900" />
           </div>
@@ -39,7 +33,7 @@ export default function AreasServed() {
             Book a Free Consultation
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
