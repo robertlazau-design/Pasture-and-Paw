@@ -198,16 +198,14 @@ export default function BreedPage() {
               { label: 'Lifespan', value: breed.lifespan },
               { label: 'Role on Farm', value: breed.roleOnFarm },
             ].map((stat) => (
-              <motion.div
+              <div
+                data-reveal="up"
                 key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 className="text-center"
               >
                 <p className="text-sage font-bold text-sm uppercase tracking-wider mb-2">{stat.label}</p>
                 <p className="font-display font-bold text-xl text-cream">{stat.value}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -215,10 +213,8 @@ export default function BreedPage() {
 
       {/* Full Description */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
+          data-reveal="up"
           className="space-y-8"
         >
           {breed.description.slice(1).map((paragraph, i) => (
@@ -226,42 +222,33 @@ export default function BreedPage() {
               {paragraph}
             </p>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* Characteristics */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
+          <div data-reveal="left-sm">
             <h2 className="font-display text-4xl font-bold text-teal-900 mb-8 flex items-center gap-3">
               <Leaf className="w-10 h-10 text-sage" />
               Key Characteristics
             </h2>
             <ul className="space-y-5">
               {breed.characteristics.map((item, i) => (
-                <motion.li
+                <li
+                  data-reveal="left-sm"
                   key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
                   className="flex items-start gap-4"
                 >
                   <CheckCircle2 className="w-7 h-7 text-clay shrink-0 mt-0.5" />
                   <span className="text-lg text-teal-900/80 font-medium leading-relaxed">{item}</span>
-                </motion.li>
+                </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+          <div
+            data-reveal="right-sm"
             className="bg-sage-light rounded-[2rem] p-10 border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C]"
           >
             <h2 className="font-display text-3xl font-bold text-teal-900 mb-6">Our Story with {breed.name.split(' ')[0]}s</h2>
@@ -276,16 +263,14 @@ export default function BreedPage() {
                 <p className="text-teal-900/80 font-medium leading-relaxed">{breed.fourHInfo}</p>
               </div>
             )}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* CTA */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
+          data-reveal="up"
           className="bg-teal-900 rounded-[2rem] p-12 border-4 border-teal-950 shadow-[12px_12px_0px_0px_#052223]"
         >
           <h2 className="font-display text-4xl font-bold text-cream mb-4">Want to Meet Our {breed.name}?</h2>
@@ -295,7 +280,7 @@ export default function BreedPage() {
           <Link to="/contact?service=farm" className={btnPrimary}>
             Book a Farm Visit
           </Link>
-        </motion.div>
+        </div>
       </section>
     </div>
   );

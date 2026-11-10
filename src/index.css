@@ -13,3 +13,149 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Fraunces", ui-serif, Georgia, serif;
 }
+
+/* ── Golden Boy motion kit, Pasture & Paw edition (src/effects.tsx) ──────────
+   Only transform and opacity move, plus the headline's light sweep. Each effect
+   has a finished state for "reduce motion" (bottom of this file). */
+:root {
+  --pp-ease: cubic-bezier(0.16, 1, 0.3, 1);         /* reveals: quick start, long soft landing */
+  --pp-ease-cut: cubic-bezier(0.76, 0, 0.24, 1);    /* a light sweep */
+  --pp-ease-settle: cubic-bezier(0.34, 1.4, 0.64, 1); /* cards and photos: a small overshoot, like the old springs */
+  --pp-morning: #f6e3be;                             /* early sun on the sage headline */
+}
+
+/* Scroll reveals. data-pp is set only by JavaScript, only on content below the
+   first screen: "armed" holds it back, "in" lets it come in, then the attribute
+   is removed and the element is exactly as it was written. */
+[data-reveal][data-pp="armed"] {
+  opacity: 0;
+  translate: 0 24px;
+  transition: none;
+}
+[data-reveal="up-lg"][data-pp="armed"],
+[data-reveal="card"][data-pp="armed"] { translate: 0 44px; }
+[data-reveal="left"][data-pp="armed"] { translate: -36px 0; }
+[data-reveal="left-sm"][data-pp="armed"] { translate: -16px 0; }
+[data-reveal="right"][data-pp="armed"] { translate: 36px 0; }
+[data-reveal="right-sm"][data-pp="armed"] { translate: 20px 0; }
+[data-reveal="zoom"][data-pp="armed"] { translate: none; scale: 0.92; }
+/* the story photo drops onto the page like a print on a table */
+[data-reveal="tilt"][data-pp="armed"] { translate: 0 16px; scale: 0.86; rotate: -5deg; }
+[data-reveal="tilt-left"][data-pp="armed"] { translate: -40px 0; rotate: 5deg; }
+
+[data-reveal][data-pp="in"] {
+  --pp-curve: var(--pp-ease);
+  --pp-move: 1s;
+  transition:
+    opacity 0.7s ease-out var(--pp-delay, 0ms),
+    translate var(--pp-move) var(--pp-curve) var(--pp-delay, 0ms),
+    rotate var(--pp-move) var(--pp-curve) var(--pp-delay, 0ms),
+    scale var(--pp-move) var(--pp-curve) var(--pp-delay, 0ms);
+}
+[data-reveal="card"][data-pp="in"],
+[data-reveal="tilt"][data-pp="in"],
+[data-reveal="tilt-left"][data-pp="in"] {
+  --pp-curve: var(--pp-ease-settle);
+  --pp-move: 0.9s;
+}
+
+/* "Real-World Dog Training." catches the morning light once after the page
+   loads. Readable from the first frame; only the color moves. */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .pp-sweep-text {
+    background-image: linear-gradient(100deg, var(--color-sage) 0%, var(--color-sage) 40%, var(--pp-morning) 50%, var(--color-sage) 60%, var(--color-sage) 100%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pp-sweep 1.8s var(--pp-ease-cut) 1.1s 1 both;
+  }
+  .pp-sweep-text::selection {
+    -webkit-text-fill-color: var(--color-teal-900);
+  }
+}
+@keyframes pp-sweep {
+  from { background-position: 100% 0; }
+  to { background-position: 0% 0; }
+}
+@media (forced-colors: active) {
+  .pp-sweep-text {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    animation: none;
+  }
+}
+
+/* Golden-hour light leak (LightLeak): warm light drifts across the hero photo
+   from the sun's side once at load, then the layer switches itself off. It sits
+   under the headline, so text is never covered. */
+.pp-leak {
+  overflow: hidden;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  animation: pp-leak-off 0s linear 3.4s forwards;
+}
+.pp-leak > span {
+  position: absolute;
+  top: -35%;
+  right: -15%;
+  width: 75%;
+  height: 170%;
+  border-radius: 50%;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: pp-leak-drift 2.8s var(--pp-ease) 0.15s forwards;
+}
+.pp-leak-a { background: radial-gradient(closest-side, rgb(255 196 120 / 0.8), rgb(200 159 126 / 0.42) 55%, transparent); }
+.pp-leak > .pp-leak-b { right: 12%; background: radial-gradient(closest-side, rgb(249 232 200 / 0.7), rgb(200 159 126 / 0.28) 60%, transparent); animation-delay: 0.3s; }
+.pp-leak > .pp-leak-c { right: 38%; width: 45%; background: radial-gradient(closest-side, rgb(255 152 96 / 0.5), transparent 70%); animation-delay: 0.45s; }
+.pp-leak::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(249 236 214);
+  opacity: 0;
+  animation: pp-leak-flash 1.8s ease-out 0.2s forwards;
+}
+@keyframes pp-leak-drift {
+  0% { opacity: 0; transform: translateX(55%) scale(0.9); }
+  30% { opacity: 0.85; }
+  100% { opacity: 0; transform: translateX(-80%) scale(1.15); }
+}
+@keyframes pp-leak-flash {
+  0% { opacity: 0; }
+  20% { opacity: 0.14; }
+  100% { opacity: 0; }
+}
+@keyframes pp-leak-off {
+  to { visibility: hidden; }
+}
+
+/* Reduce motion and print: everything in its finished state. */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal][data-pp] {
+    opacity: 1;
+    translate: none;
+    rotate: none;
+    scale: none;
+    transition: none;
+  }
+  .pp-sweep-text {
+    animation: none;
+  }
+  .pp-leak {
+    display: none;
+  }
+}
+@media print {
+  [data-reveal][data-pp] {
+    opacity: 1;
+    translate: none;
+    rotate: none;
+    scale: none;
+  }
+  .pp-leak {
+    display: none;
+  }
+}

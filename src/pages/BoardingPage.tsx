@@ -99,11 +99,8 @@ export default function BoardingPage() {
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+            <div
+              data-reveal="up"
               className="max-w-3xl mx-auto text-center mb-16"
             >
               <h2 className="font-display text-4xl md:text-5xl font-bold mb-8">Cared For by Trainers, Not Kennel Staff</h2>
@@ -115,16 +112,13 @@ export default function BoardingPage() {
                   Available for overnight stays, extended trips, and recurring weekly schedules.
                 </p>
               </div>
-            </motion.div>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {boardingFeatures.map((feature, index) => (
-                <motion.div
+                <div
+                  data-reveal="up"
                   key={feature.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="bg-teal-900 rounded-2xl p-8 border-2 border-teal-800 flex items-start gap-6"
                 >
                   <div className="p-3 bg-sage rounded-xl border-2 border-teal-900 shrink-0">
@@ -134,7 +128,7 @@ export default function BoardingPage() {
                     <h3 className="font-display font-bold text-xl text-cream mb-2">{feature.title}</h3>
                     <p className="text-cream/70 font-medium leading-relaxed">{feature.description}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -143,11 +137,8 @@ export default function BoardingPage() {
 
       {/* Training cross-link */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div
+          data-reveal="up"
           className="bg-sage-light rounded-[2rem] p-8 md:p-12 border-4 border-teal-900 shadow-[8px_8px_0px_0px_#0B3B3C] flex flex-col md:flex-row items-start md:items-center gap-8"
         >
           <div className="p-3 bg-clay rounded-xl border-2 border-teal-900 shrink-0 shadow-[4px_4px_0px_0px_#0B3B3C]">
@@ -163,16 +154,13 @@ export default function BoardingPage() {
             Dog Training
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
-        </motion.div>
+        </div>
       </section>
 
       {/* New boarding home */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div
+          data-reveal="up"
           className="bg-cream rounded-[2rem] p-8 md:p-12 border-4 border-teal-900 shadow-[8px_8px_0px_0px_#0B3B3C]"
         >
           <h2 className="font-display font-bold text-3xl md:text-4xl text-teal-900 mb-4">Looking for a New Boarding Home Near Enumclaw?</h2>
@@ -186,7 +174,7 @@ export default function BoardingPage() {
             Tell Us About Your Dog
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
-        </motion.div>
+        </div>
       </section>
 
       {/* FAQ */}
