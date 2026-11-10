@@ -349,7 +349,9 @@ export default function ContactPage() {
               </button>
             )}
 
-            <AnimatePresence mode="wait">
+            {/* initial={false}: the first step is in the prerendered page fully visible;
+                only moving between steps animates. */}
+            <AnimatePresence mode="wait" initial={false}>
               {/* Step 1: Service Selection */}
               {bookingStep === 'service' && (
                 <motion.div
@@ -690,10 +692,8 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <motion.a
             href={`mailto:${TARGET_EMAIL}`}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
+            data-reveal="up"
+            transition={{ type: "spring", stiffness: 320, damping: 20 }}
             whileHover={{ y: -4 }}
             className="bg-sage-light border-3 border-teal-900 p-6 rounded-2xl shadow-[6px_6px_0px_0px_#0B3B3C] hover:shadow-[3px_3px_0px_0px_#0B3B3C] hover:translate-x-[3px] hover:translate-y-[3px] transition-all group text-center"
           >
@@ -706,11 +706,8 @@ export default function ContactPage() {
             </p>
           </motion.a>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.1 }}
+          <div
+            data-reveal="up"
             className="bg-sage-light border-3 border-teal-900 p-6 rounded-2xl shadow-[6px_6px_0px_0px_#0B3B3C] text-center"
           >
             <div className="w-12 h-12 bg-sage rounded-xl border-2 border-teal-900 flex items-center justify-center mx-auto mb-4">
@@ -722,16 +719,14 @@ export default function ContactPage() {
               Serving greater King County
             </p>
             <p className="text-xs text-teal-900/50 mt-2 font-medium italic">*Visits by appointment only</p>
-          </motion.div>
+          </div>
 
           <motion.a
             href="https://www.instagram.com/pastureandpaw"
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.2 }}
+            data-reveal="up"
+            transition={{ type: "spring", stiffness: 320, damping: 20 }}
             whileHover={{ y: -4 }}
             className="bg-sage-light border-3 border-teal-900 p-6 rounded-2xl shadow-[6px_6px_0px_0px_#0B3B3C] hover:shadow-[3px_3px_0px_0px_#0B3B3C] hover:translate-x-[3px] hover:translate-y-[3px] transition-all group text-center"
           >

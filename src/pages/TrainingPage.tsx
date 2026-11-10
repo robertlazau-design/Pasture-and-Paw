@@ -141,12 +141,7 @@ export default function TrainingPage() {
       {/* Personalized Approach Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+          <div data-reveal="left">
             <div className="inline-flex items-center gap-2 bg-sage-light text-teal-900 px-5 py-2 rounded-full border-2 border-teal-900 mb-6 shadow-[4px_4px_0px_0px_#0B3B3C]">
               <MessageCircleHeart className="h-5 w-5" />
               <span className="font-bold text-sm uppercase tracking-wider">Our Approach</span>
@@ -166,14 +161,9 @@ export default function TrainingPage() {
                 From there, we build a program specifically for you. The length of training, the specific milestones, and the hands-on owner coaching sessions are all arranged to give you lasting results at home.
               </p>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <div data-reveal="up-lg">
             <div className="bg-sage-light rounded-[2rem] p-10 border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C]">
               <div className="flex items-center gap-3 mb-8">
                 <Sparkles className="w-8 h-8 text-clay" />
@@ -188,21 +178,18 @@ export default function TrainingPage() {
                   'Thorough owner handoff lessons so good habits transfer smoothly to your home',
                   'Ongoing support to ensure long-term consistency and success',
                 ].map((item, i) => (
-                  <motion.li
+                  <li
+                    data-reveal="left-sm"
                     key={i}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.08 }}
                     className="flex items-start gap-4"
                   >
                     <CheckCircle2 className="w-6 h-6 text-clay shrink-0 mt-0.5" />
                     <span className="text-lg text-teal-900/80 font-medium leading-relaxed">{item}</span>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -218,12 +205,9 @@ export default function TrainingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {goalAreas.map((goal, index) => (
-              <motion.div
+              <div
+                data-reveal="card"
                 key={goal.title}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: index * 0.08 }}
                 className="bg-cream rounded-[2rem] p-8 border-4 border-teal-900 shadow-[8px_8px_0px_0px_#0B3B3C] flex flex-col h-full hover:-translate-y-1 transition-transform"
               >
                 <div className="inline-flex items-center justify-center p-3 bg-sage rounded-xl border-2 border-teal-900 mb-6 w-fit shadow-[3px_3px_0px_0px_#0B3B3C]">
@@ -235,14 +219,12 @@ export default function TrainingPage() {
                 <p className="text-teal-900/75 text-lg font-medium leading-relaxed">
                   {goal.description}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <div
+            data-reveal="up"
             className="mt-12 text-center"
           >
             <div className="inline-block bg-cream rounded-2xl px-8 py-5 border-2 border-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C]">
@@ -253,7 +235,7 @@ export default function TrainingPage() {
                 Every program is custom. If it is important for your household, we can address it.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -268,12 +250,9 @@ export default function TrainingPage() {
 
         <div className="space-y-8">
           {processSteps.map((step, index) => (
-            <motion.div
+            <div
+              data-reveal={index % 2 === 0 ? "left" : "right"}
               key={step.number}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
               className="bg-cream rounded-[2rem] p-8 md:p-10 border-4 border-teal-900 shadow-[8px_8px_0px_0px_#0B3B3C] flex flex-col md:flex-row items-start gap-6 md:gap-10"
             >
               <div className="bg-clay text-cream w-16 h-16 rounded-2xl border-2 border-teal-900 flex items-center justify-center shrink-0 shadow-[4px_4px_0px_0px_#0B3B3C]">
@@ -283,30 +262,25 @@ export default function TrainingPage() {
                 <h3 className="font-display font-bold text-2xl md:text-3xl text-teal-900 mb-3">{step.title}</h3>
                 <p className="text-teal-900/80 text-lg font-medium leading-relaxed">{step.description}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
+          data-reveal="up"
           className="text-center mt-12"
         >
           <Link to="/contact?service=training" className={btnPrimary}>
             Start With a Free Consultation
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
-        </motion.div>
+        </div>
       </section>
 
       {/* Boarding Teaser */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div
+          data-reveal="up"
           className="bg-teal-950 text-cream rounded-[2rem] border-4 border-teal-900 shadow-[12px_12px_0px_0px_#C89F7E] overflow-hidden grid grid-cols-1 lg:grid-cols-2"
         >
           <div className="p-8 md:p-12">
@@ -336,7 +310,7 @@ export default function TrainingPage() {
               className="w-full h-full object-cover"
             />
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* FAQ */}

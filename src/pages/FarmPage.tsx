@@ -138,10 +138,8 @@ export default function FarmPage() {
           {animals.map((animal, index) => (
             <Link to={`/farm/${animal.slug}`} key={animal.name}>
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                data-reveal="card"
+                transition={{ type: "spring", stiffness: 320, damping: 20 }}
                 whileHover={{ y: -8 }}
                 className="bg-sage-light rounded-[2rem] p-8 border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C] flex flex-col h-full group cursor-pointer"
               >
@@ -186,12 +184,7 @@ export default function FarmPage() {
         <div className="bg-sage-light py-24 border-y-4 border-teal-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-              >
+              <div data-reveal="left">
                 <div className="inline-flex items-center gap-2 bg-clay text-cream px-5 py-2 rounded-full border-2 border-teal-900 mb-6 shadow-[4px_4px_0px_0px_#0B3B3C]">
                   <Flower2 className="h-5 w-5" />
                   <span className="font-bold text-sm uppercase tracking-wider">Farm Visits &amp; Days</span>
@@ -217,13 +210,10 @@ export default function FarmPage() {
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+              <div
+                data-reveal="zoom"
                 className="relative"
               >
                 <div className="aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C] bg-clay">
@@ -244,32 +234,27 @@ export default function FarmPage() {
                     <span className="text-lg">Day Experience</span>
                   </p>
                 </motion.div>
-              </motion.div>
+              </div>
             </div>
 
             {/* What's Included */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+            <div
+              data-reveal="up-lg"
               className="mt-20 bg-cream rounded-[2rem] p-10 md:p-12 border-4 border-teal-900 shadow-[12px_12px_0px_0px_#0B3B3C]"
             >
               <h3 className="font-display text-3xl font-bold text-teal-900 mb-10 text-center">What's Included</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {wellnessIncludes.map((item, i) => (
-                  <motion.div
+                  <div
+                    data-reveal="up"
                     key={i}
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
                     className="flex items-start gap-4"
                   >
                     <div className="p-3 bg-sage-light rounded-xl border-2 border-teal-900 shrink-0">
                       <item.icon className="h-6 w-6 text-teal-900" />
                     </div>
                     <p className="text-lg text-teal-900/80 font-medium leading-relaxed pt-2">{item.text}</p>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
               <div className="mt-10 p-6 bg-sage-light rounded-2xl border-2 border-teal-900 text-center">
@@ -280,7 +265,7 @@ export default function FarmPage() {
                   Contact us for seasonal scheduling and group rates.
                 </p>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
