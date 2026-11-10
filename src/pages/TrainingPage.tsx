@@ -85,12 +85,15 @@ export default function TrainingPage() {
             animate={{ x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center justify-center p-3 bg-clay rounded-xl border-2 border-teal-900 mb-6 shadow-[4px_4px_0px_0px_#0B3B3C]">
-              <Dog className="h-8 w-8 text-cream" />
+            <div className="flex items-center gap-4 mb-6">
+              <div className="inline-flex items-center justify-center p-3 bg-clay rounded-xl border-2 border-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C]">
+                <Dog className="h-8 w-8 text-cream" />
+              </div>
+              <p className="font-display text-2xl font-bold text-teal-900">Canine Academy</p>
             </div>
-            <h1 className="font-display text-6xl md:text-7xl font-bold text-teal-900 mb-6 leading-tight">
-              Canine <br/>
-              <span className="text-sage">Academy</span>
+            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold text-teal-900 mb-6 leading-tight">
+              Dog Training <br/>
+              <span className="text-sage">in Enumclaw</span>
             </h1>
             <p className="text-2xl text-teal-900/80 font-medium mb-4 leading-relaxed">
               Every dog learns differently, and every owner needs something different.
