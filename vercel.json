@@ -2,6 +2,18 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "pasture-and-paw.vercel.app" }],
+      "destination": "https://www.pasturepaw.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "pasture-and-paw.vercel.app" }],
+      "destination": "https://www.pasturepaw.com/:path*",
+      "permanent": true
+    },
     { "source": "/farm/highlander-cattle", "destination": "/farm/highland-cattle", "permanent": true }
   ]
 }

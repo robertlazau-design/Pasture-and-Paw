@@ -15,6 +15,8 @@ The website for Pasture & Paw, a working farm and dog training business (trainin
 - Vite, React 19, React Router 7 and Tailwind CSS 4, hosted on Vercel (project `pasture-and-paw`).
 - Pages are prerendered to static HTML by `scripts/prerender.mjs`, which also writes the sitemap. `npm run build` builds and prerenders. `npm run lint` type-checks.
 - Page titles, descriptions, canonicals and structured data live in `src/seo.ts`. Town names and FAQs live in `src/content/local.ts`.
+- Fonts load from Google Fonts through `<link>` tags in `index.html`. Don't move them back to an `@import` in `index.css`: that makes the browser wait for the app CSS before it even asks for the fonts.
+- `vercel.json` sends `pasture-and-paw.vercel.app` to `www.pasturepaw.com`, so Google sees one copy of the site.
 
 | File | What's in it |
 | --- | --- |
