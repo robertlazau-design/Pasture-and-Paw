@@ -31,7 +31,7 @@ const BREEDS: Record<string, { name: string; title: string; description: string 
   },
   'silver-fox-rabbits': {
     name: 'Silver Fox Rabbits',
-    title: 'Silver Fox Rabbits | Pasture & Paw',
+    title: 'Silver Fox Rabbits in Enumclaw, WA | Pasture & Paw',
     description: 'Pasture & Paw raises Silver Fox rabbits, a rare American heritage breed, and shares them with local 4-H youth.',
   },
 };
