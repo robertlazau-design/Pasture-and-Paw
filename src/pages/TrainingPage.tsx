@@ -45,7 +45,7 @@ const processSteps = [
   {
     number: '01',
     title: 'Tell Us About Your Dog',
-    description: 'We start with a thorough phone consultation. Tell us about your dog\'s temperament, daily habits, where you struggle, and what you love about them. Every detail helps us understand what is really going on.',
+    description: 'We start by getting to know your dog. Tell us about your dog\'s temperament, daily habits, where you struggle, and what you love about them. Every detail helps us understand what is really going on.',
   },
   {
     number: '02',
@@ -102,7 +102,7 @@ export default function TrainingPage() {
               Tell us what challenges you are facing and what you want life with your dog to look like. We build a personalized program around you and your dog.
             </p>
             <Link to="/contact?service=training" className={btnPrimary}>
-              Start Your Consultation
+              Ask About Training
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </motion.div>
@@ -232,7 +232,7 @@ export default function TrainingPage() {
           >
             <div className="inline-block bg-cream rounded-2xl px-8 py-5 border-2 border-teal-900 shadow-[4px_4px_0px_0px_#0B3B3C]">
               <p className="text-teal-900 font-bold text-lg">
-                Have a unique situation or specific goal? <span className="text-clay">Just let us know during your consultation.</span>
+                Have a unique situation or specific goal? <span className="text-clay">Just let us know.</span>
               </p>
               <p className="text-teal-900/70 font-medium mt-1">
                 Every program is custom. If it is important for your household, we can address it.
@@ -247,7 +247,7 @@ export default function TrainingPage() {
         <div className="text-center mb-16">
           <h2 className="font-display text-5xl font-bold text-teal-900 mb-4">How It Works</h2>
           <p className="text-xl text-teal-900/70 font-medium max-w-2xl mx-auto">
-            From your initial phone consultation through your final handoff lesson, here is how our training process works.
+            From getting to know your dog through your final handoff lesson, here is how our training process works.
           </p>
         </div>
 
@@ -274,7 +274,7 @@ export default function TrainingPage() {
           className="text-center mt-12"
         >
           <Link to="/contact?service=training" className={btnPrimary}>
-            Start With a Free Consultation
+            Ask About Training
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </div>

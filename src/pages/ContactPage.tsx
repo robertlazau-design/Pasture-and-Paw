@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Calendar as CalendarIcon, Clock, ArrowLeft, ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, Mail, MapPin, Instagram, Dog, Leaf, Moon, Sparkles, Loader2, AlertCircle } from 'lucide-react';
+import { Calendar as CalendarIcon, Clock, ArrowLeft, ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, Mail, MapPin, Instagram, Leaf, Moon, Sparkles, Loader2, AlertCircle } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { sendBookingEmail, TARGET_EMAIL } from '../services/emailService';
 
@@ -8,13 +8,10 @@ const btnPrimary = "inline-flex items-center justify-center px-8 py-4 text-base 
 
 type ServiceType = 'farm' | 'training' | 'boarding' | 'wellness' | 'general' | null;
 
+// Training consultations are paused (Mak, Nov 2026), so training isn't in this list. The
+// Training page's buttons open /contact?service=training, which skips the calendar and goes
+// straight to a message form; the email to Mak is titled "Dog Training".
 const serviceOptions = [
-  {
-    type: 'training' as ServiceType,
-    icon: Dog,
-    title: 'Dog Training Consultation',
-    description: 'Book a free phone consultation to discuss your dog and what you would like to achieve.',
-  },
   {
     type: 'boarding' as ServiceType,
     icon: Moon,
@@ -41,6 +38,9 @@ const serviceOptions = [
   },
 ];
 
+const serviceTitle = (type: ServiceType) =>
+  type === 'training' ? 'Dog Training' : serviceOptions.find((s) => s.type === type)?.title || '';
+
 export default function ContactPage() {
   const [searchParams] = useSearchParams();
   
@@ -52,6 +52,8 @@ export default function ContactPage() {
   const [dropOff, setDropOff] = useState<Date | null>(null);
   const [pickUp, setPickUp] = useState<Date | null>(null);
   const isBoarding = serviceType === 'boarding';
+  // A message, not a booking: no calendar step.
+  const isMessage = serviceType === 'general' || serviceType === 'training';
   const [bookingStep, setBookingStep] = useState<'service' | 'calendar' | 'form' | 'success'>('service');
   const cardRef = useRef<HTMLDivElement>(null);
   const isFirstStep = useRef(true);
@@ -83,7 +85,10 @@ export default function ContactPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
     const serviceParam = searchParams.get('service');
-    if (serviceParam === 'farm' || serviceParam === 'training' || serviceParam === 'boarding' || serviceParam === 'wellness') {
+    if (serviceParam === 'training') {
+      setServiceType('training');
+      setBookingStep('form');
+    } else if (serviceParam === 'farm' || serviceParam === 'boarding' || serviceParam === 'wellness') {
       setServiceType(serviceParam as ServiceType);
       setBookingStep('calendar');
     }
@@ -154,7 +159,7 @@ export default function ContactPage() {
         })
       : undefined;
 
-    const currentServiceTitle = serviceOptions.find((s) => s.type === serviceType)?.title || 'General Inquiry';
+    const currentServiceTitle = serviceTitle(serviceType) || 'General Inquiry';
 
     const result = await sendBookingEmail({
       service: currentServiceTitle,
@@ -199,12 +204,12 @@ export default function ContactPage() {
   const getStepNumber = () => {
     if (bookingStep === 'service') return 1;
     if (bookingStep === 'calendar') return 2;
-    if (bookingStep === 'form') return serviceType === 'general' ? 2 : 3;
+    if (bookingStep === 'form') return isMessage ? 2 : 3;
     return 3;
   };
 
   const getTotalSteps = () => {
-    if (serviceType === 'general') return 2;
+    if (isMessage) return 2;
     return 3;
   };
 
@@ -276,7 +281,7 @@ export default function ContactPage() {
     );
   };
 
-  const selectedServiceLabel = serviceOptions.find(s => s.type === serviceType)?.title || '';
+  const selectedServiceLabel = serviceTitle(serviceType);
 
   return (
     <div className="min-h-screen bg-cream pt-24 pb-24">
@@ -339,7 +344,7 @@ export default function ContactPage() {
             {/* Back Button */}
             {bookingStep !== 'service' && bookingStep !== 'success' && (
               <button onClick={() => {
-                  if (bookingStep === 'form' && serviceType !== 'general') setBookingStep('calendar');
+                  if (bookingStep === 'form' && !isMessage) setBookingStep('calendar');
                   else { setBookingStep('service'); setServiceType(null); }
                 }} 
                 className="flex items-center text-teal-900 font-bold hover:text-sage transition-colors py-3 -mt-3 mb-5"
@@ -496,7 +501,7 @@ export default function ContactPage() {
                   </div>
 
                   {/* Booking Summary Bar */}
-                  {serviceType !== 'general' && (isBoarding ? stayLabel : selectedDate && selectedTime) && (
+                  {!isMessage && (isBoarding ? stayLabel : selectedDate && selectedTime) && (
                     <div className="mb-8 p-4 bg-sage-light border-2 border-teal-900 rounded-xl flex justify-between items-center">
                       <div className="flex items-center gap-3">
                         <CalendarIcon className="w-5 h-5 text-teal-900/60 shrink-0" />
@@ -513,7 +518,7 @@ export default function ContactPage() {
                   )}
 
                   <h2 className="font-display font-bold text-3xl text-teal-900 mb-8">
-                    {serviceType === 'general' ? 'Send a Message' : 'Your Details'}
+                    {isMessage ? 'Send a Message' : 'Your Details'}
                   </h2>
 
                   <form onSubmit={handleFormSubmit} className="space-y-6">
@@ -645,7 +650,7 @@ export default function ContactPage() {
                          </>
                        ) : (
                          <>
-                           <span>{serviceType === 'general' ? 'Send Message' : 'Confirm Booking Request'}</span>
+                           <span>{isMessage ? 'Send Message' : 'Confirm Booking Request'}</span>
                            <ArrowRight className="w-5 h-5" />
                          </>
                        )}
@@ -666,10 +671,10 @@ export default function ContactPage() {
                     <CheckCircle2 className="w-12 h-12 text-teal-900" />
                   </div>
                   <h2 className="font-display text-4xl font-bold text-teal-900 mb-4">
-                    {serviceType === 'general' ? 'Message Sent!' : 'Booking Request Sent!'}
+                    {isMessage ? 'Message Sent!' : 'Booking Request Sent!'}
                   </h2>
                   <p className="text-xl text-teal-900/70 font-medium mb-4 max-w-md mx-auto">
-                    {serviceType === 'general'
+                    {isMessage
                       ? "Thanks for reaching out! We've received your inquiry and will get back to you within 24 to 48 hours." 
                       : `We've received your request for ${isBoarding ? stayLabel : `${selectedDate?.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} at ${selectedTime}`}. Our team has been notified and will follow up shortly.`}
                   </p>
