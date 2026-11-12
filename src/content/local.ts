@@ -9,7 +9,7 @@ export const TRAINING_FAQS: { question: string; answer: string }[] = [
   },
   {
     question: 'How does dog training get started?',
-    answer: 'Every program starts with a free phone consultation. You tell us about your dog, where you struggle, and what you want daily life to look like, and we build a custom training plan around it.',
+    answer: 'Send us a message from our contact page. You tell us about your dog, where you struggle, and what you want daily life to look like, and we build a custom training plan around it.',
   },
   {
     question: 'Where does the training happen?',
