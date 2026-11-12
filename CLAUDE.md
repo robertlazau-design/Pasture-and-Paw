@@ -50,3 +50,10 @@ The website for Pasture & Paw, a working farm and dog training business (trainin
 | `data-reveal` + `usePageEffects` | Sections and cards on every page | Content rises, slides or settles in the first time it scrolls into view; things that arrive together cascade in reading order. Variants: `up`, `up-lg`, `left`, `left-sm`, `right`, `right-sm`, `zoom`, `tilt`, `tilt-left`, `card`. The markup is fully visible; only content below the first screen is held back, and only once JavaScript runs. |
 | `.pp-sweep-text` | Home hero: "Real-World Dog Training." | The line catches the morning light once after load. Readable from the first frame. |
 | `LightLeak` | Home hero photo | Golden-hour light drifts across the photo once, on the first page load only. It sits under the headline. |
+
+## Lead events
+
+- `src/leadEvents.ts` counts taps as Vercel Web Analytics custom events (Pro plan): `Call Click`, `Text Click`, `Email Click`, `Directions Click` and `Instagram Click`, from one click listener started in `src/main.tsx`. Properties: `page` and `spot` (nearest `data-spot`, else header/nav, footer, the section id, or page).
+- `sendBookingEmail` in `src/services/emailService.ts` sends `Form Sent` (page + the service picked) when a request goes through, and `Form Error` (page) when it doesn't.
+- Two properties per event at most (Pro's limit). Never put names, emails, phone numbers, dog details or messages in an event.
+

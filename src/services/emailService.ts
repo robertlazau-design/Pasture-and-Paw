@@ -1,4 +1,5 @@
 // Email submission service for Pasture & Paw bookings and inquiries
+import { track } from '@vercel/analytics';
 // Uses Option 1: Web3Forms / Formspree (serverless form forwarding to mak@pasturepaw.com)
 
 export interface BookingData {
@@ -24,7 +25,16 @@ export interface SendResult {
 
 export const TARGET_EMAIL = 'mak@pasturepaw.com';
 
+// Sends the request, then counts it for the growth report: `Form Sent` with the page and the
+// service picked (never names, emails, phone numbers or messages), or `Form Error` if it failed.
 export async function sendBookingEmail(data: BookingData): Promise<SendResult> {
+  const result = await deliverBookingEmail(data);
+  if (result.success) track('Form Sent', { page: window.location.pathname, service: data.service });
+  else track('Form Error', { page: window.location.pathname });
+  return result;
+}
+
+async function deliverBookingEmail(data: BookingData): Promise<SendResult> {
   const web3FormsKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || 'fccaf290-c495-4539-9eaf-f0e0e988096a';
   const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT;
 
