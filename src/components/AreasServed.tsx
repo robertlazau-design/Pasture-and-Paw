@@ -30,7 +30,7 @@ export default function AreasServed() {
             </li>
           </ul>
           <Link to="/contact" className={btnPrimary}>
-            Book a Free Consultation
+            Get in Touch
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </div>
