@@ -8,6 +8,7 @@ The website for Pasture & Paw, a working farm and dog training business (trainin
 - **Keep commits few.** Vercel has a daily build cap, so bundle related changes into one PR.
 - **Show the change first.** For anything visual, send a side-by-side video (now vs. new) and the gzip size difference before opening the PR.
 - **Don't invent facts.** No made-up prices, availability, results, credentials, review counts or customer stories. If something is unknown, ask.
+- **Training consultations are paused** (Mak's call, Nov 2026). The contact page doesn't offer one, and the Training page's "Ask About Training" buttons open a message form (`/contact?service=training`, no calendar). Don't bring consultations back until Robert says Mak wants them again.
 - **The booking and contact forms go to Mak** (`TARGET_EMAIL` in `src/services/emailService.ts`). Don't change where they send without Robert's OK.
 
 ## Stack
