@@ -18,6 +18,7 @@ The website for Pasture & Paw, a working farm and dog training business (trainin
 - Page titles, descriptions, canonicals and structured data live in `src/seo.ts`. Town names and FAQs live in `src/content/local.ts`.
 - Fonts load from Google Fonts through `<link>` tags in `index.html`. Don't move them back to an `@import` in `index.css`: that makes the browser wait for the app CSS before it even asks for the fonts.
 - `vercel.json` sends `pasture-and-paw.vercel.app` to `www.pasturepaw.com`, so Google sees one copy of the site.
+- **IndexNow:** `.github/workflows/indexnow.yml` runs `scripts/indexnow.py`. After a merge to main that changes the site, it waits for Vercel's deploy of that commit, checks the key file is live and sends every page in the live sitemap to IndexNow (Bing and the others that use it). Run it by hand from the Actions tab. The key is `public/fa65dcc68b7f5fa0cfd06909fbb61409.txt` and is public by design: it only proves the site owns the submissions. Google doesn't use IndexNow; it reads the sitemap.
 
 | File | What's in it |
 | --- | --- |
